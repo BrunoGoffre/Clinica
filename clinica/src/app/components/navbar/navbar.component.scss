@@ -1,0 +1,70 @@
+.navbar {
+    z-index: 1001;
+    background-color: #212121;
+}
+
+.logo {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 10px;
+}
+
+.buttons-login-container {
+    margin-left: 200px;
+}
+
+.button-24 {
+    background: #426eff;
+    border: 1px solid #426eff;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #42ffff;
+}
+
+.button-24:active {
+    opacity: .5;
+}
+
+.button-login {
+    background-color: red;
+    color: white;
+    font-size: x-large;
+    border-radius: 30px;
+    width: 50px;
+    height: 50px;
+}
+
+.button-login:hover {
+    background-color: rgba(252, 2, 2, 0.466);
+}
+
+.logout-text {
+    margin-right: 10px;
+    font-size: x-large;
+    color: white;
+
+}

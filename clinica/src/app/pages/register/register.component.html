@@ -1,0 +1,20 @@
+<div class="login">
+    <app-loading *ngIf="cargando"></app-loading>
+    <div class="form">
+        <form [formGroup]="registerForm" class="login-form">
+            <span class="material-icons">Register</span>
+            <input type="text" placeholder="Nombre" formControlName="nombre"
+                [class.is-invalid]="isNotValidField('nombre')"
+                [class.is-valid]="!isNotValidField('nombre') && this.f['nombre'].touched" />
+            <input type="text" placeholder="email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
+                [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />
+            <div class="invalid-feedback">{{getErrorMessage('email')}}</div>
+            <input type="password" placeholder="password" [class.is-invalid]="isNotValidField('password')"
+                [class.is-valid]="!isNotValidField('password') && this.f['password'].touched"
+                formControlName="password" />
+            <div class="invalid-feedback">{{getErrorMessage('password')}}</div>
+            <button (click)="submit()" [disabled]="registerForm.invalid">login</button>
+            <a class="register" routerLink="register">Dont have an account?</a>
+        </form>
+    </div>
+</div>
