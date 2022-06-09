@@ -12,6 +12,10 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
+import { ListadoComponent } from './components/listado/listado.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,19 @@ import { RegisterComponent } from './pages/register/register.component';
     DashboardComponent,
     NavbarComponent,
     LoadingComponent,
-    RegisterComponent
+    RegisterComponent,
+    BienvenidoComponent,
+    ListadoComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    AngularFireModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

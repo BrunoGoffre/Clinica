@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Paciente } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +12,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   cargando: boolean = false;
+  error: string = '';
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     pass: ['', [Validators.required, Validators.minLength(7)]]
   })
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router, private fireStore: FirestoreService) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +31,23 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    //this.auth.Login()
+
+    this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {
+      if (retorno != null) {
+        let result = this.fireStore.getPaciente(this.f['email'].value).subscribe((retorno) => {
+          if (retorno != null && retorno.length != 0) {
+            this.fireStore.usuario.next(retorno[0] as Paciente);
+            window.localStorage.setItem('usuario', JSON.stringify(retorno[0] as Paciente));
+            result.unsubscribe();
+            this.router.navigateByUrl('home');
+          } else {
+            this.error = 'error al iniciar sesion';
+          }
+        })
+      } else {
+        this.error = 'usuario o constraseña invalidos';
+      }
+    });
   }
 
   getErrorMessage(field: string): string {
@@ -44,5 +64,4 @@ export class LoginComponent implements OnInit {
     }
     return retorno;
   }
-
 }

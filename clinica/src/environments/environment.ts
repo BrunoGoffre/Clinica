@@ -4,12 +4,13 @@
 
 export const environment = {
   firebase: {
-    apiKey: "AIzaSyCvcc2IwL0Y5855XgzyKgc0H81G238Gw64",
-    authDomain: "clinica-42844.firebaseapp.com",
-    projectId: "clinica-42844",
-    storageBucket: "clinica-42844.appspot.com",
-    messagingSenderId: "12143411139",
-    appId: "1:12143411139:web:b85318e3a6b77e7b02c776"
+    projectId: 'tp-final-3e4ef',
+    appId: '1:617002588097:web:fd0739fe851e0e012f8140',
+    storageBucket: 'tp-final-3e4ef.appspot.com',
+    locationId: 'southamerica-east1',
+    apiKey: 'AIzaSyBEBxf5TwgW6jUgqlCmUTT4K0Pg0XE4ZHA',
+    authDomain: 'tp-final-3e4ef.firebaseapp.com',
+    messagingSenderId: '617002588097',
   },
   production: false
 };

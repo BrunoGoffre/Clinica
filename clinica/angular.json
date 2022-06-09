@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "clinica"
+  "defaultProject": "clinica",
+  "cli": {
+    "analytics": false
+  }
 }

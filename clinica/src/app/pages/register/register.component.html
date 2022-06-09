@@ -3,18 +3,47 @@
     <div class="form">
         <form [formGroup]="registerForm" class="login-form">
             <span class="material-icons">Register</span>
+
+            <input type="text" placeholder="DNI" formControlName="DNI" [class.is-invalid]="isNotValidField('DNI')"
+                [class.is-valid]="!isNotValidField('DNI') && this.f['DNI'].touched" />
+            <div class="invalid-feedback">{{getErrorMessage('DNI')}}</div>
+
             <input type="text" placeholder="Nombre" formControlName="nombre"
                 [class.is-invalid]="isNotValidField('nombre')"
                 [class.is-valid]="!isNotValidField('nombre') && this.f['nombre'].touched" />
-            <input type="text" placeholder="email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
+            <div *ngIf="isNotValidField('nombre')" class="invalid-feedback">{{getErrorMessage('nombre')}}</div>
+
+            <input type="text" placeholder="Apellido" formControlName="apellido"
+                [class.is-invalid]="isNotValidField('apellido')"
+                [class.is-valid]="!isNotValidField('apellido') && this.f['apellido'].touched" />
+            <div *ngIf="isNotValidField('apellido')" class="invalid-feedback">{{getErrorMessage('apellido')}}</div>
+
+            <input type="number" placeholder="Edad" formControlName="edad" [class.is-invalid]="isNotValidField('edad')"
+                [class.is-valid]="!isNotValidField('edad') && this.f['edad'].touched" />
+            <div *ngIf="isNotValidField('edad')" class="invalid-feedback">{{getErrorMessage('edad')}}</div>
+
+            <input type="text" placeholder="Obra Social" formControlName="obraSocial"
+                [class.is-invalid]="isNotValidField('obraSocial')"
+                [class.is-valid]="!isNotValidField('obraSocial') && this.f['obraSocial'].touched" />
+            <div *ngIf="isNotValidField('obraSocial')" class="invalid-feedback">{{getErrorMessage('obraSocial')}}</div>
+
+            <input type="text" placeholder="Email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
                 [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />
-            <div class="invalid-feedback">{{getErrorMessage('email')}}</div>
-            <input type="password" placeholder="password" [class.is-invalid]="isNotValidField('password')"
+            <div *ngIf="isNotValidField('email')" class="invalid-feedback">{{getErrorMessage('email')}}</div>
+
+            <input type="password" placeholder="Contraseña" [class.is-invalid]="isNotValidField('password')"
                 [class.is-valid]="!isNotValidField('password') && this.f['password'].touched"
                 formControlName="password" />
-            <div class="invalid-feedback">{{getErrorMessage('password')}}</div>
-            <button (click)="submit()" [disabled]="registerForm.invalid">login</button>
-            <a class="register" routerLink="register">Dont have an account?</a>
+            <div *ngIf="isNotValidField('password')" class="invalid-feedback">{{getErrorMessage('password')}}</div>
+
+            <input #file type="file" accept="image/*" (change)="onChangeFile()" placeholder="Seleccione una imagen" />
+            <div class="invalid-feedback">{{getErrorMessage('')}}</div>
+
+            <div *ngIf="error != ''" Class="form" style="color: red;">{{error}}</div>
+
+            <button (click)="submit()" [disabled]="registerForm.invalid">Register</button>
+            <a class="register" routerLink="/login">Already have an account?</a>
+
         </form>
     </div>
 </div>

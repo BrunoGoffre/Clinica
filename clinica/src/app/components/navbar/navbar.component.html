@@ -8,43 +8,38 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav gap-2">
                 <li class="nav-item ">
-                    <a class="nav-link active" aria-current="page" routerLink="">
+                    <a class="nav-link active" aria-current="page" routerLink="home">
                         <img class="logo" src="../../../assets/clinica-logo2.jpg" alt="">
                     </a>
                 </li>
                 <li class="nav-item rounded">
-                    <a class="nav-link active" aria-current="page" href="#">
+                    <a class="nav-link active" aria-current="page" routerLink="home">
                         <i class="bi bi-house-fill me-2"></i>Home
                     </a>
                 </li>
                 <li class="nav-item rounded">
-                    <a class="nav-link" href="#"><i class="bi bi-people-fill me-2"></i>About</a>
+                    <a class="nav-link"><i class="bi bi-people-fill me-2"></i>About</a>
                 </li>
                 <li class="nav-item rounded">
-                    <a class="nav-link" href="#"><i class="bi bi-telephone-fill me-2"></i>Contact</a>
+                    <a class="nav-link"><i class="bi bi-telephone-fill me-2"></i>Contact</a>
                 </li>
-                <li class="nav-item ms-md-auto dropdown rounded">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"><i
-                            class="bi bi-person-fill me-2"></i>Profile</a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Account</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>
+                <li class="nav-item rounded">
+                    <a class="nav-link" routerLink="/home/usuarios"><i
+                            class="bi bi-telephone-fill me-2"></i>Usuarios</a>
+                </li>
+                <li class="nav-item rounded">
+                    <a class="nav-link"><i class="bi bi-telephone-fill me-2"></i>Perfil</a>
                 </li>
             </ul>
         </div>
-        <div *ngIf="true" class="buttons-login-container">
-            <button class="button-24" role="button" routerLink="login">Log in</button>
-            <button class="button-24" role="button" routerLink="register">Register</button>
+        <div *ngIf="usuario.value == null" class="buttons-login-container">
+            <button class="button-24" role="button" routerLink="/login">Log in</button>
+            <button class="button-24" role="button" routerLink="/register">Register</button>
         </div>
-        <div *ngIf="false">
+        <div *ngIf="usuario.value != null">
+            <span class="logout-text">{{usuario.value.nombre}}</span>
             <span class="logout-text">Logout</span>
-            <button class="button-login"><i class="fa fa-power-off"></i></button>
+            <button (click)="onClickLogOut()" class="button-login"><i class="fa fa-power-off"></i></button>
         </div>
     </div>
 </nav>

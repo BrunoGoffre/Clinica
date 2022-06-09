@@ -3,14 +3,19 @@
     <div class="form">
         <form [formGroup]="loginForm" class="login-form">
             <span class="material-icons">Log in</span>
+
             <input type="text" placeholder="email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
                 [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />
             <div class="invalid-feedback">{{getErrorMessage('email')}}</div>
+
             <input type="password" placeholder="password" [class.is-invalid]="isNotValidField('pass')"
                 [class.is-valid]="!isNotValidField('pass') && this.f['pass'].touched" formControlName="pass" />
             <div class="invalid-feedback">{{getErrorMessage('pass')}}</div>
+
+            <div *ngIf="error != ''" style="color: red;">{{error}}</div>
+
             <button (click)="submit()" [disabled]="loginForm.invalid">login</button>
-            <a class="register" routerLink="register">Dont have an account?</a>
+            <a class="register" routerLink="/register">Dont have an account?</a>
         </form>
     </div>
 </div>

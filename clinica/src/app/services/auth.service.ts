@@ -13,17 +13,24 @@ export class AuthService {
     try {
       return await this.firebase.createUserWithEmailAndPassword(paciente.email, paciente.password);
     } catch (error) {
-      console.log("Error en register: ", error);
+      return error;
+    }
+  }
+
+  async Login(email: string, pass: string) {
+    try {
+      return await this.firebase.signInWithEmailAndPassword(email, pass);
+    } catch (error) {
       return null;
     }
   }
 
-  async Login(paciente: Paciente) {
+  async LogOut() {
     try {
-      return await this.firebase.signInWithEmailAndPassword(paciente.email, paciente.password);
+      return await this.firebase.signOut();
     } catch (error) {
-      console.log("Error en login", error);
       return null;
     }
   }
+
 }
