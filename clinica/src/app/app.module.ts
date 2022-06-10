@@ -12,8 +12,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { ListadoComponent } from './components/listado/listado.component';
 
@@ -27,8 +25,7 @@ import { ListadoComponent } from './components/listado/listado.component';
     LoadingComponent,
     RegisterComponent,
     BienvenidoComponent,
-    ListadoComponent,
-
+    ListadoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +34,6 @@ import { ListadoComponent } from './components/listado/listado.component';
     AngularFireModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-
   ],
   providers: [],
   bootstrap: [AppComponent]

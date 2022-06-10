@@ -37,8 +37,7 @@
             <button class="button-24" role="button" routerLink="/register">Register</button>
         </div>
         <div *ngIf="usuario.value != null">
-            <span class="logout-text">{{usuario.value.nombre}}</span>
-            <span class="logout-text">Logout</span>
+            <span class="logout-text">{{usuario.value.nombre}} {{usuario.value.apellido}} </span>
             <button (click)="onClickLogOut()" class="button-login"><i class="fa fa-power-off"></i></button>
         </div>
     </div>

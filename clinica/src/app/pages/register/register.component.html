@@ -1,7 +1,20 @@
 <div class="login">
     <app-loading *ngIf="cargando"></app-loading>
     <div class="form">
-        <form [formGroup]="registerForm" class="login-form">
+        <div *ngIf="!rolSelected" class="row container-img">
+            <div class="col-6">
+                <label for="paciente">Paciente</label>
+                <button id="paciente"><img class="btn-img1" src="../../../assets/logo-paciente.jpg" alt=""
+                        (click)="obtenerRol('paciente')"></button>
+            </div>
+            <div class="col-6">
+                <label for="especialista">Especialista</label>
+                <button id="especialista"><img class="btn-img2" src="../../../assets/logo-espcialista.png"
+                        (click)="obtenerRol('paciente')" alt=""></button>
+            </div>
+        </div>
+
+        <form *ngIf="rolSelected" [formGroup]="registerForm" class="login-form">
             <span class="material-icons">Register</span>
 
             <input type="text" placeholder="DNI" formControlName="DNI" [class.is-invalid]="isNotValidField('DNI')"
@@ -43,7 +56,6 @@
 
             <button (click)="submit()" [disabled]="registerForm.invalid">Register</button>
             <a class="register" routerLink="/login">Already have an account?</a>
-
         </form>
     </div>
 </div>

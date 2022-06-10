@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'
 import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from './auth.service';
-import { Paciente } from '../models/usuario';
+import { Usuario } from '../models/usuario';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject, Subject, windowWhen } from 'rxjs';
 
@@ -12,11 +12,11 @@ import { BehaviorSubject, Subject, windowWhen } from 'rxjs';
 })
 export class FirestoreService {
 
-  usuario = new BehaviorSubject<Paciente | null>(null);
+  usuario = new BehaviorSubject<Usuario | null>(null);
 
   constructor(private aFStore: AngularFirestore, private aFAuth: AngularFireAuth, private AFAuthService: AuthService, private storage: AngularFireStorage) { }
 
-  public setPaciente(usuario: Paciente) {
+  public setPaciente(usuario: Usuario) {
     return this.aFStore.collection('users').add(usuario);
   }
   public getPaciente(email: string) {

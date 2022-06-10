@@ -1,3 +1,14 @@
 <div class="container">
-
+    <app-loading *ngIf="cargando"></app-loading>
+    <div class="container" *ngIf="cargando == false">
+        <h2>Usuarios registrados</h2>
+        <ul class="responsive-table">
+            <li class="table-row" *ngFor="let item of users">
+                <div class="col col-3"><img class="img" src="{{item.imageURL1}}"></div>
+                <div class="col col-1">{{item.rol}}</div>
+                <div class="col col-2" style="padding-left: 10%;">{{item.nombre}} {{item.apellido}}</div>
+                <div class="col col-2"><img>{{item.email}}</div>
+            </li>
+        </ul>
+    </div>
 </div>

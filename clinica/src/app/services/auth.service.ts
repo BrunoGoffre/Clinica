@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { Paciente } from '../models/usuario';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor(private firebase: AngularFireAuth) { }
 
-  async Register(paciente: Paciente) {
+  async Register(paciente: Usuario) {
     try {
       return await this.firebase.createUserWithEmailAndPassword(paciente.email, paciente.password);
     } catch (error) {

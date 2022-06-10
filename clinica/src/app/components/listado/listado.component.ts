@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
-import { Paciente } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/usuario';
 
 
 @Component({
@@ -10,16 +10,20 @@ import { Paciente } from 'src/app/models/usuario';
   styleUrls: ['./listado.component.scss']
 })
 export class ListadoComponent implements OnInit {
-  users !: Array<Paciente>;
+  cargando: boolean = false;
+  users: Array<Usuario> = [];
+
   constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
+    this.getUsers().then(() => this.cargando = true);
   }
-  getUsers() {
-    this.firestore.getPacientes().subscribe((retorno) => {
+  async getUsers() {
+    await this.firestore.getPacientes().subscribe((retorno) => {
       retorno.forEach((item) => {
-        this.users.push(item as Paciente);
+        this.users.push(item as Usuario);
       })
+      this.cargando = false;
     })
   }
 

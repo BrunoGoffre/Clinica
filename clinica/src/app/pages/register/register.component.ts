@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Paciente } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -12,9 +12,11 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class RegisterComponent implements OnInit {
 
-  paciente !: Paciente;
+  rolSelected: boolean = false;
+  paciente !: Usuario;
   error: string = "";
   archivo: any;
+  rol: string = 'paciente';
   @ViewChild('file') file !: ElementRef;
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private firestore: FirestoreService, public router: Router) {
   }
@@ -40,19 +42,21 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
+    console.log("Entre");
     this.cargando = true;
     if (!this.registerForm.invalid) {
-      this.paciente = this.registerForm.value as Paciente;
+      this.paciente = this.registerForm.value as Usuario;
       this.auth.Register(this.paciente).then((retorno) => {
         if ((retorno as firebase.default.auth.UserCredential).user?.email) {
           this.firestore.uploadImage(this.paciente.email, this.archivo).then((url) => {
             if (url != null) {
               this.paciente.imageURL1 = url;
+              this.paciente.rol = this.rol;
               this.firestore.setPaciente(this.paciente).then(() => {
                 this.cargando = false;
                 this.firestore.usuario.next(this.paciente);
                 window.localStorage.setItem('usuario', JSON.stringify(this.firestore.usuario.value));
-                this.router.navigateByUrl('');
+                this.router.navigateByUrl('home');
               }
               );
             } else {
@@ -107,4 +111,9 @@ export class RegisterComponent implements OnInit {
       this.archivo = reader.result;
     };
   }
+  obtenerRol(rol: string) {
+    this.rolSelected = true;
+    this.rol = rol;
+  }
+
 }

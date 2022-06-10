@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Paciente } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -34,10 +34,11 @@ export class LoginComponent implements OnInit {
 
     this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {
       if (retorno != null) {
+        console.log(retorno);
         let result = this.fireStore.getPaciente(this.f['email'].value).subscribe((retorno) => {
           if (retorno != null && retorno.length != 0) {
-            this.fireStore.usuario.next(retorno[0] as Paciente);
-            window.localStorage.setItem('usuario', JSON.stringify(retorno[0] as Paciente));
+            this.fireStore.usuario.next(retorno[0] as Usuario);
+            window.localStorage.setItem('usuario', JSON.stringify(retorno[0] as Usuario));
             result.unsubscribe();
             this.router.navigateByUrl('home');
           } else {
@@ -63,5 +64,10 @@ export class LoginComponent implements OnInit {
 
     }
     return retorno;
+  }
+  autocompletado(email: string, pass: string) {
+    this.f['email'].setValue(email);
+    this.f['pass'].setValue(pass);
+    this.submit();
   }
 }
