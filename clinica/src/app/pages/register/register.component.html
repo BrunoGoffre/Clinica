@@ -10,7 +10,7 @@
             <div class="col-6">
                 <label for="especialista">Especialista</label>
                 <button id="especialista"><img class="btn-img2" src="../../../assets/logo-espcialista.png"
-                        (click)="obtenerRol('paciente')" alt=""></button>
+                        (click)="obtenerRol('especialista')" alt=""></button>
             </div>
         </div>
 
@@ -35,10 +35,16 @@
                 [class.is-valid]="!isNotValidField('edad') && this.f['edad'].touched" />
             <div *ngIf="isNotValidField('edad')" class="invalid-feedback">{{getErrorMessage('edad')}}</div>
 
-            <input type="text" placeholder="Obra Social" formControlName="obraSocial"
+            <input *ngIf="rol == 'paciente'" type="text" placeholder="Obra Social" formControlName="obraSocial"
                 [class.is-invalid]="isNotValidField('obraSocial')"
                 [class.is-valid]="!isNotValidField('obraSocial') && this.f['obraSocial'].touched" />
             <div *ngIf="isNotValidField('obraSocial')" class="invalid-feedback">{{getErrorMessage('obraSocial')}}</div>
+
+            <input *ngIf="rol == 'especialista'" type="text" placeholder="Especialidad" formControlName="especialidad"
+                [class.is-invalid]="isNotValidField('especialidad')"
+                [class.is-valid]="!isNotValidField('especialidad') && this.f['especialidad'].touched" />
+            <div *ngIf="isNotValidField('especialidad')" class="invalid-feedback">{{getErrorMessage('especialidad')}}
+            </div>
 
             <input type="text" placeholder="Email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
                 [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />

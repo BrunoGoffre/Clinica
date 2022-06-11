@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   paciente !: Usuario;
   error: string = "";
   archivo: any;
-  rol: string = 'paciente';
+  rol !: string;
   @ViewChild('file') file !: ElementRef;
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private firestore: FirestoreService, public router: Router) {
   }
@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     apellido: ['', [Validators.minLength(3), Validators.required]],
     edad: ['', [Validators.required]],
     obraSocial: ['', [Validators.minLength(3), Validators.required]],
+    rol: ['', [Validators.minLength(3), Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(7), Validators.required]],
   });
@@ -38,7 +39,11 @@ export class RegisterComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } { return this.registerForm.controls; }
 
   isNotValidField(field: string): boolean {
-    return (this.f[field].touched || this.f[field].dirty == true) && !this.f[field].valid;
+    if (this.f[field]) {
+      return (this.f[field].touched || this.f[field].dirty == true) && !this.f[field].valid;
+    } else {
+      return false;
+    }
   }
 
   submit() {
@@ -52,6 +57,7 @@ export class RegisterComponent implements OnInit {
             if (url != null) {
               this.paciente.imageURL1 = url;
               this.paciente.rol = this.rol;
+              this.paciente.activo = 'true';
               this.firestore.setPaciente(this.paciente).then(() => {
                 this.cargando = false;
                 this.firestore.usuario.next(this.paciente);
@@ -92,17 +98,6 @@ export class RegisterComponent implements OnInit {
     return retorno;
   }
 
-  onChangeSelect() {
-    if (this.f["rol"].value == "especialista") {
-      this.registerForm.addControl("especialidad", new FormControl('', Validators.required));
-      this.registerForm.removeControl("obraSocial");
-    }
-    else if (this.f["rol"].value == "paciente") {
-      this.registerForm.addControl("obraSocial", new FormControl('', Validators.required));
-      this.registerForm.removeControl("especialidad");
-    }
-  }
-
   onChangeFile() {
     let file = this.file.nativeElement.files[0];
     let reader = new FileReader();
@@ -114,6 +109,16 @@ export class RegisterComponent implements OnInit {
   obtenerRol(rol: string) {
     this.rolSelected = true;
     this.rol = rol;
+    this.f['rol'].setValue(this.rol);
+
+    if (this.f["rol"].value == "especialista") {
+      this.registerForm.addControl("especialidad", new FormControl('', Validators.required));
+      this.registerForm.removeControl("obraSocial");
+    }
+    else if (this.f["rol"].value == "paciente") {
+      this.registerForm.addControl("obraSocial", new FormControl('', Validators.required));
+      this.registerForm.removeControl("especialidad");
+    }
   }
 
 }

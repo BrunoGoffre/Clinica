@@ -38,4 +38,7 @@ export class FirestoreService {
   getPacientes() {
     return this.aFStore.collection('users').valueChanges();
   }
+  // getImagenesUsuaiosLogin() {
+  //   this.aFStore.collection('users', ref => ref.where('email', '==', 'CarlosBaute@gmail.com'));
+  // }
 }

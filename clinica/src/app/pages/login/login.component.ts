@@ -13,6 +13,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class LoginComponent implements OnInit {
   cargando: boolean = false;
   error: string = '';
+  fotos = [];
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     pass: ['', [Validators.required, Validators.minLength(7)]]
@@ -30,6 +31,13 @@ export class LoginComponent implements OnInit {
       && !this.f[field].valid;
   }
 
+  getImagen(email: string) {
+    console.log(email);
+    //this.fireStore.getPaciente('email').subscribe((retorno) => {
+    //console.log((retorno[0] as Usuario).imageURL1);
+    //})
+
+  }
   submit() {
 
     this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {

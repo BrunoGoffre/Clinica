@@ -14,6 +14,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { ListadoComponent } from './components/listado/listado.component';
+import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ListadoComponent } from './components/listado/listado.component';
     LoadingComponent,
     RegisterComponent,
     BienvenidoComponent,
-    ListadoComponent
+    ListadoComponent,
+    ToggleButtonComponent
   ],
   imports: [
     BrowserModule,
