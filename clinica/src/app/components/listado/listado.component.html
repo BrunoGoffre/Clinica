@@ -2,12 +2,14 @@
     <app-loading *ngIf="cargando"></app-loading>
     <div class="container" *ngIf="cargando == false">
         <h2>Usuarios registrados</h2>
+        <button class="button-add-Admin" mat-raised-button matTooltip="Agregar usuario" matTooltipPosition="above"
+            matTooltipClass="example-tooltip-red" routerLink="/register"><i class="fa fa-plus"></i></button>
         <ul class="responsive-table">
             <li class="table-row" *ngFor="let item of users">
-                <div class="col col-3"><img class="img" src="{{item.imageURL1}}"></div>
-                <div class="col col-1">{{item.rol}}</div>
+                <div class="col col-2"><img class="img" src="{{item.imageURL1}}"></div>
+                <div class="col col-2">{{item.rol}}</div>
                 <div class="col col-2" style="padding-left: 10%;">{{item.nombre}} {{item.apellido}}</div>
-                <div class="col col-2"><img>{{item.email}}</div>
+                <div class="col col-3"><img>{{item.email}}</div>
                 <app-toggle-button class="col col-2" [activo]="item.activo"></app-toggle-button>
             </li>
         </ul>

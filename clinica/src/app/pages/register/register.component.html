@@ -2,20 +2,25 @@
     <app-loading *ngIf="cargando"></app-loading>
     <div class="form">
         <div *ngIf="!rolSelected" class="row container-img">
-            <div class="col-6">
+            <div class="col-6 mb-4">
                 <label for="paciente">Paciente</label>
-                <button id="paciente"><img class="btn-img1" src="../../../assets/logo-paciente.jpg" alt=""
+                <button id="paciente"><img class="btn-img" src="../../../assets/logo-paciente.jpg" alt=""
                         (click)="obtenerRol('paciente')"></button>
             </div>
-            <div class="col-6">
+            <div class="col-6 mb-4">
                 <label for="especialista">Especialista</label>
-                <button id="especialista"><img class="btn-img2" src="../../../assets/logo-espcialista.png"
+                <button id="especialista"><img class="btn-img" src="../../../assets/logo-espcialista.png"
                         (click)="obtenerRol('especialista')" alt=""></button>
+            </div>
+            <div class="col-12" *ngIf="admin == true">
+                <label for="admin">Admin</label>
+                <button id="admin"><img class="btn-img" src="../../../assets/logo-admin.png"
+                        (click)="obtenerRol('admin')" alt=""></button>
             </div>
         </div>
 
         <form *ngIf="rolSelected" [formGroup]="registerForm" class="login-form">
-            <span class="material-icons">Register</span>
+            <span class="material-icon">Register</span>
 
             <input type="text" placeholder="DNI" formControlName="DNI" [class.is-invalid]="isNotValidField('DNI')"
                 [class.is-valid]="!isNotValidField('DNI') && this.f['DNI'].touched" />
@@ -49,6 +54,7 @@
             <input type="text" placeholder="Email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
                 [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />
             <div *ngIf="isNotValidField('email')" class="invalid-feedback">{{getErrorMessage('email')}}</div>
+            <div *ngIf="f['email'].errors?.['emailVerified']" class="invalid-feedback">Email already in use.</div>
 
             <input type="password" placeholder="Contraseña" [class.is-invalid]="isNotValidField('password')"
                 [class.is-valid]="!isNotValidField('password') && this.f['password'].touched"
@@ -56,7 +62,6 @@
             <div *ngIf="isNotValidField('password')" class="invalid-feedback">{{getErrorMessage('password')}}</div>
 
             <input #file type="file" accept="image/*" (change)="onChangeFile()" placeholder="Seleccione una imagen" />
-            <div class="invalid-feedback">{{getErrorMessage('')}}</div>
 
             <div *ngIf="error != ''" Class="form" style="color: red;">{{error}}</div>
 

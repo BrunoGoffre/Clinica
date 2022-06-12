@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { async } from '@firebase/util';
+import { resolve } from 'dns';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -15,6 +17,7 @@ export class RegisterComponent implements OnInit {
   rolSelected: boolean = false;
   paciente !: Usuario;
   error: string = "";
+  listaUsuarios: Array<Usuario> = [];
   archivo: any;
   rol !: string;
   @ViewChild('file') file !: ElementRef;
@@ -22,15 +25,17 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
 
+    this.firestore.getPacientes().subscribe((retorno) => { retorno.forEach((item) => { this.listaUsuarios.push(item as Usuario) }) });
+    this.AdminValid();
+  }
+  admin: boolean = false;
   cargando: boolean = false;
   registerForm = this.formBuilder.group({
     DNI: ['', [Validators.minLength(7), Validators.maxLength(8), Validators.required]],
     nombre: ['', [Validators.minLength(3), Validators.required]],
     apellido: ['', [Validators.minLength(3), Validators.required]],
     edad: ['', [Validators.required]],
-    obraSocial: ['', [Validators.minLength(3), Validators.required]],
     rol: ['', [Validators.minLength(3), Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(7), Validators.required]],
@@ -51,30 +56,36 @@ export class RegisterComponent implements OnInit {
     this.cargando = true;
     if (!this.registerForm.invalid) {
       this.paciente = this.registerForm.value as Usuario;
-      this.auth.Register(this.paciente).then((retorno) => {
-        if ((retorno as firebase.default.auth.UserCredential).user?.email) {
-          this.firestore.uploadImage(this.paciente.email, this.archivo).then((url) => {
-            if (url != null) {
-              this.paciente.imageURL1 = url;
-              this.paciente.rol = this.rol;
-              this.paciente.activo = 'true';
-              this.firestore.setPaciente(this.paciente).then(() => {
+      if (this.IsRepetedEmail(this.paciente.email, this.listaUsuarios)) {
+        this.error = 'Email already in use';
+        this.cargando = false;
+      } else {
+
+        this.auth.Register(this.paciente).then((retorno) => {
+          if ((retorno as firebase.default.auth.UserCredential).user?.email) {
+            this.firestore.uploadImage(this.paciente.email, this.archivo).then((url) => {
+              if (url != null) {
+                this.paciente.imageURL1 = url;
+                this.paciente.rol = this.rol;
+                this.paciente.activo = 'true';
+                this.firestore.setPaciente(this.paciente).then(() => {
+                  this.cargando = false;
+                  this.firestore.usuario.next(this.paciente);
+                  window.localStorage.setItem('usuario', JSON.stringify(this.firestore.usuario.value));
+                  this.router.navigateByUrl('home');
+                }
+                );
+              } else {
+                this.error = 'Cant upload image.';
                 this.cargando = false;
-                this.firestore.usuario.next(this.paciente);
-                window.localStorage.setItem('usuario', JSON.stringify(this.firestore.usuario.value));
-                this.router.navigateByUrl('home');
               }
-              );
-            } else {
-              this.error = 'Cant upload image.';
-              this.cargando = false;
-            }
-          })
-        } else {
-          this.error = 'Cant resolve register, try later.';
-          this.cargando = false;
-        }
-      });
+            })
+          } else {
+            this.error = 'Cant resolve register, try later.';
+            this.cargando = false;
+          }
+        });
+      }
     } else {
       this.error = 'Formulario invalido';
       console.log('error');
@@ -121,4 +132,51 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  AdminValid() {
+    let user = window.localStorage.getItem('usuario');
+    if (user != null && JSON.parse(user)['rol'] == 'admin') {
+      this.admin = true;
+    }
+  }
+  // IsRepetedEmail(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+
+  //     let emailVerified = null;
+  //     const value = control.value;
+
+  //     if (!value) {
+  //       console.log(value);
+  //       return null;
+  //     } else {
+  //       console.log('entre else');
+  //       this.firestore.getPacientes().subscribe((retorno) => {
+  //         retorno.forEach((item) => {
+  //           if ((item as Usuario).email == value) {
+  //             console.log('encontre el email');
+  //             emailVerified = null;
+  //           }
+  //           else {
+  //             emailVerified = { emailRepeated: true };
+  //           }
+
+  //         })
+  //       }).unsubscribe();
+  //     }
+  //     return emailVerified;
+  //   }
+  // }
+
+  IsRepetedEmail(email: string, listaUsuarios: Array<Usuario>) {
+
+    let emailRepeated = false;
+
+    listaUsuarios.forEach((item) => {
+      if (item.email == email) {
+        emailRepeated = true;
+      }
+    })
+    return emailRepeated;
+  }
 }
+
+

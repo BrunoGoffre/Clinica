@@ -14,7 +14,6 @@ export class NavbarComponent implements OnInit {
   constructor(private firestore: FirestoreService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.firestore.usuario);
   }
 
   onClickLogOut() {

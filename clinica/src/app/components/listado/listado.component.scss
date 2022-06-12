@@ -1,13 +1,16 @@
 body {
     font-family: 'lato', sans-serif;
+
 }
 
 .container {
-    max-width: 1000px;
+    //max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
+    width: 4000px;
+
 }
 
 h2 {
@@ -26,21 +29,31 @@ h2 {
     border-radius: 10%;
 }
 
+.button-add-Admin {
+    color: blue;
+    border: none;
+    background-color: transparent;
+    font-size: xx-large;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    margin-left: 3%;
+}
+
 .responsive-table {
+
+    max-height: 850px;
+    overflow-y: scroll;
+
     li {
         border-radius: 3px;
-        padding: 25px 30px;
+        padding: 25px 15px;
         display: flex;
         justify-content: space-between;
+        margin-top: 10px;
         margin-bottom: 25px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .table-header {
-        background-color: #95A5A6;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
+        width: 98%;
     }
 
     .table-row {
@@ -48,28 +61,17 @@ h2 {
         box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
     }
 
-    .col-1 {
-        flex-basis: 10%;
-    }
-
     .col-2 {
-        flex-basis: 40%;
+        flex-basis: 10%;
+        justify-content: center;
     }
 
-    .col-3 {
-        flex-basis: 25%;
-    }
 
-    .col-4 {
-        flex-basis: 25%;
-    }
 
     @media all and (max-width: 767px) {
         .table-header {
             display: none;
         }
-
-        .table-row {}
 
         li {
             display: block;

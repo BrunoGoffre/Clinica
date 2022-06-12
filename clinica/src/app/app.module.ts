@@ -15,6 +15,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { ListadoComponent } from './components/listado/listado.component';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { ToggleButtonComponent } from './components/toggle-button/toggle-button.
     AngularFireModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

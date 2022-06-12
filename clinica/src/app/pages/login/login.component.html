@@ -2,7 +2,7 @@
     <app-loading *ngIf="cargando"></app-loading>
     <div class="form">
         <form [formGroup]="loginForm" class="login-form">
-            <span class="material-icons">Log in</span>
+            <span class="material-icon">Login</span>
 
             <input type="text" placeholder="email" formControlName="email" [class.is-invalid]="isNotValidField('email')"
                 [class.is-valid]="!isNotValidField('email') && this.f['email'].touched" />
