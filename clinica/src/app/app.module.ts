@@ -16,7 +16,8 @@ import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { ListadoComponent } from './components/listado/listado.component';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
+import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { MatButtonModule } from '@angular/material/button';
     RegisterComponent,
     BienvenidoComponent,
     ListadoComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
+    MisTurnosComponent,
+    AddTurnoComponent
   ],
   imports: [
     BrowserModule,

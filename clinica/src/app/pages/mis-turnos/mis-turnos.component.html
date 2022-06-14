@@ -1,0 +1,37 @@
+<div class="container">
+    <app-add-turno *ngIf="agregandoTurno"></app-add-turno>
+    <!-- <app-loading></app-loading> -->
+
+    <div class="container">
+        <h2>Turnos</h2>
+        <hr>
+        <div class="row">
+            <div class="col-3">
+                <button class="button-add-turno" mat-raised-button matTooltip="Agregar usuario"
+                    matTooltipPosition="above" matTooltipClass="example-tooltip-red" (click)="OpenForm()"><i
+                        class="fa fa-plus"> Agregar
+                        turno</i></button>
+            </div>
+            <div class="col-3">
+                <button class="button-delete-turno" mat-raised-button matTooltip="Agregar usuario"
+                    matTooltipPosition="above" matTooltipClass="example-tooltip-red" routerLink="/register"><i
+                        class="fa fa-trash"> Borrar
+                        turno</i></button>
+            </div>
+            <div class="col-6">
+                <input type="text" class="search" placeholder="Search by">
+            </div>
+        </div>
+        <div class="row">
+            <ul class="responsive-table">
+                <li class="table-row" *ngFor="let turno of turnos">
+                    <div class="col col-2">{{turno.fecha}}</div>
+                    <div class="col col-2" style="padding-left: 10%;">{{turno.hora}}</div>
+                    <div class="col col-3">{{turno.especialista}}</div>
+                    <div class="col col-3">Review <i class="fa fa-pencil"></i></div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

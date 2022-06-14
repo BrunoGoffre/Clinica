@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { Usuario } from '../models/usuario';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject, Subject, windowWhen } from 'rxjs';
+import { turno } from '../models/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,11 @@ export class FirestoreService {
   getPacientes() {
     return this.aFStore.collection('users').valueChanges();
   }
-  // getImagenesUsuaiosLogin() {
-  //   this.aFStore.collection('users', ref => ref.where('email', '==', 'CarlosBaute@gmail.com'));
-  // }
+
+  getTurnos() {
+    return this.aFStore.collection('turnos').valueChanges();
+  }
+  setTurnos(turno: turno) {
+    return this.aFStore.collection('turnos').add(turno);
+  }
 }

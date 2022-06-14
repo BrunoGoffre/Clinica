@@ -1,11 +1,11 @@
-export interface Usuario {
+export interface Especialista {
     nombre: string;
     apellido: string;
     DNI: string;
     edad: string;
-    obraSocial: string;
     email: string;
     password: string;
+    especialidad: string;
     rol: string;
     activo: string;
     imageURL1: string;

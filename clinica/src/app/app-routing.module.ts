@@ -6,6 +6,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { ListadoComponent } from './components/listado/listado.component';
 import { AdminGuard } from './guards/admin.guard';
+import { PacienteGuard } from './guards/paciente.guard';
+import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,7 @@ const routes: Routes = [
   {
     path: "home", component: HomeComponent, children: [
       { path: "usuarios", component: ListadoComponent, canActivate: [AdminGuard] },
-      { path: "usuario", component: ListadoComponent }
+      { path: "mis-turnos", component: MisTurnosComponent, canActivate: [PacienteGuard] }
     ],
   },
   { path: "login", component: LoginComponent },

@@ -31,18 +31,10 @@ export class LoginComponent implements OnInit {
       && !this.f[field].valid;
   }
 
-  getImagen(email: string) {
-    console.log(email);
-    //this.fireStore.getPaciente('email').subscribe((retorno) => {
-    //console.log((retorno[0] as Usuario).imageURL1);
-    //})
-
-  }
   submit() {
 
     this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {
       if (retorno != null) {
-        console.log(retorno);
         let result = this.fireStore.getPaciente(this.f['email'].value).subscribe((retorno) => {
           if (retorno != null && retorno.length != 0) {
             this.fireStore.usuario.next(retorno[0] as Usuario);
