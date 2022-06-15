@@ -27,4 +27,7 @@ export class MisTurnosComponent implements OnInit {
   OpenForm() {
     this.agregandoTurno = true;
   }
+  Closeform() {
+    this.agregandoTurno = false;
+  }
 }

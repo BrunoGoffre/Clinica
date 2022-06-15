@@ -1,3 +1,33 @@
-<div class="container">
-    <p>dia</p>
+<div class="contenedor">
+    <div class="login-box">
+        <div class="close-container">
+            <div (click)="onClose()" class="leftright"></div>
+            <div (click)="onClose()" class="rightleft"></div>
+        </div>
+        <h2>Login</h2>
+        <form>
+            <div class="user-box">
+                <input type="text" name="" required="">
+                <label>Time</label>
+            </div>
+            <div class="user-box">
+                <label>Date</label>
+                <input type="date" name="" required="" placeholder="">
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Especilidad
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item">Action</a>
+                    <a class="dropdown-item">Another action</a>
+                    <a class="dropdown-item">Something else here</a>
+                </div>
+            </div>
+            <a>
+                Submit
+            </a>
+        </form>
+    </div>
 </div>
