@@ -1,4 +1,5 @@
 <div class="contenedor">
+    <app-loading *ngIf="cargando"></app-loading>
     <div class="login-box">
         <div class="close-container">
             <button (click)="onClose()" type="button" class="btn-close">
@@ -6,30 +7,47 @@
                 <span class="visually-hidden">Close</span>
             </button>
         </div>
-        <h2>Login</h2>
-        <form>
+        <h2>Turnos</h2>
+        <form [formGroup]="turnoForm">
             <div class="user-box">
-                <input type="text" name="" required="">
-                <label>Time</label>
+                <label for="">Fecha:</label>
+                <input type="date" formControlName="fecha">
             </div>
             <div class="user-box">
-                <label>Date</label>
-                <input type="date" name="" required="" placeholder="">
+                <label for="">Hora:</label>
+                <input type="time" formControlName="hora">
             </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Especilidad
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item">Action</a>
-                    <a class="dropdown-item">Another action</a>
-                    <a class="dropdown-item">Something else here</a>
+            <div class="row">
+                <div class="dropdown col-6">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Especilidad
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li *ngFor="let especialidad of especialidades"><button
+                                (click)="FilterByEspecilidad(especialidad)" class="dropdown-item">
+                                {{especialidad}}
+                            </button></li>
+                    </ul>
+                </div>
+                <div class="dropdown col-6">
+                    <button class="btn btn-secondary dropdown-toggle" [disabled]="!specialtySelected" type="button"
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Especialistas
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li *ngFor="let especialista of especialistas">
+                            <button (click)="selectEspecialista(especialista)" class="dropdown-item" href="#">
+                                {{especialista.nombre}}
+                                {{especialista.apellido}}</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <a>
-                Submit
-            </a>
+            <button class="button-submit" (click)="submit()"
+                [disabled]="turnoForm.invalid || specialtystSelected == undefined">
+                Solicitar
+            </button>
         </form>
     </div>
 </div>

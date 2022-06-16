@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/models/turno';
+import { Usuario } from 'src/app/models/usuario';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -12,17 +14,35 @@ export class MisTurnosComponent implements OnInit {
   turnos: Array<turno> = [];
   turnosWithoutFilter: Array<turno> = [];
   filter: string = '';
-  constructor() { }
+  cargando: boolean = false;
+  user !: Usuario;
+
+  constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
-    //this.turnos
+    this.getCurrentUser();
+    this.getTurnos();
   }
 
 
-  // onFilter() {
-  //   this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialidad.toLowerCase().includes(this.filter.toLowerCase())  ||
-  //   turno.especialista.nombre.toLowerCase().includes(this.filter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(this.filter.toLowerCase()))
-  // }
+  onFilter() {
+    //  this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialidad.toLowerCase().includes(this.filter.toLowerCase())  ||
+    // turno.especialista.nombre.toLowerCase().includes(this.filter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(this.filter.toLowerCase()))
+  }
+
+  getTurnos() {
+    this.cargando = true;
+    this.firestore.getTurnos(this.user.email).subscribe((retorno) => {
+      retorno.forEach((item) => {
+        this.turnos.push(item as turno);
+      })
+      this.cargando = false;
+    });
+  }
+
+  getCurrentUser() {
+    this.user = JSON.parse(window.localStorage.getItem('usuario') as string) as Usuario;
+  }
 
   OpenForm() {
     this.agregandoTurno = true;

@@ -1,7 +1,6 @@
 <div class="container">
+    <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
-    <!-- <app-loading></app-loading> -->
-
     <div class="container">
         <h2>Turnos</h2>
         <hr>
@@ -19,15 +18,22 @@
                         turno</i></button>
             </div>
             <div class="col-6">
-                <input type="text" class="search" placeholder="Search by">
+                <input type="text" (change)="onFilter()" class="search" placeholder="Search by">
             </div>
         </div>
         <div class="row">
+
             <ul class="responsive-table">
+                <li class="table-header">
+                    <div class="col col-2">Fecha</div>
+                    <div class="col col-2" style="padding-left: 10%;">Hora</div>
+                    <div class="col col-3">Especialista </div>
+                    <div class="col col-3"><i class="fa fa-pencil"></i></div>
+                </li>
                 <li class="table-row" *ngFor="let turno of turnos">
                     <div class="col col-2">{{turno.fecha}}</div>
                     <div class="col col-2" style="padding-left: 10%;">{{turno.hora}}</div>
-                    <div class="col col-3">{{turno.especialista}}</div>
+                    <div class="col col-3">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
                     <div class="col col-3">Review <i class="fa fa-pencil"></i></div>
 
                 </li>

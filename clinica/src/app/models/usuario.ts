@@ -4,6 +4,7 @@ export interface Usuario {
     DNI: string;
     edad: string;
     obraSocial: string;
+    especialidad: string;
     email: string;
     password: string;
     rol: string;

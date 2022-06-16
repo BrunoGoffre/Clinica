@@ -40,10 +40,16 @@ export class FirestoreService {
     return this.aFStore.collection('users').valueChanges();
   }
 
-  getTurnos() {
-    return this.aFStore.collection('turnos').valueChanges();
+  getTurnos(CurrentUserEmail: string) {
+    return this.aFStore.collection('turnos', ref => ref.where('usuario.email', '==', CurrentUserEmail)).valueChanges();
   }
   setTurnos(turno: turno) {
     return this.aFStore.collection('turnos').add(turno);
+  }
+  getEspecilistas() {
+    return this.aFStore.collection('users', ref => ref.where('rol', '==', 'especialista').where('activo', '==', 'true')).valueChanges();
+  }
+  getEspecilistasByEspecilidad(especialidad: string) {
+    return this.aFStore.collection('users', ref => ref.where('rol', '==', 'especialista').where('especialidad', '==', especialidad).where('activo', '==', 'true')).valueChanges();
   }
 }

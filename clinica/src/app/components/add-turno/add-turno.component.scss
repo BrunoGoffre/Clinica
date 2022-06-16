@@ -42,6 +42,8 @@ $mediumblu: #1E272D;
     }
 }
 
+
+//Form
 .login-box {
     position: absolute;
     top: 50%;
@@ -65,6 +67,7 @@ $mediumblu: #1E272D;
 
 .login-box .user-box {
     position: relative;
+
 }
 
 .login-box .user-box input {
@@ -74,56 +77,32 @@ $mediumblu: #1E272D;
     color: #fff;
     margin-bottom: 30px;
     border: none;
+    background-color: transparent;
     border-bottom: 1px solid #fff;
     outline: none;
-    background: transparent;
 }
 
-.login-box .user-box label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
-    top: -20px;
-    left: 0;
-    color: black;
-    font-size: 12px;
-}
-
-.login-box form a {
+.button-submit {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
     color: white;
     font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
     overflow: hidden;
-    transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px;
     border-color: black;
+    //border: 20px;
+    border-radius: 30px;
+    background-color: grey;
     cursor: pointer;
 }
 
-.login-box a:hover {
-    background: #9fa0a0;
-    color: #fff;
-
-    border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4,
-        0 0 25px #03e9f4,
-        0 0 50px #03e9f4,
-        0 0 100px #03e9f4;
+.button-submit:hover {
+    border-color: rgb(135, 201, 212);
+    transition: 0.5s;
 }
+
 
 .close-container {
     position: relative;
@@ -171,16 +150,18 @@ $mediumblu: #1E272D;
 
 }
 
+//////////////////////////
 
-// Example 1.
+
+//Boton cerrar
 .btn-close {
     margin: 0;
     border: 0;
     padding: 0;
     background: hsl(216, 100, 50);
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -189,7 +170,7 @@ $mediumblu: #1E272D;
     transition: all 150ms;
 
     .icon-cross {
-        @include cross(40px, #fff, 6px);
+        @include cross(30px, #fff, 6px);
     }
 
     &:hover,
@@ -200,31 +181,18 @@ $mediumblu: #1E272D;
 
 }
 
-// Example 2.
+.dropdown-item:hover {
+    background-color: grey;
+}
+
 .cross-stand-alone {
     @include cross(40px, #000, 4px);
 }
 
-
-// Example 3.
 .cross-1px {
     @include cross(80px, #000);
 }
 
-
-// Demo styles.
-
-body {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: center;
-    align-content: flex-start;
-    height: 100vh;
-}
-
-
-// For screen readers.
 .visually-hidden {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
@@ -234,3 +202,5 @@ body {
     width: 1px !important;
     overflow: hidden;
 }
+
+//////////////////////////
