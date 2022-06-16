@@ -1,8 +1,10 @@
 <div class="contenedor">
     <div class="login-box">
         <div class="close-container">
-            <div (click)="onClose()" class="leftright"></div>
-            <div (click)="onClose()" class="rightleft"></div>
+            <button (click)="onClose()" type="button" class="btn-close">
+                <span class="icon-cross"></span>
+                <span class="visually-hidden">Close</span>
+            </button>
         </div>
         <h2>Login</h2>
         <form>

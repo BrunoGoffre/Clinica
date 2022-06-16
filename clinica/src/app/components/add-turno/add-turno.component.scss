@@ -136,53 +136,101 @@ $mediumblu: #1E272D;
     cursor: pointer;
 }
 
-.leftright {
-    height: 4px;
-    width: 50px;
-    position: absolute;
-    margin-top: 24px;
-    background-color: $softorange;
-    border-radius: 2px;
-    transform: rotate(45deg);
-    transition: all .3s ease-in;
+@mixin cross($size: 20px, $color: currentColor, $thickness: 1px) {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    position: relative;
+    width: $size;
+    height: $size;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: ($size - $thickness) / 2;
+        left: 0;
+        right: 0;
+        height: $thickness;
+        background: $color;
+        border-radius: $thickness;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
+
+    span {
+        display: block;
+    }
+
 }
 
-.rightleft {
-    height: 4px;
-    width: 50px;
-    position: absolute;
-    margin-top: 24px;
-    background-color: $softorange;
-    border-radius: 2px;
-    transform: rotate(-45deg);
-    transition: all .3s ease-in;
+
+// Example 1.
+.btn-close {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: hsl(216, 100, 50);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+
+    .icon-cross {
+        @include cross(40px, #fff, 6px);
+    }
+
+    &:hover,
+    &:focus {
+        transform: rotateZ(90deg);
+        background: hsl(216, 100, 40);
+    }
+
 }
 
-label {
-    color: white;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: .6em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: all .3s ease-in;
-    opacity: 0;
+// Example 2.
+.cross-stand-alone {
+    @include cross(40px, #000, 4px);
 }
 
-.close {
-    margin: 60px 0 0 5px;
-    position: absolute;
+
+// Example 3.
+.cross-1px {
+    @include cross(80px, #000);
 }
 
-.close-container:hover .leftright {
-    transform: rotate(-45deg);
-    background-color: $tomatored;
+
+// Demo styles.
+
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: flex-start;
+    height: 100vh;
 }
 
-.close-container:hover .rightleft {
-    transform: rotate(45deg);
-    background-color: $tomatored;
-}
 
-.close-container:hover label {
-    opacity: 1;
+// For screen readers.
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
 }
