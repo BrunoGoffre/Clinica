@@ -5,6 +5,7 @@
         <hr>
         <button class="button-add-Admin" mat-raised-button matTooltip="Agregar usuario" matTooltipPosition="above"
             matTooltipClass="example-tooltip-red" routerLink="/register"><i class="fa fa-plus"></i></button>
+        <button class="button-add-Admin" (click)="exportExcel()"><i class="fa fa-save"></i></button>
         <ul class="responsive-table">
             <li class="table-row" *ngFor="let item of users">
                 <div class="col col-2"><img class="img" src="{{item.imageURL1}}"></div>
