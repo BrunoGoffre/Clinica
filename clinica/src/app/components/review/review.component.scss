@@ -1,0 +1,109 @@
+.loading-overlay {
+    display: flex;
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9997;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper {
+    background-color: grey;
+    width: 20%;
+    height: 40%;
+    border-radius: 5px;
+}
+
+.review {
+    margin-top: 10%;
+    margin-left: 1%;
+    justify-content: center;
+}
+
+@mixin cross($size: 20px, $color: currentColor, $thickness: 1px) {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    position: relative;
+    width: $size;
+    height: $size;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: ($size - $thickness) / 2;
+        left: 0;
+        right: 0;
+        height: $thickness;
+        background: $color;
+        border-radius: $thickness;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
+
+    span {
+        display: block;
+    }
+
+}
+
+
+// Example 1.
+.btn-close {
+    margin-left: 10%;
+    margin-top: 5%;
+    border: 0;
+    padding: 0;
+    background: hsl(216, 100, 50);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+
+    .icon-cross {
+        @include cross(40px, #fff, 6px);
+    }
+
+    &:hover,
+    &:focus {
+        transform: rotateZ(90deg);
+        background: hsl(216, 100, 40);
+    }
+
+}
+
+.cross-stand-alone {
+    @include cross(40px, #000, 4px);
+}
+
+
+.cross-1px {
+    @include cross(80px, #000);
+}
+
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}

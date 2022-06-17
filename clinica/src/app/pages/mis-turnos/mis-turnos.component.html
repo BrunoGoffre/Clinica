@@ -1,6 +1,7 @@
 <div class="container">
     <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
+    <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
     <div class="container">
         <h2>Turnos</h2>
         <hr>
@@ -34,7 +35,9 @@
                     <div class="col col-2">{{turno.fecha}}</div>
                     <div class="col col-2" style="padding-left: 10%;">{{turno.hora}}</div>
                     <div class="col col-3">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
-                    <div class="col col-3">Review <i class="fa fa-pencil"></i></div>
+                    <div class="col col-3"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
+                                class="fa fa-pencil"></i></button>
+                    </div>
 
                 </li>
             </ul>

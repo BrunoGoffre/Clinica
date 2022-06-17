@@ -80,6 +80,14 @@ h2 {
         border-radius: 0px;
     }
 
+    .btn-review {
+        border-radius: 10px;
+        border-color: 0.5px grey;
+        background-color: grey;
+        color: white;
+        cursor: pointer;
+    }
+
     .col-2 {
         flex-basis: 10%;
         justify-content: center;

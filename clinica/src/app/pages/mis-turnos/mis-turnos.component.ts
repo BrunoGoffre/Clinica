@@ -11,7 +11,9 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class MisTurnosComponent implements OnInit {
 
   agregandoTurno: boolean = false;
+  mostrarReview: boolean = false;
   turnos: Array<turno> = [];
+  turnoSelected !: string;
   turnosWithoutFilter: Array<turno> = [];
   filter: string = '';
   cargando: boolean = false;
@@ -49,5 +51,14 @@ export class MisTurnosComponent implements OnInit {
   }
   Closeform() {
     this.agregandoTurno = false;
+  }
+  viewReview(resenia: string) {
+    if (resenia != null && resenia != '') {
+      this.turnoSelected = resenia;
+      this.mostrarReview = true;
+    }
+  }
+  CloseReiew() {
+    this.mostrarReview = false;
   }
 }

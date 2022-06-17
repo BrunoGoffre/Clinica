@@ -35,11 +35,13 @@ export class LoginComponent implements OnInit {
 
     this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {
       if (retorno != null) {
+        this.cargando = true;
         let result = this.fireStore.getPaciente(this.f['email'].value).subscribe((retorno) => {
           if (retorno != null && retorno.length != 0) {
             this.fireStore.usuario.next(retorno[0] as Usuario);
             window.localStorage.setItem('usuario', JSON.stringify(retorno[0] as Usuario));
             result.unsubscribe();
+            this.cargando = false;
             this.router.navigateByUrl('home');
           } else {
             this.error = 'error al iniciar sesion';
