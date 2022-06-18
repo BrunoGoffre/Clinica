@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { ReviewComponent } from './components/review/review.component';
+import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReviewComponent } from './components/review/review.component';
     ToggleButtonComponent,
     MisTurnosComponent,
     AddTurnoComponent,
-    ReviewComponent
+    ReviewComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,

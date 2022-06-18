@@ -18,6 +18,7 @@ export class MisTurnosComponent implements OnInit {
   filter: string = '';
   cargando: boolean = false;
   user !: Usuario;
+  mostrarQuestion: boolean = false;
 
   constructor(private firestore: FirestoreService) { }
 
@@ -60,5 +61,15 @@ export class MisTurnosComponent implements OnInit {
   }
   CloseReiew() {
     this.mostrarReview = false;
+  }
+  deleteTurno(turno: turno) {
+    this.cargando = true;
+    //this.firestore.
+  }
+  wantToDelete() {
+    this.mostrarQuestion = true;
+  }
+  closeWantToDelete() {
+    this.mostrarQuestion = false;
   }
 }

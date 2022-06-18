@@ -2,42 +2,42 @@
     <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
+    <app-question *ngIf="mostrarQuestion" (close)="closeWantToDelete()"></app-question>
     <div class="container">
         <h2>Turnos</h2>
         <hr>
         <div class="row">
-            <div class="col-3">
-                <button class="button-add-turno" mat-raised-button matTooltip="Agregar usuario"
-                    matTooltipPosition="above" matTooltipClass="example-tooltip-red" (click)="OpenForm()"><i
-                        class="fa fa-plus"> Agregar
-                        turno</i></button>
+            <div class="col-2">
+                <button class="button-add-turno" (click)="OpenForm()">
+                    <i class="fa fa-plus"> Agregar turno</i></button>
             </div>
-            <div class="col-3">
-                <button class="button-delete-turno" mat-raised-button matTooltip="Agregar usuario"
-                    matTooltipPosition="above" matTooltipClass="example-tooltip-red" routerLink="/register"><i
-                        class="fa fa-trash"> Borrar
-                        turno</i></button>
-            </div>
-            <div class="col-6">
+            <div class="col-10 d-flex flex-row-reverse">
                 <input type="text" (change)="onFilter()" class="search" placeholder="Search by">
             </div>
         </div>
-        <div class="row">
-
+        <div class="row mt-5">
             <ul class="responsive-table">
                 <li class="table-header">
                     <div class="col col-2">Fecha</div>
-                    <div class="col col-2" style="padding-left: 10%;">Hora</div>
+                    <div class="col col-2">Hora</div>
                     <div class="col col-3">Especialista </div>
                     <div class="col col-3"><i class="fa fa-pencil"></i></div>
+                    <div class="col col-2">Accion</div>
                 </li>
                 <li class="table-row" *ngFor="let turno of turnos">
                     <div class="col col-2">{{turno.fecha}}</div>
-                    <div class="col col-2" style="padding-left: 10%;">{{turno.hora}}</div>
+                    <div class="col col-2">{{turno.hora}}</div>
                     <div class="col col-3">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
                     <div class="col col-3"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
                                 class="fa fa-pencil"></i></button>
                     </div>
+                    <div class="col col-2">
+                        <button class="button-delete-turno" (click)="wantToDelete()"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+
+
+
 
                 </li>
             </ul>
