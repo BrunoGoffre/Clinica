@@ -7,6 +7,7 @@ import { Usuario } from '../models/usuario';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject, Subject, windowWhen } from 'rxjs';
 import { turno } from '../models/turno';
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import { turno } from '../models/turno';
 export class FirestoreService {
 
   usuario = new BehaviorSubject<Usuario | null>(null);
+  storageFirestore = getStorage();
 
   constructor(private aFStore: AngularFirestore, private aFAuth: AngularFireAuth, private AFAuthService: AuthService, private storage: AngularFireStorage) { }
 
@@ -44,7 +46,8 @@ export class FirestoreService {
     return this.aFStore.collection('turnos', ref => ref.where('usuario.email', '==', CurrentUserEmail)).valueChanges();
   }
   setTurnos(turno: turno) {
-    return this.aFStore.collection('turnos').add(turno);
+    //return this.aFStore.collection('turnos').add(turno);
+    return this.aFStore.collection('turnos').doc(turno.id).set(turno);
   }
   getEspecilistas() {
     return this.aFStore.collection('users', ref => ref.where('rol', '==', 'especialista').where('activo', '==', 'true')).valueChanges();
@@ -52,4 +55,7 @@ export class FirestoreService {
   getEspecilistasByEspecilidad(especialidad: string) {
     return this.aFStore.collection('users', ref => ref.where('rol', '==', 'especialista').where('especialidad', '==', especialidad).where('activo', '==', 'true')).valueChanges();
   }
-}
+  UpdateObj(collection: string, obj: any, id: string = obj.id) {
+    return this.aFStore.collection(collection).doc(id).set(obj, { merge: true });
+  }
+} 

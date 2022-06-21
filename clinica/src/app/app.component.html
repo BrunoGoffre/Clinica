@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<app-navbar *ngIf="route"></app-navbar>
+<app-dashboard *ngIf="route"></app-dashboard>
+<div [@routeAnimations]="getRouteAnimationData()">
+    <router-outlet></router-outlet>
+</div>

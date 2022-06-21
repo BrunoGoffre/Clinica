@@ -1,11 +1,11 @@
-<div class="container">
+<div class="contenedor">
     <div class="card__container">
         <div class="card">
             <div class="card__content">
-                <button (click)="closeQuestion()">X</button>
-                <h3 class="card__header">Card 1</h3>
-                <p class="card__info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <button class="card__button">Read now</button>
+                <h3 class="card__header">Cuidado!</h3>
+                <p class="card__info">Desea eleminar el turno?</p>
+                <button class="card__button" (click)="DeleteTurno(true)">Aceptar</button>
+                <button class="card__button" (click)="DeleteTurno(false)">Cancelar</button>
             </div>
         </div>
     </div>

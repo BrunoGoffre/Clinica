@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-question',
@@ -8,14 +9,13 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class QuestionComponent implements OnInit {
 
   @Output() close = new EventEmitter<any>();
-  constructor() { }
+
+  constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
   }
 
-  closeQuestion() {
-    this.close.emit();
+  DeleteTurno(respuesta: boolean) {
+    this.close.emit(respuesta);
   }
-
-
 }

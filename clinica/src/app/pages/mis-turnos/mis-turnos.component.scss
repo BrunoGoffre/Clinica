@@ -54,6 +54,36 @@ h2 {
     margin-left: 3%;
 }
 
+.searcher {
+    border-radius: 20px;
+    border-color: grey;
+    height: 100%;
+    width: 40%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: grey;
+}
+
+.searcher:hover {
+    border-color: rgb(78, 103, 240);
+}
+
+.cancelado {
+    color: red;
+}
+
+.pendiente {
+    color: blue;
+}
+
+.completado {
+    color: green;
+}
+
+.aceptado {
+    color: yellow;
+}
+
+
 .responsive-table {
 
     max-height: 850px;
@@ -95,9 +125,7 @@ h2 {
         justify-content: center;
     }
 
-    .search {
-        margin-left: 80%;
-    }
+
 
     @media all and (max-width: 767px) {
         .table-header {

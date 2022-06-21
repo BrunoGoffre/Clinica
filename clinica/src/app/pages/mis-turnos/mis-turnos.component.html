@@ -2,7 +2,7 @@
     <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
-    <app-question *ngIf="mostrarQuestion" (close)="closeWantToDelete()"></app-question>
+    <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)"></app-question>
     <div class="container">
         <h2>Turnos</h2>
         <hr>
@@ -12,33 +12,38 @@
                     <i class="fa fa-plus"> Agregar turno</i></button>
             </div>
             <div class="col-10 d-flex flex-row-reverse">
-                <input type="text" (change)="onFilter()" class="search" placeholder="Search by">
+                <input type="text" (change)="onFilter($event)" class="searcher" placeholder="Buscar por ...">
             </div>
+        </div>
+        <div *ngIf="error != ''" class="alert alert-danger mt-2" (click)="onClickError()" role="alert">
+            {{error}}
         </div>
         <div class="row mt-5">
             <ul class="responsive-table">
                 <li class="table-header">
                     <div class="col col-2">Fecha</div>
                     <div class="col col-2">Hora</div>
-                    <div class="col col-3">Especialista </div>
-                    <div class="col col-3"><i class="fa fa-pencil"></i></div>
+                    <div class="col col-2">Especialista </div>
+                    <div class="col col-2"><i class="fa fa-pencil"></i></div>
+                    <div class="col col-2">Estado</div>
                     <div class="col col-2">Accion</div>
                 </li>
                 <li class="table-row" *ngFor="let turno of turnos">
                     <div class="col col-2">{{turno.fecha}}</div>
                     <div class="col col-2">{{turno.hora}}</div>
-                    <div class="col col-3">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
-                    <div class="col col-3"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
+                    <div class="col col-2">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
+                    <div class="col col-2"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
                                 class="fa fa-pencil"></i></button>
                     </div>
+                    <div class="col col-2"
+                        [class.cancelado]="turno.estado == 'cancelado' || turno.estado == 'rechazado'"
+                        [class.aceptado]="turno.estado == 'aceptado'" [class.completado]="turno.estado == 'completado'"
+                        [class.pendiente]="turno.estado == 'pendiente'">
+                        {{turno.estado}}</div>
                     <div class="col col-2">
-                        <button class="button-delete-turno" (click)="wantToDelete()"><i
-                                class="fa fa-trash"></i></button>
+                        <button class="button-delete-turno" (click)="wantToCancel(turno)"><i
+                                class="fa fa-ban"></i></button>
                     </div>
-
-
-
-
                 </li>
             </ul>
         </div>

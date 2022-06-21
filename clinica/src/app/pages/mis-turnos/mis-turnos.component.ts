@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { response } from 'express';
 import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-mis-turnos',
   templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.scss']
+  styleUrls: ['./mis-turnos.component.scss'],
+
 })
 export class MisTurnosComponent implements OnInit {
 
@@ -15,10 +18,13 @@ export class MisTurnosComponent implements OnInit {
   turnos: Array<turno> = [];
   turnoSelected !: string;
   turnosWithoutFilter: Array<turno> = [];
-  filter: string = '';
   cargando: boolean = false;
+  filter!: string;
   user !: Usuario;
   mostrarQuestion: boolean = false;
+  response !: boolean;
+  UpdateTurnoSelected !: turno | null;
+  error: string = '';
 
   constructor(private firestore: FirestoreService) { }
 
@@ -28,17 +34,25 @@ export class MisTurnosComponent implements OnInit {
   }
 
 
-  onFilter() {
-    //  this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialidad.toLowerCase().includes(this.filter.toLowerCase())  ||
-    // turno.especialista.nombre.toLowerCase().includes(this.filter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(this.filter.toLowerCase()))
+  onFilter(filter: any) {
+    let valueFilter = filter['srcElement']['value'];
+    this.filter = valueFilter;
+    this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
+      turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()))
   }
 
   getTurnos() {
     this.cargando = true;
     this.firestore.getTurnos(this.user.email).subscribe((retorno) => {
+      this.turnos = [];
       retorno.forEach((item) => {
         this.turnos.push(item as turno);
       })
+
+      if (this.filter)
+        this.onFilter(this.filter);
+
+      this.turnosWithoutFilter = this.turnos;
       this.cargando = false;
     });
   }
@@ -57,19 +71,31 @@ export class MisTurnosComponent implements OnInit {
     if (resenia != null && resenia != '') {
       this.turnoSelected = resenia;
       this.mostrarReview = true;
+    } else {
+      this.error = 'No hay ninguna reseña';
     }
   }
   CloseReiew() {
     this.mostrarReview = false;
   }
-  deleteTurno(turno: turno) {
+  UpdateTurno(respuesta: any) {
     this.cargando = true;
-    //this.firestore.
+    if (this.UpdateTurnoSelected?.estado)
+      this.UpdateTurnoSelected.estado = 'cancelado';
+    if (respuesta == true) {
+      this.firestore.UpdateObj('turnos', this.UpdateTurnoSelected, this.UpdateTurnoSelected?.id).then((retorno) => {
+        this.cargando = false;
+        this.mostrarQuestion = false;
+        this.UpdateTurnoSelected = null;
+      });
+    } else if (respuesta == false)
+      this.mostrarQuestion = false;
   }
-  wantToDelete() {
+  wantToCancel(turno: turno) {
+    this.UpdateTurnoSelected = turno;
     this.mostrarQuestion = true;
   }
-  closeWantToDelete() {
-    this.mostrarQuestion = false;
+  onClickError() {
+    this.error = '';
   }
 }

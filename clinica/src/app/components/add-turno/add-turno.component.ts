@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormsModule, Validators } from '@angular/
 import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { Guid } from "guid-typescript";
 
 @Component({
   selector: 'app-add-turno',
@@ -83,7 +84,8 @@ export class AddTurnoComponent implements OnInit {
       this.turno = this.turnoForm.value as turno;
       this.turno.usuario = user as Usuario;
       this.turno.especialista = this.specialtystSelected;
-      this.turno.completado = false;
+      this.turno.estado = 'pendiente';
+      this.turno.id = Guid.create().toString();
       this.turno.resenia = '';
       this.turno.EncuestaCompletada = false;
       if (this.turno) {
