@@ -33,6 +33,7 @@
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
     "path": "^0.12.7",
+    "primeng": "^13.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "typescript": "~4.6.2",

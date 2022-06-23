@@ -129,8 +129,13 @@ firebase/messaging
 
 firebase/remote-config
 
+firebase/storage
+
 font-awesome
 (OFL-1.1 AND MIT)
+
+guid-typescript
+ISC
 
 idb
 ISC

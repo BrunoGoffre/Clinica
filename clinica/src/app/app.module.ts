@@ -22,6 +22,7 @@ import { ReviewComponent } from './components/review/review.component';
 import { QuestionComponent } from './components/question/question.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
+import { FinaliazarTurnoComponent } from './components/finaliazar-turno/finaliazar-turno.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TurnosComponent } from './pages/turnos/turnos.component';
     ReviewComponent,
     QuestionComponent,
     MiPerfilComponent,
-    TurnosComponent
+    TurnosComponent,
+    FinaliazarTurnoComponent
   ],
   imports: [
     BrowserModule,

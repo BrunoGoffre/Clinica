@@ -25,6 +25,7 @@ export class MisTurnosComponent implements OnInit {
   response !: boolean;
   UpdateTurnoSelected !: turno | null;
   estadoUpdate!: string;
+  mostrarFinalizarFormulario!: boolean;
   error: string = '';
 
   constructor(private firestore: FirestoreService) { }
@@ -44,7 +45,6 @@ export class MisTurnosComponent implements OnInit {
 
   getTurnos() {
     this.cargando = true;
-    console.log(this.user.email);
     if (this.user.rol == 'paciente') {
       this.firestore.getTurnosPacienteByEmail(this.user.email).subscribe((retorno) => {
         this.turnos = [];
@@ -124,5 +124,9 @@ export class MisTurnosComponent implements OnInit {
       this.estadoUpdate = 'rechazado';
     }
     this.mostrarQuestion = true;
+  }
+
+  ShowFinalizarForm(turno: turno) {
+    this.mostrarFinalizarFormulario = true;
   }
 }
