@@ -1,26 +1,22 @@
 <div class="container">
     <app-loading *ngIf="cargando"></app-loading>
-    <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
-    <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)" [estadoUpdate]="estadoUpdate"></app-question>
+    <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)"></app-question>
     <div class="container">
-        <h2>Mis turnos</h2>
+        <h2>Turnos de la clinica</h2>
         <hr>
         <div class="row">
-            <div *ngIf="user.rol == 'paciente'" class="col-2">
-                <button class="button-add-turno" (click)="OpenForm()">
-                    <i class="fa fa-plus"> Agregar turno</i></button>
-            </div>
-            <div class="col-10 d-flex flex-row-reverse">
+            <div class="col-3 d-flex">
                 <input type="text" (change)="onFilter($event)" class="searcher" placeholder="Buscar por ...">
             </div>
         </div>
         <div *ngIf="error != ''" class="alert alert-danger mt-2" (click)="onClickError()" role="alert">
             {{error}}
         </div>
-        <div class="row mt-5">
+        <div class="row mt-2">
             <ul class="responsive-table">
                 <li class="table-header">
+                    <div class="col col-2">Usuario</div>
                     <div class="col col-2">Fecha</div>
                     <div class="col col-2">Hora</div>
                     <div class="col col-2">Especialista </div>
@@ -29,6 +25,7 @@
                     <div class="col col-2">Accion</div>
                 </li>
                 <li class="table-row" *ngFor="let turno of turnos">
+                    <div class="col col-2">{{turno.usuario.nombre}} {{turno.usuario.apellido}}</div>
                     <div class="col col-2">{{turno.fecha}}</div>
                     <div class="col col-2">{{turno.hora}}</div>
                     <div class="col col-2">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
@@ -40,17 +37,14 @@
                         [class.aceptado]="turno.estado == 'aceptado'" [class.completado]="turno.estado == 'completado'"
                         [class.pendiente]="turno.estado == 'pendiente'">
                         {{turno.estado}}</div>
-                    <div *ngIf="user.rol == 'paciente'" class="col col-2">
-                        <button class="button-delete-turno" (click)="ChangeStateTurno('cancelar',turno)"><i
-                                class="fa fa-ban"></i></button>
+                    <div *ngIf="canCencel(turno)" class="col col-2">
+                        <button class="button-delete-turno" (click)="wantToCancel(turno)">
+                            <i class="fa fa-ban"></i>
+                        </button>
                     </div>
-                    <div *ngIf="user.rol == 'especialista'" class="col col-2">
-                        <button class="button-delete-turno" style="color: green;"
-                            (click)="ChangeStateTurno('aceptar',turno)"><i class="fa fa-check"></i></button>
-                        <button class="button-delete-turno" (click)="ChangeStateTurno('rechazar',turno)"><i
-                                class="fa fa-close"></i></button>
-                        <button class="button-delete-turno" (click)="ChangeStateTurno('cancelar',turno)"><i
-                                class="fa fa-ban"></i></button>
+                    <div *ngIf="!canCencel(turno)" class="col col-2">
+                        <button style="color: grey;" disabled class="button-delete-turno"
+                            (click)="wantToCancel(turno)"><i class="fa fa-ban"></i></button>
                     </div>
                 </li>
             </ul>

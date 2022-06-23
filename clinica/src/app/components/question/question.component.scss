@@ -10,14 +10,14 @@
 }
 
 .card {
-    width: 60%;
-    height: 50%;
+    width: 70%;
+    height: 70%;
     text-align: center;
     background: #333333;
     border-radius: 10px;
     box-shadow: 25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f;
     margin-left: 210%;
-    margin-top: 50%;
+    margin-top: 30%;
     font-size: x-large;
 
 
@@ -60,6 +60,16 @@
     margin: 50px auto;
     border: 2px transparent;
     font-size: large;
+}
+
+.inputResenia {
+    width: 90%;
+    height: 35%;
+    color: white;
+    background: #4e4e4e;
+    margin: 10px auto;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .card__button:hover {

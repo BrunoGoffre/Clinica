@@ -57,11 +57,12 @@ h2 {
 .searcher {
     border-radius: 20px;
     border-color: grey;
-    height: 100%;
-    width: 40%;
+    height: 3rem;
+    width: 100%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: grey;
 }
+
 
 .searcher:hover {
     border-color: rgb(78, 103, 240);
@@ -80,7 +81,7 @@ h2 {
 }
 
 .aceptado {
-    color: lightblue;
+    color: yellow;
 }
 
 

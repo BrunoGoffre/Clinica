@@ -19,12 +19,18 @@
 }
 
 .review {
+    justify-content: center;
     margin-top: 10%;
     margin-left: 1%;
+    width: 100%;
+    height: 70%;
     justify-content: center;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: white 20px solid;
 }
 
-@mixin cross($size: 20px, $color: currentColor, $thickness: 1px) {
+@mixin cross($size: 5px, $color: currentColor, $thickness: 1px) {
     margin: 0;
     padding: 0;
     border: 0;
@@ -60,7 +66,6 @@
 }
 
 
-// Example 1.
 .btn-close {
     margin-left: 10%;
     margin-top: 5%;
@@ -68,8 +73,8 @@
     padding: 0;
     background: hsl(216, 100, 50);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -78,7 +83,7 @@
     transition: all 150ms;
 
     .icon-cross {
-        @include cross(40px, #fff, 6px);
+        @include cross(30px, #fff, 6px);
     }
 
     &:hover,

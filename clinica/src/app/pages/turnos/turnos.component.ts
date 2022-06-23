@@ -5,13 +5,13 @@ import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
-@Component({
-  selector: 'app-mis-turnos',
-  templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.scss'],
 
+@Component({
+  selector: 'app-turnos',
+  templateUrl: './turnos.component.html',
+  styleUrls: ['./turnos.component.scss']
 })
-export class MisTurnosComponent implements OnInit {
+export class TurnosComponent implements OnInit {
 
   agregandoTurno: boolean = false;
   mostrarReview: boolean = false;
@@ -24,7 +24,6 @@ export class MisTurnosComponent implements OnInit {
   mostrarQuestion: boolean = false;
   response !: boolean;
   UpdateTurnoSelected !: turno | null;
-  estadoUpdate!: string;
   error: string = '';
 
   constructor(private firestore: FirestoreService) { }
@@ -44,34 +43,18 @@ export class MisTurnosComponent implements OnInit {
 
   getTurnos() {
     this.cargando = true;
-    console.log(this.user.email);
-    if (this.user.rol == 'paciente') {
-      this.firestore.getTurnosPacienteByEmail(this.user.email).subscribe((retorno) => {
-        this.turnos = [];
-        retorno.forEach((item) => {
-          this.turnos.push(item as turno);
-        })
+    this.firestore.getTurnos().subscribe((retorno) => {
+      this.turnos = [];
+      retorno.forEach((item) => {
+        this.turnos.push(item as turno);
+      })
 
-        if (this.filter)
-          this.onFilter(this.filter);
+      if (this.filter)
+        this.onFilter(this.filter);
 
-        this.turnosWithoutFilter = this.turnos;
-        this.cargando = false;
-      });
-    } else if (this.user.rol == 'especialista') {
-      this.firestore.getTurnosEspcialistaByEmail(this.user.email).subscribe((retorno) => {
-        this.turnos = [];
-        retorno.forEach((item) => {
-          this.turnos.push(item as turno);
-        })
-
-        if (this.filter)
-          this.onFilter(this.filter);
-
-        this.turnosWithoutFilter = this.turnos;
-        this.cargando = false;
-      });
-    }
+      this.turnosWithoutFilter = this.turnos;
+      this.cargando = false;
+    });
   }
 
   getCurrentUser() {
@@ -97,32 +80,36 @@ export class MisTurnosComponent implements OnInit {
   }
   UpdateTurno(respuesta: any) {
     this.cargando = true;
-    console.log(respuesta);
-    if (this.UpdateTurnoSelected?.estado && respuesta['respuesta'] == true) {
+    if (this.UpdateTurnoSelected?.estado) {
+      this.UpdateTurnoSelected.estado = 'cancelado';
       this.UpdateTurnoSelected.resenia = respuesta['resenia'];
-      this.UpdateTurnoSelected.estado = this.estadoUpdate;
-      this.firestore.UpdateObj('turnos', this.UpdateTurnoSelected, this.UpdateTurnoSelected?.id).then((retorno) => {
-        this.cargando = false;
-        this.mostrarQuestion = false;
-        this.UpdateTurnoSelected = null;
-      });
-    } else {
-      this.cargando = false;
+      console.log(this.UpdateTurnoSelected.resenia);
+      if (respuesta['respuesta'] == true) {
+        this.firestore.UpdateObj('turnos', this.UpdateTurnoSelected, this.UpdateTurnoSelected?.id).then((retorno) => {
+          this.cargando = false;
+          this.mostrarQuestion = false;
+          this.UpdateTurnoSelected = null;
+        });
+      }
+    } else if (respuesta['respuesta'] == false) {
       this.mostrarQuestion = false;
+      this.cargando = false;
     }
+  }
+  wantToCancel(turno: turno) {
+    this.UpdateTurnoSelected = turno;
+    this.mostrarQuestion = true;
   }
   onClickError() {
     this.error = '';
   }
-  ChangeStateTurno(state: string, turno: turno) {
-    this.UpdateTurnoSelected = turno;
-    if (state == 'cancelar') {
-      this.estadoUpdate = 'cancelado';
-    } else if (state == 'aceptar') {
-      this.estadoUpdate = 'aceptado';
-    } else if (state == 'rechazar') {
-      this.estadoUpdate = 'rechazado';
+  canCencel(turno: turno) {
+    if (turno.estado != 'aceptado' && turno.estado != 'cancelado' && turno.estado != 'rechazado') {
+      return true;
+    } else {
+      return false;
     }
-    this.mostrarQuestion = true;
+
   }
+
 }

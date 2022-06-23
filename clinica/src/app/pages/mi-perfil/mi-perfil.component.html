@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <img class="img col-4" img src="{{usuario.value?.imageURL1}}" alt="">
+        <div class="contendor-info mt-5 col-8 ">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Nombre:</h3>
+                    <h4>{{usuario.value?.nombre}} {{usuario.value?.apellido}}</h4>
+                </div>
+                <div class="col-6">
+                    <h3>Edad:</h3>
+                    <h4>{{usuario.value?.edad}} Años</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h3>DNI:</h3>
+                    <h5>{{usuario.value?.DNI}}</h5>
+                </div>
+                <div class="col-6">
+                    <h3>Email:</h3>
+                    <h4>{{usuario.value?.email}}</h4>
+                </div>
+            </div>
+            <div class="row">
+
+                <div *ngIf="usuario.value?.rol=='paciente'" class="col-12">
+                    <h3>ObraSocial:</h3>
+                    <h4>{{usuario.value?.obraSocial}} </h4>
+                </div>
+                <div *ngIf="usuario.value?.rol=='especialista'" class="col-12">
+                    <h3>Especialidad:</h3>
+                    <h4>{{usuario.value?.especialidad}} </h4>
+                </div>
+            </div>
+        </div>
+        <button *ngIf="usuario.value?.rol == 'especialista'" class="button-15" role="button"><i class="fa fa-pencil">
+                Mis turnos</i></button>
+        <button style="margin-bottom: 2%;" class="button-15" role="button"><i class="fa fa-file"></i>
+            Imprimir historia clinica (PDF)</button>
+    </div>
+</div>

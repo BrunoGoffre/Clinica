@@ -42,8 +42,14 @@ export class FirestoreService {
     return this.aFStore.collection('users').valueChanges();
   }
 
-  getTurnos(CurrentUserEmail: string) {
+  getTurnosPacienteByEmail(CurrentUserEmail: string) {
     return this.aFStore.collection('turnos', ref => ref.where('usuario.email', '==', CurrentUserEmail)).valueChanges();
+  }
+  getTurnosEspcialistaByEmail(CurrentUserEmail: string) {
+    return this.aFStore.collection('turnos', ref => ref.where('especialista.email', '==', CurrentUserEmail)).valueChanges();
+  }
+  getTurnos() {
+    return this.aFStore.collection('turnos').valueChanges();
   }
   setTurnos(turno: turno) {
     //return this.aFStore.collection('turnos').add(turno);

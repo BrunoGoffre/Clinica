@@ -19,8 +19,22 @@
             <button class="button-24" role="button" routerLink="/register">Register</button>
         </div>
         <div *ngIf="usuario.value != null">
-            <span class="logout-text">{{usuario.value.nombre}} {{usuario.value.apellido}} </span>
-            <button (click)="onClickLogOut()" class="button-login"><i class="fa fa-power-off"></i></button>
+            <div class="btn-group">
+                <button class="buttonDropDown btn btn-secondary btn-lg dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="img" src="{{usuario.value.imageURL1}}">
+                    {{usuario.value.nombre}} {{usuario.value.apellido}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngIf="usuario.value.rol != 'admin'"><button class="dropdown-item" routerLink="/mi-perfil">Mi
+                            perfil</button></li>
+                    <li *ngIf="usuario.value.rol != 'admin'">
+                        <hr style=" color: white;" class="dropdown-divider">
+                    </li>
+                    <li><button class="dropdown-item" (click)="onClickLogOut()"><i class="fa fa-power-off"></i>
+                            Logout</button></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
