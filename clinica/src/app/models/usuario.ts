@@ -9,6 +9,8 @@ export interface Usuario {
     password: string;
     rol: string;
     activo: string;
+    desde: number;
+    hasta: number;
     imageURL1: string;
     imageURL2: string;
 }

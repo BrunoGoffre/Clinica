@@ -16,6 +16,7 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { PipesModule } from './pipes/pipes.module';
 import { GeneralComponentsModule } from './components/general-components.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { GeneralComponentsModule } from './components/general-components.module'
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     PipesModule,
-    GeneralComponentsModule
+    GeneralComponentsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

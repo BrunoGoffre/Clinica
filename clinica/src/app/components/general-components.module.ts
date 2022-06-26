@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild([]),
     PipesModule,
     FormsModule,
   ],
@@ -29,7 +32,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
     LoadingComponent,
     DashboardComponent,
     NavbarComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
   ]
 })
 export class GeneralComponentsModule { }

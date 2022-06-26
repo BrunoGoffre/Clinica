@@ -6,6 +6,8 @@ import { FinaliazarTurnoComponent } from 'src/app/pages/mis-turnos/finaliazar-tu
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { GeneralComponentsModule } from 'src/app/components/general-components.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { GeneralComponentsModule } from 'src/app/components/general-components.m
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild([]),
     PipesModule,
     FormsModule,
     GeneralComponentsModule
