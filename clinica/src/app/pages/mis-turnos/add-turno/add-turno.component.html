@@ -1,13 +1,39 @@
 <div class="contenedor">
-    <app-loading *ngIf="cargando"></app-loading>
-    <div class="login-box">
-        <div class="close-container">
-            <button (click)="onClose()" type="button" class="btn-close">
-                <span class="icon-cross"></span>
-                <span class="visually-hidden">Close</span>
-            </button>
+    <div class="close-container">
+        <button (click)="onClose()" type="button" class="btn-close">
+            <span class="icon-cross"></span>
+            <span class="visually-hidden">Close</span>
+        </button>
+    </div>
+    <div class="crearTurno">
+        <div class="contenedorEspecialistas" *ngIf="especialistaSeleccionado == null">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" *ngFor="let especialista of especialistas" (click)="selectEspecialista(especialista)">
+                    <div class="card">
+                        <img src="{{especialista.imageURL1}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{especialista.nombre}} {{especialista.apellido}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2>Turnos</h2>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-3 g-4"
+        *ngIf="especialistaSeleccionado != null && especialidadSeleccionada == ''">
+        <div class="col" (click)="SetEspecialidad(especialistaSeleccionado.especialidad)">
+            <div class="card">
+                <img src="{{especialistaSeleccionado.especialidad | EspecialidadFoto}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{especialistaSeleccionado.especialidad}}</h5>
+                    <p class="card-text">Descripcion de especialidad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <h2>Turnos</h2>
         <form [formGroup]="turnoForm">
             <div class="user-box">
                 <label for="">Fecha:</label>
@@ -48,6 +74,4 @@
                 [disabled]="turnoForm.invalid || specialtystSelected == undefined">
                 Solicitar
             </button>
-        </form>
-    </div>
-</div>
+        </form> -->

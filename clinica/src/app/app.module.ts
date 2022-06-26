@@ -6,43 +6,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { LoadingComponent } from './components/loading/loading.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
-import { ListadoComponent } from './components/listado/listado.component';
-import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
+import { ListadoComponent } from './pages/listadoUsuarios/listado.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
-import { AddTurnoComponent } from './components/add-turno/add-turno.component';
-import { ReviewComponent } from './components/review/review.component';
-import { QuestionComponent } from './components/question/question.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
-import { FinaliazarTurnoComponent } from './components/finaliazar-turno/finaliazar-turno.component';
+import { PipesModule } from './pipes/pipes.module';
+import { GeneralComponentsModule } from './components/general-components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    DashboardComponent,
-    NavbarComponent,
-    LoadingComponent,
     RegisterComponent,
     BienvenidoComponent,
     ListadoComponent,
-    ToggleButtonComponent,
-    MisTurnosComponent,
-    AddTurnoComponent,
-    ReviewComponent,
-    QuestionComponent,
     MiPerfilComponent,
     TurnosComponent,
-    FinaliazarTurnoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +36,8 @@ import { FinaliazarTurnoComponent } from './components/finaliazar-turno/finaliaz
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
+    PipesModule,
+    GeneralComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

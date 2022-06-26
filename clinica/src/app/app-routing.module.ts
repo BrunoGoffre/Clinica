@@ -4,7 +4,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
-import { ListadoComponent } from './components/listado/listado.component';
+import { ListadoComponent } from './pages/listadoUsuarios/listado.component';
 import { AdminGuard } from './guards/admin.guard';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
@@ -12,11 +12,12 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 // import { EspecialistaGuard } from './guards/especialista.guard';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 
+//
 
 const routes: Routes = [
   { path: "", component: BienvenidoComponent },
   { path: "usuarios", component: ListadoComponent, canActivate: [AdminGuard], data: { animation: 'usuariosPage' } },
-  { path: "mis-turnos", component: MisTurnosComponent, data: { animation: 'misTurnosPage' } },
+  { path: "mis-turnos", component: MisTurnosComponent, loadChildren: () => import('../app/pages/mis-turnos/turnos.module').then(m => m.TurnosModule) },
   { path: "turnos", component: TurnosComponent, canActivate: [AdminGuard] },
   { path: "home", component: HomeComponent, data: { animation: 'homePage' } },
   { path: "login", component: LoginComponent, data: { animation: 'fadePage' } },

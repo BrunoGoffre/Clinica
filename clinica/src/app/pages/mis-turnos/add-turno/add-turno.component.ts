@@ -4,6 +4,7 @@ import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Guid } from "guid-typescript";
+import { Especialista } from 'src/app/models/itemHistorial';
 
 @Component({
   selector: 'app-add-turno',
@@ -13,8 +14,8 @@ import { Guid } from "guid-typescript";
 export class AddTurnoComponent implements OnInit {
 
   @Output() close = new EventEmitter<any>();
-  specialtySelected: boolean = false;
-  specialtystSelected !: Usuario;
+  especialidadSeleccionada: string = '';
+  especialistaSeleccionado !: Usuario | any;
   especialistas: Array<Usuario> = [];
   especialidades: Array<string> = [];
   cargando: boolean = false;
@@ -28,6 +29,7 @@ export class AddTurnoComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.getEspecialistas();
     this.getEspecialidades().then(() => this.cargando = false);
   }
 
@@ -56,6 +58,17 @@ export class AddTurnoComponent implements OnInit {
     this.close.emit();
   }
 
+  getEspecialistas() {
+    this.cargando = true;
+    this.especialistas = [];
+    this.firestore.getEspecilistas().subscribe((retorno) => {
+      retorno.forEach(item => {
+        this.especialistas.push(item as Usuario);
+      })
+      this.cargando = false;
+    })
+  }
+
   async getEspecialidades() {
     this.cargando = true;
     await this.firestore.getEspecilistas().subscribe((retorno) => {
@@ -64,8 +77,8 @@ export class AddTurnoComponent implements OnInit {
       })
     });
   }
+
   async FilterByEspecilidad(especilidad: string) {
-    this.specialtySelected = true;
     await this.firestore.getEspecilistasByEspecilidad(especilidad).subscribe((retorno) => {
       this.especialistas = [];
       retorno.forEach((item) => {
@@ -74,8 +87,10 @@ export class AddTurnoComponent implements OnInit {
     })
   }
   selectEspecialista(especialista: Usuario) {
-    this.specialtystSelected = especialista;
-    console.log(this.specialtystSelected);
+    this.especialistaSeleccionado = especialista;
+  }
+  SetEspecialidad(especialidad: string) {
+    this.especialidadSeleccionada = especialidad;
   }
   submit() {
     this.cargando = true;
@@ -83,7 +98,7 @@ export class AddTurnoComponent implements OnInit {
     if (!this.turnoForm.invalid) {
       this.turno = this.turnoForm.value as turno;
       this.turno.usuario = user as Usuario;
-      this.turno.especialista = this.specialtystSelected;
+      this.turno.especialista = this.especialistaSeleccionado;
       this.turno.estado = 'pendiente';
       this.turno.id = Guid.create().toString();
       this.turno.resenia = '';
