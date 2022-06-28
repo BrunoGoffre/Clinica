@@ -26,7 +26,6 @@ import { DropdownModule } from 'primeng/dropdown';
     RegisterComponent,
     BienvenidoComponent,
     ListadoComponent,
-    MiPerfilComponent,
     TurnosComponent,
   ],
   imports: [
@@ -39,7 +38,7 @@ import { DropdownModule } from 'primeng/dropdown';
     BrowserAnimationsModule,
     PipesModule,
     GeneralComponentsModule,
-    DropdownModule
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclinica=self.webpackChunkclinica||[]).push([[229],{8229:(P,_,n)=>{n.r(_),n.d(_,{TurnosModule:()=>r});var s=n(9808),u=n(5503),E=n(2382),a=n(2544),M=n(441),l=n(5e3);let r=(()=>{class o{}return o.\u0275fac=function(O){return new(O||o)},o.\u0275mod=l.oAB({type:o}),o.\u0275inj=l.cJS({imports:[[s.ez,M.Bz.forChild([]),u.D,E.u5,a.T]]}),o})()}}]);

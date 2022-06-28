@@ -1,4 +1,5 @@
 export interface Usuario {
+    id: string;
     nombre: string;
     apellido: string;
     DNI: string;
@@ -9,8 +10,9 @@ export interface Usuario {
     password: string;
     rol: string;
     activo: string;
-    desde: number;
-    hasta: number;
+    dias: Array<string>;
+    desde: string;
+    hasta: string;
     imageURL1: string;
     imageURL2: string;
 }

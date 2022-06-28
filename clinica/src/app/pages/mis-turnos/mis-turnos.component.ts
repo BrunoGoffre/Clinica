@@ -4,11 +4,13 @@ import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-mis-turnos',
   templateUrl: './mis-turnos.component.html',
   styleUrls: ['./mis-turnos.component.scss'],
+  providers: [MessageService]
 
 })
 export class MisTurnosComponent implements OnInit {
@@ -28,7 +30,7 @@ export class MisTurnosComponent implements OnInit {
   mostrarFinalizarFormulario!: boolean;
   error: string = '';
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(private firestore: FirestoreService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -111,8 +113,8 @@ export class MisTurnosComponent implements OnInit {
       this.mostrarQuestion = false;
     }
   }
-  onClickError() {
-    this.error = '';
+  onClickError(mensage: string) {
+    this.messageService.add({ key: 'c', severity: 'error', summary: 'Error', detail: mensage });
   }
   ChangeStateTurno(state: string, turno: turno) {
     this.UpdateTurnoSelected = turno;

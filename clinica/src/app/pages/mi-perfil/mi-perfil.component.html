@@ -1,3 +1,25 @@
+<p-toast position="top-right" key="c" [baseZIndex]="5000"></p-toast>
+<p-dialog header="Seleccione dias" [(visible)]="display" [style]="{width: '25vw', height:'40vh', background:'white'}">
+    <ng-template pTemplate="content row">
+        <p>
+            <p-selectButton class="col col-8" [options]="daysOptions" [(ngModel)]="selectedDays" [multiple]="true"
+                optionLabel="name" optionValue="value">
+            </p-selectButton>
+        </p>
+        <h5>Seleccione horarios</h5>
+        <p class="row">
+            <label>Desde</label>
+            <input type="time" (change)="onSelectTime($event,'desde')">
+            <label>Hasta</label>
+            <input type="time" (change)="onSelectTime($event,'hasta')">
+        </p>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="AddHorarios()" label="Finalizar" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>
 <div class="container">
     <div class="row">
         <img class="img col-4" img src="{{usuario.value?.imageURL1}}" alt="">
@@ -34,9 +56,13 @@
                 </div>
             </div>
         </div>
-        <button *ngIf="usuario.value?.rol == 'especialista'" class="button-15" role="button"><i class="fa fa-pencil">
+        <button *ngIf="usuario.value?.rol == 'especialista'" class="button-15" type="button" (click)="display=true"><i
+                class="fa fa-clock-o"></i> Cargar mis horarios</button>
+        <button *ngIf="usuario.value?.rol == 'especialista'" style="margin-bottom: 2%;" routerLink="/mis-turnos"
+            class="button-15" role="button"><i class="fa fa-pencil">
                 Mis turnos</i></button>
-        <button style="margin-bottom: 2%;" class="button-15" role="button"><i class="fa fa-file"></i>
+        <button *ngIf="usuario.value?.rol != 'especialista'" style="margin-bottom: 2%;" class="button-15"
+            role="button"><i class="fa fa-file"></i>
             Imprimir historia clinica (PDF)</button>
     </div>
 </div>

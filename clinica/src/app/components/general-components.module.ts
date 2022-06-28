@@ -4,12 +4,12 @@ import { QuestionComponent } from './question/question.component';
 import { ReviewComponent } from './review/review.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PipesModule } from '../pipes/pipes.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -18,13 +18,14 @@ import { RouterModule } from '@angular/router';
     LoadingComponent,
     DashboardComponent,
     NavbarComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([]),
     PipesModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     QuestionComponent,
@@ -33,6 +34,6 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     NavbarComponent,
     ToggleButtonComponent,
-  ]
+  ],
 })
 export class GeneralComponentsModule { }

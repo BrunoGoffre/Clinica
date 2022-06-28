@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent, data: { animation: 'homePage' } },
   { path: "login", component: LoginComponent, data: { animation: 'fadePage' } },
   { path: "register", component: RegisterComponent },
-  { path: "mi-perfil", component: MiPerfilComponent, },
+  { path: "mi-perfil", component: MiPerfilComponent, loadChildren: () => import('./pages/mi-perfil/MiPerfil.module').then(m => m.MiPerfilModule) },
   { path: "**", redirectTo: 'home' },
 ]
 

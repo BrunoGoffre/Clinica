@@ -4,10 +4,13 @@ import { MisTurnosComponent } from './mis-turnos.component';
 import { AddTurnoComponent } from 'src/app/pages/mis-turnos/add-turno/add-turno.component';
 import { FinaliazarTurnoComponent } from 'src/app/pages/mis-turnos/finaliazar-turno/finaliazar-turno.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralComponentsModule } from 'src/app/components/general-components.module';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,12 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([]),
     PipesModule,
     FormsModule,
-    GeneralComponentsModule
+    ReactiveFormsModule,
+    GeneralComponentsModule,
+    DropdownModule,
+    DialogModule,
+    ButtonModule,
+    ToastModule
   ],
   exports: [
     MisTurnosComponent,

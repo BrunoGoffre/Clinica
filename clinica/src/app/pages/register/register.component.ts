@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, ValidationErrors, ValidatorF
 import { Router } from '@angular/router';
 import { async } from '@firebase/util';
 import { resolve } from 'dns';
+import { Guid } from 'guid-typescript';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -68,6 +69,7 @@ export class RegisterComponent implements OnInit {
                 this.paciente.imageURL1 = url;
                 this.paciente.rol = this.rol;
                 this.paciente.activo = 'true';
+                this.paciente.id = Guid.create().toString();
                 this.firestore.setPaciente(this.paciente).then(() => {
                   this.cargando = false;
                   this.firestore.usuario.next(this.paciente);

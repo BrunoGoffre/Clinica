@@ -1,6 +1,7 @@
 <div class="container">
+    <p-toast position="top-right" key="c" [baseZIndex]="5000"></p-toast>
     <app-loading *ngIf="cargando"></app-loading>
-    <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()"></app-add-turno>
+    <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()" (error)="onClickError($event)"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
     <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)" [estadoUpdate]="estadoUpdate"></app-question>
     <app-finaliazar-turno *ngIf="mostrarFinalizarFormulario"></app-finaliazar-turno>
@@ -16,7 +17,7 @@
                 <input type="text" (change)="onFilter($event)" class="searcher" placeholder="Buscar por ...">
             </div>
         </div>
-        <div *ngIf="error != ''" class="alert alert-danger mt-2" (click)="onClickError()" role="alert">
+        <div *ngIf="error != ''" class="alert alert-danger mt-2" role="alert">
             {{error}}
         </div>
         <div class="row mt-5">

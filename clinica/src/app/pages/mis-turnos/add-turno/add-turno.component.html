@@ -1,81 +1,59 @@
-<div class="contenedor">
-    <div class="close-container">
-        <button (click)="onClose()" type="button" class="btn-close">
-            <span class="icon-cross"></span>
-            <span class="visually-hidden">Close</span>
-        </button>
-    </div>
-    <div class="crearTurno">
-        <div class="contenedorEspecialistas" *ngIf="especialistaSeleccionado == null">
-            <h1 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione especialista</h1>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col" *ngFor="let especialista of especialistas" (click)="selectEspecialista(especialista)">
-                    <div class="card">
-                        <img src="{{especialista.imageURL1}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{especialista.nombre}} {{especialista.apellido}}</h5>
+<p-dialog header="Agregando turno..." [(visible)]="display" [draggable]="false" [closable]="false"
+    [style]="{width: '30vw', height:'55vh'}">
+    <ng-template pTemplate="content row">
+        <hr>
+        <div class="crearTurno">
+            <div class="contenedorEspecialistas" *ngIf="especialistaSeleccionado == null">
+                <h3 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione especialista
+                </h3>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let especialista of especialistas"
+                        (click)="selectEspecialista(especialista)">
+                        <div class="card">
+                            <img src="{{especialista.imageURL1}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{especialista.nombre}} {{especialista.apellido}}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row row-cols-1 row-cols-lg-3 g-4 containerEspecialidades"
-        *ngIf="especialistaSeleccionado != null && especialidadSeleccionada == ''">
-        <div class="col" (click)="SetEspecialidad(especialistaSeleccionado.especialidad)">
-            <div class="card">
-                <img src="{{especialistaSeleccionado.especialidad | EspecialidadFoto}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{especialistaSeleccionado.especialidad}}</h5>
-                    <p class="card-text">Descripcion de especialidad</p>
+        <div class="containerEspecialidades" *ngIf="especialistaSeleccionado != null && especialidadSeleccionada == ''">
+            <h3 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione especialidad</h3>
+            <div class="row row-cols-1 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card" (click)="SetEspecialidad(especialistaSeleccionado.especialidad)">
+                        <img src="{{especialistaSeleccionado.especialidad | EspecialidadFoto}}" class="card-img-top"
+                            alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{especialistaSeleccionado.especialidad}}</h5>
+                            <p class="card-text">Descripcion de especialidad</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="contenedorFechas">
-        <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown> -->
-    </div>
-</div>
+        <div class="contenedorFechas" *ngIf="especialidadSeleccionada != ''">
+            <div class="row justify-content-center text-aling center">
+                <div class="col-6  alig-items-center">
+                    <h3 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione dia</h3>
+                    <p-dropdown [options]="dias" [(ngModel)]="diaSelected" optionValue="value" optionLabel="name"
+                        placeholder="Dias" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+                <div class="col-6  alig-items-center">
+                    <h3 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione fecha</h3>
+                    <p-dropdown [options]="horas" [(ngModel)]="horaSelected" optionValue="value" optionLabel="name"
+                        placeholder="Hora" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 
-<!-- <h2>Turnos</h2>
-        <form [formGroup]="turnoForm">
-            <div class="user-box">
-                <label for="">Fecha:</label>
-                <input type="date" formControlName="fecha">
-            </div>
-            <div class="user-box">
-                <label for="">Hora:</label>
-                <input type="time" formControlName="hora">
-            </div>
-            <div class="row">
-                <div class="dropdown col-6">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Especilidad
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li *ngFor="let especialidad of especialidades"><button
-                                (click)="FilterByEspecilidad(especialidad)" class="dropdown-item">
-                                {{especialidad}}
-                            </button></li>
-                    </ul>
-                </div>
-                <div class="dropdown col-6">
-                    <button class="btn btn-secondary dropdown-toggle" [disabled]="!specialtySelected" type="button"
-                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Especialistas
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li *ngFor="let especialista of especialistas">
-                            <button (click)="selectEspecialista(especialista)" class="dropdown-item" href="#">
-                                {{especialista.nombre}}
-                                {{especialista.apellido}}</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <button class="button-submit" (click)="submit()"
-                [disabled]="turnoForm.invalid || specialtystSelected == undefined">
-                Solicitar
-            </button>
-        </form> -->
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="AgregarTurno()" label="Agregar" styleClass="p-button-text">
+        </p-button>
+        <p-button icon="pi pi-times" (click)="onClose()" label="Cancelar" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>
