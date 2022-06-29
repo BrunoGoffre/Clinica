@@ -25,7 +25,6 @@ import { DropdownModule } from 'primeng/dropdown';
     LoginComponent,
     RegisterComponent,
     BienvenidoComponent,
-    ListadoComponent,
     TurnosComponent,
   ],
   imports: [

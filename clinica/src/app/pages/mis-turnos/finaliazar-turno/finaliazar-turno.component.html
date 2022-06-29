@@ -1,16 +1,66 @@
-<div class="container">
-    <div class="row">
-        <div class="col col-12">
-            <label>Altura</label>
-            <label>Peso</label>
-            <label>Temperatura</label>
-            <label>Presion</label>
+<p-dialog header="Finalizando turno..." [(visible)]="display" [draggable]="false" [closable]="false"
+    [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <div class="container">
+            <hr>
+            <h3 class="mb-4">Complete los campos</h3>
+            <div class="row">
+                <div class="field col-3 md:col-3">
+                    <span class="p-float-label">
+                        <input type="text" class="inputsTexts" id="Altura" pInputText [(ngModel)]="AlturaText">
+                        <label for="Altura">Altura</label>
+                    </span>
+                </div>
+                <div class="field col-3 md:col-3">
+                    <span class="p-float-label md:col-3">
+                        <input type="text" class="inputsTexts" id="Peso" pInputText [(ngModel)]="PesoText">
+                        <label for="Peso">Peso</label>
+                    </span>
+                </div>
+                <div class="field col-3 md:col-3">
+                    <span class="p-float-label md:col-3">
+                        <input type="text" class="inputsTexts" id="Temperatura" pInputText
+                            [(ngModel)]="TemperaturaText">
+                        <label for="Temperatura">Temperatura</label>
+                    </span>
+                </div>
+                <div class="field col-3 md:col-3">
+                    <span class="p-float-label md:col-3">
+                        <input type="text" class="inputsTexts" id="Presion" pInputText [(ngModel)]="PresionText">
+                        <label for="Presion">Presion</label>
+                    </span>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3">
+                <p-button icon="pi pi-plus" [hidden]="Dynamic3.mostrar == true" (onClick)="AddDynamicButton()"
+                    styleClass="p-button-text"></p-button>
+            </div>
+            <div *ngIf="Dynamic1.mostrar" class="row">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic1" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic1.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <input type="text" class="col-5 inputsTexts" id="Dynamic1" pInputText placeholder="Valor"
+                    [(ngModel)]="Dynamic1.value">
+            </div>
+            <div *ngIf="Dynamic2.mostrar" class="row mt-3">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic2" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic2.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <input type="text" class="col-5 inputsTexts" id="Dynamic2" pInputText placeholder="Valor"
+                    [(ngModel)]="Dynamic2.value">
+            </div>
+            <div *ngIf="Dynamic3.mostrar" class="row mt-3">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic3" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic3.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <input type="text" class="col-5 inputsTexts" id="Dynamic3" pInputText placeholder="Valor"
+                    [(ngModel)]="Dynamic3.value">
+            </div>
         </div>
-    </div>
-    <div class="row">
-
-    </div>
-    <div class="row">
-
-    </div>
-</div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Finalizar" (click)="Finalizar()" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="Cancelar()" label="Cancelar" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>

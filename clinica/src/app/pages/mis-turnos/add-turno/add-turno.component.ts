@@ -98,7 +98,7 @@ export class AddTurnoComponent implements OnInit {
         especialista: this.especialistaSeleccionado,
         estado: 'pendiente',
         resenia: '',
-        EncuestaCompletada: false
+        EncuestaCompletada: false,
       };
       this.firestore.setTurnos(this.turno).then(() => { this.cargando = false; this.close.emit() });
     } else {

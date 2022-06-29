@@ -66,3 +66,6 @@
             Imprimir historia clinica (PDF)</button>
     </div>
 </div>
+<div class="mt-4" *ngIf="usuario.value?.rol == 'paciente'">
+    <app-historial></app-historial>
+</div>

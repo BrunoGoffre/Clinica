@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import * as FileSaver from 'file-saver';
 import { Usuario } from 'src/app/models/usuario';
+import { turno } from 'src/app/models/turno';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { Usuario } from 'src/app/models/usuario';
 export class ListadoComponent implements OnInit {
   cargando: boolean = false;
   users: Array<Usuario> = [];
+  displayDialog: boolean = false;
+  turnosCompletados !: any[];
 
   constructor(private firestore: FirestoreService) { }
 
@@ -47,5 +50,20 @@ export class ListadoComponent implements OnInit {
       fileName + "export" + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
+  GetTurnosCompletados(email: string) {
+    this.turnosCompletados = [];
+    this.firestore.getTurnosPacienteByEmail(email).subscribe((retorno) => {
+      retorno.forEach(item => {
+        if ((item as turno).estado == 'completado') {
+          this.turnosCompletados.push(item as turno);
+        }
+      })
+    })
+  }
+  MostrarDialog(usuario: Usuario) {
+    if (usuario.rol == 'paciente') {
+      this.GetTurnosCompletados(usuario.email);
+      this.displayDialog = true;
+    }
+  }
 }

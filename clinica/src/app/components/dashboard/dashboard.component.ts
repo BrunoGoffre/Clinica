@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class DashboardComponent implements OnInit {
   admin !: boolean;
+  rol !: string;
   constructor() { }
 
   ngOnInit(): void {
@@ -16,7 +17,7 @@ export class DashboardComponent implements OnInit {
   }
   getUser() {
     let user = window.localStorage.getItem('usuario');
-    this.admin = user != null && JSON.parse(user)['rol'] == 'admin' ? true : false;
+    this.rol = user != null ? JSON.parse(user)['rol'] : '';
   }
 
 }

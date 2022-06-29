@@ -4,18 +4,21 @@
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()" (error)="onClickError($event)"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
     <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)" [estadoUpdate]="estadoUpdate"></app-question>
-    <app-finaliazar-turno *ngIf="mostrarFinalizarFormulario"></app-finaliazar-turno>
+    <app-finaliazar-turno *ngIf="displayDialog" [turnoAFinalizar]="UpdateTurnoSelected" (error)="onClickError($event)"
+        (close)="CloseFinalizarForm()">
+    </app-finaliazar-turno>
     <div class="container">
         <h2>Mis turnos</h2>
         <hr>
         <div class="row">
-            <div *ngIf="user.rol == 'paciente'" class="col-2">
+            <div *ngIf="user.rol == 'paciente'" class="col-2 mb-3">
                 <button class="button-add-turno" (click)="OpenForm()">
                     <i class="fa fa-plus"> Agregar turno</i></button>
             </div>
-            <div class="col-10 d-flex flex-row-reverse">
-                <input type="text" (change)="onFilter($event)" class="searcher" placeholder="Buscar por ...">
-            </div>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search" style="margin-left: 1%;"></i>
+                <input type="text" pInputText (change)="onFilter($event)" placeholder="Search" />
+            </span>
         </div>
         <div *ngIf="error != ''" class="alert alert-danger mt-2" role="alert">
             {{error}}
@@ -61,8 +64,8 @@
                             class="button-delete-turno" (click)="ChangeStateTurno('cancelar',turno)"><i
                                 class="fa fa-ban"></i></button>
                         <button *ngIf="turno.estado != 'cancelado' && turno.estado != 'completado'"
-                            class="button-delete-turno" style="color:blue;" (click)="ShowFinalizarForm(turno)"><i
-                                class="fa fa-file-text-o"></i></button>
+                            class="button-delete-turno" style="color:white; background-color:blue ;"
+                            (click)="ShowFinalizarForm(turno)">Finalizar</button>
                     </div>
                 </li>
             </ul>

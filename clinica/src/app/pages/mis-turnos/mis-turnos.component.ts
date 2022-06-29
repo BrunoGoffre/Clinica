@@ -27,8 +27,8 @@ export class MisTurnosComponent implements OnInit {
   response !: boolean;
   UpdateTurnoSelected !: turno | null;
   estadoUpdate!: string;
-  mostrarFinalizarFormulario!: boolean;
   error: string = '';
+  displayDialog: boolean = false;
 
   constructor(private firestore: FirestoreService, private messageService: MessageService) { }
 
@@ -41,9 +41,36 @@ export class MisTurnosComponent implements OnInit {
   onFilter(filter: any) {
     let valueFilter = filter['srcElement']['value'];
     this.filter = valueFilter;
-    this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
-      turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()))
+    this.turnos = this.turnosWithoutFilter.filter(turno => {
+      let retorno = false;
+      retorno = turno.estado.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.fecha.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.hora.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.id.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.usuario.nombre.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.usuario.apellido.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.usuario.email.toLowerCase().includes(valueFilter.toLowerCase());
+
+      if (turno.historiaClinica) {
+        retorno = retorno || turno.historiaClinica.peso.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.altura.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.temperatura.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.presion.toLowerCase().includes(this.filter.toLowerCase())
+
+        if (turno.historiaClinica.dynamics) {
+          retorno = retorno || turno.historiaClinica.dynamics.filter(value => value.valor.toLowerCase().includes(this.filter.toLocaleLowerCase()) ||
+            value.clave.toLowerCase().includes(this.filter.toLocaleLowerCase())).length > 0
+        }
+      }
+      return retorno;
+      return retorno;
+    }
+    )
   }
+
 
   getTurnos() {
     this.cargando = true;
@@ -64,7 +91,9 @@ export class MisTurnosComponent implements OnInit {
       this.firestore.getTurnosEspcialistaByEmail(this.user.email).subscribe((retorno) => {
         this.turnos = [];
         retorno.forEach((item) => {
-          this.turnos.push(item as turno);
+          if ((item as turno).estado != 'completado' && (item as turno).estado != 'cancelado') {
+            this.turnos.push(item as turno);
+          }
         })
 
         if (this.filter)
@@ -129,6 +158,10 @@ export class MisTurnosComponent implements OnInit {
   }
 
   ShowFinalizarForm(turno: turno) {
-    this.mostrarFinalizarFormulario = true;
+    this.displayDialog = true;
+    this.UpdateTurnoSelected = turno;
+  }
+  CloseFinalizarForm() {
+    this.displayDialog = false;
   }
 }

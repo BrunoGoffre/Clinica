@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { turno } from 'src/app/models/turno';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
@@ -25,11 +26,13 @@ export class MiPerfilComponent implements OnInit {
     { name: 'Jueves', value: 'Jueves' },
     { name: 'Viernes', value: 'Viernes' },
   ];
+  turnosCompletados!: turno[];
 
   constructor(private firestore: FirestoreService, private primeNGConfig: PrimeNGConfig, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.primeNGConfig.ripple = true;
+    this.getTurnosCompletadosByEmail();
   }
 
   onSelectTime(time: any, jornada: string) {
@@ -50,6 +53,18 @@ export class MiPerfilComponent implements OnInit {
       } else {
         this.messageService.add({ key: 'c', severity: 'error', summary: 'Error', detail: 'No todos los campos fueron cargados' });
       }
+    }
+  }
+  getTurnosCompletadosByEmail() {
+    if (this.turnosCompletados != [] && this.usuario.value?.email) {
+      this.turnosCompletados = [];
+      this.firestore.getTurnosPacienteByEmail(this.usuario.value.email).subscribe((retorno) => {
+        retorno.forEach(item => {
+          if ((item as turno).estado == 'completado') {
+            this.turnosCompletados.push(item as turno);
+          }
+        })
+      })
     }
   }
 }

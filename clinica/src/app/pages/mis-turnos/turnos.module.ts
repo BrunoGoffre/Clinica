@@ -11,6 +11,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { PrimeIcons } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { ToastModule } from 'primeng/toast';
     DropdownModule,
     DialogModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    InputTextModule,
   ],
   exports: [
     MisTurnosComponent,

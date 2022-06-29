@@ -1,3 +1,13 @@
+<p-dialog [(visible)]="displayDialog" [style]="{width: '70vw'}" [closable]="false" [draggable]="false">
+    <ng-template pTemplate="content">
+        <app-historial [turnosCompletadosByAdmin]="turnosCompletados"></app-historial>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="displayDialog=false" label="Cerrar" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+
 <div class="container">
     <app-loading *ngIf="cargando"></app-loading>
     <div class="container" *ngIf="cargando == false">
@@ -7,12 +17,13 @@
             matTooltipClass="example-tooltip-red" routerLink="/register"><i class="fa fa-plus"></i></button>
         <button class="button-add-Admin" (click)="exportExcel()"><i class="fa fa-save"></i></button>
         <ul class="responsive-table">
-            <li class="table-row" *ngFor="let item of users">
+            <li class="table-row" *ngFor="let item of users" (click)="MostrarDialog(item)"
+                [class.pointer]="item.rol == 'paciente'">
                 <div class="col col-2"><img class="img" src="{{item.imageURL1}}"></div>
                 <div class="col col-2">{{item.rol}}</div>
                 <div class="col col-2" style="padding-left: 10%;">{{item.nombre}} {{item.apellido}}</div>
                 <div class="col col-3">{{item.email}}</div>
-                <app-toggle-button class="col col-2" [activo]="item.activo"></app-toggle-button>
+                <app-toggle-button class="col col-2" [activo]="item.activo" style="z-index: 1;"></app-toggle-button>
             </li>
         </ul>
     </div>

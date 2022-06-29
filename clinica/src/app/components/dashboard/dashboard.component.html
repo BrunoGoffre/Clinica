@@ -8,7 +8,7 @@
                 </span>
             </a>
         </li>
-        <li *ngIf="admin" class="has-subnav">
+        <li *ngIf="rol == 'admin'" class="has-subnav">
             <a routerLink="/usuarios">
                 <i class="fa fa-user fa-2x"></i>
                 <span class="nav-text">
@@ -16,7 +16,7 @@
                 </span>
             </a>
         </li>
-        <li *ngIf="!admin" class="has-subnav">
+        <li *ngIf="rol != 'admin'" class="has-subnav">
             <a routerLink="/mis-turnos">
                 <i class="fa fa-clock-o fa-2x"></i>
                 <span class="nav-text">
@@ -24,7 +24,7 @@
                 </span>
             </a>
         </li>
-        <li *ngIf="admin" class="has-subnav">
+        <li *ngIf="rol == 'admin'" class="has-subnav">
             <a routerLink="/turnos">
                 <i class="fa fa-clock-o fa-2x"></i>
                 <span class="nav-text">
@@ -32,11 +32,19 @@
                 </span>
             </a>
         </li>
-        <li *ngIf="!admin" class="has-subnav">
+        <li *ngIf="rol != 'admin'" class="has-subnav">
             <a routerLink="/mi-perfil">
                 <i class="fa fa-user fa-2x"></i>
                 <span class="nav-text">
                     Mis datos
+                </span>
+            </a>
+        </li>
+        <li *ngIf="rol != 'admin'" class="has-subnav">
+            <a routerLink="/historial">
+                <i class="fa fa-history"></i>
+                <span class="nav-text">
+                    Historial
                 </span>
             </a>
         </li>

@@ -38,7 +38,7 @@ export class TurnosComponent implements OnInit {
     let valueFilter = filter['srcElement']['value'];
     this.filter = valueFilter;
     this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
-      turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()))
+      turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()));
   }
 
   getTurnos() {
