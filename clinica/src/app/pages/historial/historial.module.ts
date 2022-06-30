@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { GeneralComponentsModule } from 'src/app/components/general-components.module';
 
 
 
@@ -18,7 +19,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
-    SelectButtonModule
+    SelectButtonModule,
+    GeneralComponentsModule
   ],
   exports: [
     HistorialComponent

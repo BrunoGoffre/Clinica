@@ -14,7 +14,6 @@
             <input type="time" (change)="onSelectTime($event,'hasta')">
         </p>
     </ng-template>
-
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="AddHorarios()" label="Finalizar" styleClass="p-button-text">
         </p-button>
@@ -45,7 +44,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <div *ngIf="usuario.value?.rol=='paciente'" class="col-12">
                     <h3>ObraSocial:</h3>
                     <h4>{{usuario.value?.obraSocial}} </h4>
@@ -55,14 +53,25 @@
                     <h4>{{usuario.value?.especialidad}} </h4>
                 </div>
             </div>
+            <div class="row">
+                <div *ngIf="usuario.value?.rol=='especialista'" class="col-6">
+                    <h3>Dias:</h3>
+                    <h4 *ngFor="let dia of usuario.value?.dias">{{dia}}</h4>
+                </div>
+                <div *ngIf="usuario.value?.rol=='especialista'" class="col-6">
+                    <h3>Horarios:</h3>
+                    <h4>Desde: {{usuario.value?.desde | formatHorario}}</h4>
+                    <h4>Hasta: {{usuario.value?.hasta | formatHorario}}</h4>
+                </div>
+            </div>
         </div>
         <button *ngIf="usuario.value?.rol == 'especialista'" class="button-15" type="button" (click)="display=true"><i
                 class="fa fa-clock-o"></i> Cargar mis horarios</button>
         <button *ngIf="usuario.value?.rol == 'especialista'" style="margin-bottom: 2%;" routerLink="/mis-turnos"
             class="button-15" role="button"><i class="fa fa-pencil">
                 Mis turnos</i></button>
-        <button *ngIf="usuario.value?.rol != 'especialista'" style="margin-bottom: 2%;" class="button-15"
-            role="button"><i class="fa fa-file"></i>
+        <button *ngIf="usuario.value?.rol != 'especialista'" (click)="PrintJS()" style="margin-bottom: 2%;"
+            class="button-15" role="button"><i class="fa fa-file"></i>
             Imprimir historia clinica (PDF)</button>
     </div>
 </div>

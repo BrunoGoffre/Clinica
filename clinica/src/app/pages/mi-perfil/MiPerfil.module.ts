@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { HistorialModule } from "../historial/historial.module";
+import { PipesModule } from "src/app/pipes/pipes.module";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { HistorialModule } from "../historial/historial.module";
         ButtonModule,
         DropdownModule,
         ToastModule,
-        HistorialModule
+        HistorialModule,
+        PipesModule
     ],
     exports: [
         MiPerfilComponent

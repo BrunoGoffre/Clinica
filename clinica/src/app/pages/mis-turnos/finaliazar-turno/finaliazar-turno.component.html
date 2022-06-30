@@ -31,9 +31,11 @@
                     </span>
                 </div>
             </div>
-            <div class="row mt-3 mb-3">
-                <p-button icon="pi pi-plus" [hidden]="Dynamic3.mostrar == true" (onClick)="AddDynamicButton()"
-                    styleClass="p-button-text"></p-button>
+            <div class="row d-flex justify-content-center mt-3 mb-3">
+                <p-button class="col-1" icon="pi pi-plus" (onClick)="AddDynamicButton()" styleClass="p-button-text">
+                </p-button>
+                <p-button class="col-1" icon="pi pi-minus" (onClick)="LessDynamicButton()" styleClass="p-button-text">
+                </p-button>
             </div>
             <div *ngIf="Dynamic1.mostrar" class="row">
                 <input type="text" class="col-5 inputsTexts" id="Dynamic1" pInputText placeholder="Nombre"

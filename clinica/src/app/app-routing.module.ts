@@ -11,6 +11,7 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { HistorialComponent } from './pages/historial/historial/historial.component';
 import { PacientesComponent } from './pages/pacientes/pacientes/pacientes.component';
+import { HistorialParaEspecialistaComponent } from './pages/historial-para-especialistas/historial-para-especialista/historial-para-especialista.component';
 
 //
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "mi-perfil", component: MiPerfilComponent, loadChildren: () => import('./pages/mi-perfil/MiPerfil.module').then(m => m.MiPerfilModule) },
   { path: "historial", component: HistorialComponent, loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialModule) },
+  { path: "historia-para-especialistas", component: HistorialParaEspecialistaComponent, loadChildren: () => import('./pages/historial-para-especialistas/historial-para-especialistas.module').then(m => m.HistorialParaEspecialistasModule) },
   { path: "pacientes", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
   { path: "**", redirectTo: 'home' },
 ]

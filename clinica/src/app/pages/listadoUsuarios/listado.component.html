@@ -7,15 +7,29 @@
     </ng-template>
 </p-dialog>
 
-
 <div class="container">
     <app-loading *ngIf="cargando"></app-loading>
     <div class="container" *ngIf="cargando == false">
         <h2>Usuarios registrados</h2>
         <hr>
-        <button class="button-add-Admin" mat-raised-button matTooltip="Agregar usuario" matTooltipPosition="above"
-            matTooltipClass="example-tooltip-red" routerLink="/register"><i class="fa fa-plus"></i></button>
-        <button class="button-add-Admin" (click)="exportExcel()"><i class="fa fa-save"></i></button>
+        <div class="row">
+            <button class="button-add-Admin col-3" pTooltip="Agregar usuario" tooltipPosition="top"
+                routerLink="/register"><i class="fa fa-plus"></i></button>
+            <button class="button-add-Admin col-3" pTooltip="Descargar excel" tooltipPosition="top"
+                (click)="exportExcel()"><i class="fa fa-save"></i></button>
+            <button class="button-add-Admin col-3" pTooltip="Descargar PDF por Especialidad"
+                (click)="diplayEspecialidades=true" tooltipPosition="top"><i class="fa fa-file-text-o"></i></button>
+            <div class="dropdown ml-5 col-3" *ngIf="diplayEspecialidades">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Especialidades
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" *ngFor="let especialidad of especialidades"
+                            (click)="PrintJS(especialidad)">{{especialidad}}</a></li>
+                </ul>
+            </div>
+        </div>
         <ul class="responsive-table">
             <li class="table-row" *ngFor="let item of users" (click)="MostrarDialog(item)"
                 [class.pointer]="item.rol == 'paciente'">

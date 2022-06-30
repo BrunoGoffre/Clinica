@@ -45,6 +45,23 @@ export class FinaliazarTurnoComponent implements OnInit {
     else
       this.Dynamic3.mostrar = true
   }
+  LessDynamicButton() {
+    if (this.Dynamic3.mostrar == true) {
+      this.Dynamic3.mostrar = false;
+      this.Dynamic3.name = '';
+      this.Dynamic3.value = '';
+    }
+    else if (this.Dynamic2.mostrar == true) {
+      this.Dynamic2.mostrar = false;
+      this.Dynamic2.name = '';
+      this.Dynamic2.value = '';
+    }
+    else {
+      this.Dynamic1.mostrar = false;
+      this.Dynamic1.name = '';
+      this.Dynamic1.value = '';
+    }
+  }
   Cancelar() {
     this.display = false;
     this.close.emit();

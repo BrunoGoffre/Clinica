@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { RouterModule } from '@angular/router';
+import { CardPacienteComponent } from './card-paciente/card-paciente.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     NavbarComponent,
     ToggleButtonComponent,
+    CardPacienteComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     NavbarComponent,
     ToggleButtonComponent,
+    CardPacienteComponent,
   ],
 })
 export class GeneralComponentsModule { }

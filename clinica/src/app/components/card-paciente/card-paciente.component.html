@@ -1,0 +1,14 @@
+<div class="card m-2" style="width: 18rem;">
+    <img class="card-img-top" src="{{usuario.imageURL1}}" alt="Imagen usuario">
+    <div class="card-body">
+        <h5 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h5>
+        <label>Ultimas consultas</label>
+        <hr>
+        <div class="card-text">
+            <div class="item row m-2" *ngFor="let item of Ultimos3turnosCompletados">
+                <label class="col-8">{{item.fecha}}</label>
+                <label class="col-4">{{item.hora}}</label>
+            </div>
+        </div>
+    </div>
+</div>
