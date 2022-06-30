@@ -1,1 +1,22 @@
-<router-outlet></router-outlet>
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="">Turnos por Especialidades</h3>
+            <p-button label="ImprimirPDF" (click)="PrintJSTurnosPorEspecialidad()"></p-button>
+            <p-chart class=" flex-row-reverse" type="pie" [data]="TurnosPorEspecialidad"
+                [style]="{'width': '20%', 'height':'20%'}">
+            </p-chart>
+        </div>
+        <div class="col-6 mb-5">
+            <h3 class="">Turnos por dia</h3>
+            <p-button label="ImprimirPDF" (click)="PrintJSTurnosPorDia()"></p-button>
+            <p-chart class="col-12 flex-row-reverse" type="line" [data]="turnosPorDia"
+                [style]="{'width': '50%', 'height':'50%'}">
+            </p-chart>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+
+</div>

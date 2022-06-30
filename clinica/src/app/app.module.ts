@@ -15,6 +15,8 @@ import { TurnosComponent } from './pages/turnos/turnos.component';
 import { PipesModule } from './pipes/pipes.module';
 import { GeneralComponentsModule } from './components/general-components.module';
 import { DropdownModule } from 'primeng/dropdown';
+import { ChartModule } from 'primeng/chart';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
     PipesModule,
     GeneralComponentsModule,
     DropdownModule,
+    ChartModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,5 +13,4 @@ export class FormatHorarioPipe implements PipeTransform {
       return value + ' PM';
     }
   }
-
 }

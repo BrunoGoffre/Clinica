@@ -25,10 +25,10 @@ nav.main-menu.expanded {
 
 .main-menu {
     background: #212121;
-    position: absolute;
+    position: fixed;
     top: 7.5%;
     bottom: 0;
-    height: 92.5%;
+    height: 100vh;
     left: 0;
     width: 60px;
     overflow: hidden;

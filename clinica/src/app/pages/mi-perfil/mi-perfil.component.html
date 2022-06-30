@@ -1,12 +1,14 @@
 <p-toast position="top-right" key="c" [baseZIndex]="5000"></p-toast>
-<p-dialog header="Seleccione dias" [(visible)]="display" [style]="{width: '25vw', height:'40vh', background:'white'}">
-    <ng-template pTemplate="content row">
-        <p>
-            <p-selectButton class="col col-8" [options]="daysOptions" [(ngModel)]="selectedDays" [multiple]="true"
+<p-dialog header="Cargar Horarios" [(visible)]="display" [style]="{width: '35vw', height:'47vh'}" [draggable]="false">
+    <ng-template pTemplate="content">
+        <hr>
+        <h5>Seleccione dias</h5>
+        <p class="row">
+            <p-selectButton class="col col-12" [options]="daysOptions" [(ngModel)]="selectedDays" [multiple]="true"
                 optionLabel="name" optionValue="value">
             </p-selectButton>
         </p>
-        <h5>Seleccione horarios</h5>
+        <h5 class="mt-5">Seleccione horarios</h5>
         <p class="row">
             <label>Desde</label>
             <input type="time" (change)="onSelectTime($event,'desde')">
