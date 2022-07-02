@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: "historial", component: HistorialComponent, loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialModule) },
   { path: "historia-para-especialistas", component: HistorialParaEspecialistaComponent, loadChildren: () => import('./pages/historial-para-especialistas/historial-para-especialistas.module').then(m => m.HistorialParaEspecialistasModule) },
   { path: "pacientes", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
+  { path: "Terminos-y-condiciones", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
   { path: "**", redirectTo: 'home' },
 ]
 

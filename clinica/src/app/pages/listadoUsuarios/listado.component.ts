@@ -94,7 +94,6 @@ export class ListadoComponent implements OnInit {
       })
     });
   }
-
   PrintJS(especialidad: string) {
     this.BuildPrintableJson(especialidad);
     printJS({
@@ -107,7 +106,6 @@ export class ListadoComponent implements OnInit {
       gridStyle: 'font-size:23px; border: 1px solid lightgray; margin-bottom: -1px;'
     })
   }
-
   BuildPrintableJson(especialidad: string) {
     let turno;
     if (this.AllturnosCompletados) {

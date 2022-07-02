@@ -115,7 +115,6 @@ export class HomeComponent implements OnInit {
       gridStyle: 'font-size:25px; border: 1px solid lightgray; margin-bottom: -1px;'
     })
   }
-
   BuildPrintableJson(tipo: string) {
     if (tipo == 'especialidad') {
       if (this.diasPorEspecialidad) {

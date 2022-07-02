@@ -11,12 +11,12 @@
         <h2>Mis turnos</h2>
         <hr>
         <div class="row">
-            <div *ngIf="user.rol == 'paciente'" class="col-2 mb-3">
+            <div *ngIf="user.rol == 'paciente'" class="col-6 mb-3">
                 <button class="button-add-turno" (click)="OpenForm()">
                     <i class="fa fa-plus"> Agregar turno</i></button>
             </div>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search" style="margin-left: 1%;"></i>
+            <span class="p-input-icon-left d-flex justify-content-end col-6">
+                <i class="pi pi-search" style="margin-left: 65%;"></i>
                 <input type="text" pInputText (change)="onFilter($event)" placeholder="Search" />
             </span>
         </div>

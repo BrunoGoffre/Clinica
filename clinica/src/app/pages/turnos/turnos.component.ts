@@ -37,8 +37,38 @@ export class TurnosComponent implements OnInit {
   onFilter(filter: any) {
     let valueFilter = filter['srcElement']['value'];
     this.filter = valueFilter;
-    this.turnos = this.turnosWithoutFilter.filter(turno => turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
-      turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) || turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase()));
+    let retorno = false;
+    this.turnos = this.turnosWithoutFilter.filter(turno => {
+      retorno = turno.estado.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.fecha.toLowerCase().includes(valueFilter.toLowerCase()) ||
+        turno.hora.toLowerCase().includes(valueFilter.toLowerCase());
+
+      if (turno.especialista) {
+        retorno = retorno || turno.id.toLowerCase().includes(valueFilter.toLowerCase()) ||
+          turno.especialista.especialidad.toLowerCase().includes(valueFilter.toLowerCase()) ||
+          turno.especialista.nombre.toLowerCase().includes(valueFilter.toLowerCase()) ||
+          turno.especialista.apellido.toLowerCase().includes(valueFilter.toLowerCase());
+      }
+      if (turno.usuario) {
+        retorno = retorno || turno.usuario.nombre.toLowerCase().includes(valueFilter.toLowerCase()) ||
+          turno.usuario.apellido.toLowerCase().includes(valueFilter.toLowerCase()) ||
+          turno.usuario.email.toLowerCase().includes(valueFilter.toLowerCase());
+      }
+      if (turno.historiaClinica) {
+        retorno = retorno || turno.historiaClinica.peso.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.altura.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.temperatura.toLowerCase().includes(this.filter.toLowerCase()) ||
+          turno.historiaClinica.presion.toLowerCase().includes(this.filter.toLowerCase());
+
+        if (turno.historiaClinica.dynamics) {
+          turno.historiaClinica.dynamics.forEach(dinamyc => {
+            retorno = retorno || dinamyc.name.toLocaleLowerCase().includes(this.filter.toLocaleLowerCase()) ||
+              dinamyc.value.toLocaleLowerCase().includes(this.filter.toLocaleLowerCase());
+          })
+        }
+      }
+      return retorno;
+    });
   }
 
   getTurnos() {
