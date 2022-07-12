@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { RouterModule } from '@angular/router';
 import { CardPacienteComponent } from './card-paciente/card-paciente.component';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { CardPacienteComponent } from './card-paciente/card-paciente.component';
     RouterModule.forChild([]),
     PipesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule,
+    ButtonModule
   ],
   exports: [
     QuestionComponent,

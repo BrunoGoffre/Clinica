@@ -24,29 +24,32 @@
                     <div class="col col-2">Estado</div>
                     <div class="col col-2">Accion</div>
                 </li>
-                <li class="table-row" *ngFor="let turno of turnos">
-                    <div class="col col-2">{{turno.usuario.nombre}} {{turno.usuario.apellido}}</div>
-                    <div class="col col-2">{{turno.fecha}}</div>
-                    <div class="col col-2">{{turno.hora}}</div>
-                    <div class="col col-2">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
-                    <div class="col col-2"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
-                                class="fa fa-pencil"></i></button>
-                    </div>
-                    <div class="col col-2"
-                        [class.cancelado]="turno.estado == 'cancelado' || turno.estado == 'rechazado'"
-                        [class.aceptado]="turno.estado == 'aceptado'" [class.completado]="turno.estado == 'completado'"
-                        [class.pendiente]="turno.estado == 'pendiente'">
-                        {{turno.estado}}</div>
-                    <div *ngIf="canCencel(turno)" class="col col-2">
-                        <button class="button-delete-turno" (click)="wantToCancel(turno)">
-                            <i class="fa fa-ban"></i>
-                        </button>
-                    </div>
-                    <div *ngIf="!canCencel(turno)" class="col col-2">
-                        <button style="color: grey;" disabled class="button-delete-turno"
-                            (click)="wantToCancel(turno)"><i class="fa fa-ban"></i></button>
-                    </div>
-                </li>
+                <div class="li-items">
+                    <li class="table-row" *ngFor="let turno of turnos">
+                        <div class="col col-2">{{turno.usuario.nombre}} {{turno.usuario.apellido}}</div>
+                        <div class="col col-2">{{turno.fecha}}</div>
+                        <div class="col col-2">{{turno.hora}}</div>
+                        <div class="col col-2">{{turno.especialista.nombre}} {{turno.especialista.apellido}}</div>
+                        <div class="col col-2"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
+                                    class="fa fa-pencil"></i></button>
+                        </div>
+                        <div class="col col-2"
+                            [class.cancelado]="turno.estado == 'cancelado' || turno.estado == 'rechazado'"
+                            [class.aceptado]="turno.estado == 'aceptado'"
+                            [class.completado]="turno.estado == 'completado'"
+                            [class.pendiente]="turno.estado == 'pendiente'">
+                            {{turno.estado}}</div>
+                        <div *ngIf="canCencel(turno)" class="col col-2">
+                            <button class="button-delete-turno" (click)="wantToCancel(turno)">
+                                <i class="fa fa-ban"></i>
+                            </button>
+                        </div>
+                        <div *ngIf="!canCencel(turno)" class="col col-2">
+                            <button style="color: grey;" disabled class="button-delete-turno"
+                                (click)="wantToCancel(turno)"><i class="fa fa-ban"></i></button>
+                        </div>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>

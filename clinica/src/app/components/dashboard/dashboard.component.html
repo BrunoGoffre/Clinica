@@ -56,6 +56,14 @@
                 </span>
             </a>
         </li>
+        <li *ngIf="rol == 'admin'" class="has-subnav">
+            <a routerLink="/estadisticas">
+                <i class="fa fa-cog"></i>
+                <span class="nav-text">
+                    Estadisticas
+                </span>
+            </a>
+        </li>
     </ul>
 
 </nav>

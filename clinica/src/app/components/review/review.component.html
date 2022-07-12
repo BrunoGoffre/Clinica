@@ -1,13 +1,11 @@
 <div class="loading-overlay">
-    <div class="container paper">
-        <div class="row">
-            <button type="button" (click)="closeReview()" class="btn-close col-12">
-                <span class="icon-cross"></span>
-                <span class="visually-hidden">Close</span>
-            </button>
-        </div>
-        <div class="row justify-content-center review">
-            <P class="col-12">{{review}}</P>
-        </div>
-    </div>
+    <p-dialog header="Reseña" visible="true">
+    </p-dialog>
+    <button type="button" (click)="closeReview()" icon="pi pi-info-circle" label="Show"></button>
+    <p-dialog header="Reseña" visible=" true" [style]="{width: '20vw'}" [closable]="false">
+        <p>{{review}}</p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="closeReview()" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
 </div>

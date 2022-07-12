@@ -17,6 +17,7 @@ import { GeneralComponentsModule } from './components/general-components.module'
 import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
+import { StatsComponent } from './pages/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ButtonModule } from 'primeng/button';
     RegisterComponent,
     BienvenidoComponent,
     TurnosComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

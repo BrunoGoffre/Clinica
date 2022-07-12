@@ -87,8 +87,8 @@ h2 {
 
 .responsive-table {
 
-    max-height: 850px;
-    overflow-y: scroll;
+    max-height: 700px;
+    border-color: #6C7A89;
 
     li {
         border-radius: 3px;
@@ -97,6 +97,7 @@ h2 {
         justify-content: space-between;
         margin-top: 10px;
         margin-bottom: 25px;
+        margin-left: 10px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         width: 98%;
     }
@@ -104,6 +105,11 @@ h2 {
     .table-row {
         background-color: #ffffff;
         box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .li-items {
+        overflow-y: auto;
+        max-height: 600px;
     }
 
     .table-header {
