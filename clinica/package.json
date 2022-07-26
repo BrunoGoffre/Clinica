@@ -33,6 +33,7 @@
     "firebase": "^9.8.2",
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
+    "ng-recaptcha": "^9.0.0",
     "path": "^0.12.7",
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",

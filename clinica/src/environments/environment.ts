@@ -12,7 +12,10 @@ export const environment = {
     authDomain: 'tp-final-3e4ef.firebaseapp.com',
     messagingSenderId: '617002588097',
   },
-  production: false
+  production: false,
+  reCaptcha: {
+    siteKey: '6Le1OhkhAAAAAM7Az5UtwsHwkPTX9USl_8b0cZZY'
+  }
 };
 
 /*

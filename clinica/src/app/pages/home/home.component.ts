@@ -1,9 +1,11 @@
 
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/models/turno';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import * as printJS from 'print-js';
+import { turnosFiltrado } from '../stats/stats.component';
+import { Chart, ChartItem } from 'chart.js';
+import { log } from 'src/app/models/log';
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +13,7 @@ import * as printJS from 'print-js';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
   TurnosPorEspecialidad: any;
   CantidadTurnosPorDia: any;
   diasPorEspecialidad!: any[];
@@ -19,6 +22,11 @@ export class HomeComponent implements OnInit {
   turnos: turno[] = [];
   PrintableJSONEspecialidad: any[] = [];
   PrintableJSONPorDia: any[] = [];
+  turnosCompletadoPorMedicoEnLapstoDeTiempo: turnosFiltrado[] = [];
+  turnosPorMedicoEnLapstoDeTiempo: turnosFiltrado[] = [];
+  chart: any;
+  chart2: any;
+  listaDeLogs!: log[];
 
   constructor(private firestore: FirestoreService) { }
 
@@ -30,18 +38,85 @@ export class HomeComponent implements OnInit {
       this.BuildCantidadTurnosPorEspecialidad(this.turnos);
       this.BuildCantidadTurnosPorDia(this.turnos);
     })
+    this.BuildTurnosPorMedicoEnLapstoDeTiempo();
+    this.BuildTurnosCompletadosEnLapstoDeTiempo();
   }
 
   GetTurnos() {
     return this.firestore.getTurnos();
   }
-
+  GetFechaUsuario() {
+    this.firestore.GetLogs().subscribe(retorno => {
+      this.listaDeLogs = retorno as log[];
+    })
+  }
+  //--------------- Buildings Charts -------------------------
+  BuildTurnosCompletadosEnLapstoDeTiempo() {
+    let desde = Date.parse('2022/06/10');
+    let hasta = Date.parse('2022/07/10');
+    let turnos: turno[] = [];
+    let labels: any = [];
+    let turnosChart: any = [];
+    this.firestore.getTurnos().subscribe(retorno => {
+      turnos = retorno as turno[];
+      turnos = turnos.filter(item => item.estado == 'completado');
+      turnos.forEach(item => {
+        let fecha = item.fecha.split('/')
+        item.fecha = fecha[2] + '/' + fecha[1] + '/' + fecha[0];
+      })
+      turnos.forEach(item => {
+        if (Date.parse(item.fecha) >= desde && Date.parse(item.fecha) <= hasta) {
+          if (this.turnosCompletadoPorMedicoEnLapstoDeTiempo.length > 0) {
+            let indice = this.turnosCompletadoPorMedicoEnLapstoDeTiempo.findIndex(ref => ref.especialista == item.especialista.nombre + " " + item.especialista.apellido);
+            if (this.turnosCompletadoPorMedicoEnLapstoDeTiempo[indice])
+              this.turnosCompletadoPorMedicoEnLapstoDeTiempo[indice].cantidadTurnos++;
+            else
+              this.turnosCompletadoPorMedicoEnLapstoDeTiempo.push({ especialista: item.especialista.nombre + ' ' + item.especialista.apellido, cantidadTurnos: 1 });
+          } else {
+            this.turnosCompletadoPorMedicoEnLapstoDeTiempo.push({ especialista: item.especialista.nombre + ' ' + item.especialista.apellido, cantidadTurnos: 1 });
+          }
+        }
+      });
+      this.turnosCompletadoPorMedicoEnLapstoDeTiempo.forEach(item => {
+        labels.push(item.especialista);
+        turnosChart.push(item.cantidadTurnos);
+      })
+      turnosChart.push(10);
+      this.chart2 = new Chart(
+        document.getElementById('myChart2') as ChartItem,
+        {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Turnos completados Por especialista',
+              data: turnosChart,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+              ],
+              borderWidth: 1,
+            }]
+          },
+          options: {}
+        })
+    })
+  }
   BuildCantidadTurnosPorEspecialidad(turnosFuncion: turno[]) {
-
-    interface especialidad {
-      especialidad: string;
-      dias: number;
-    }
 
     let CantidadDias: any[] = [{ 'especialidad': '', 'dias': 0 }];
     let Especialidades: any[] = [];
@@ -75,7 +150,74 @@ export class HomeComponent implements OnInit {
       ]
     };
   }
-
+  BuildTurnosPorMedicoEnLapstoDeTiempo() {
+    let desde = Date.parse('2022/06/10');
+    let hasta = Date.parse('2022/07/10');
+    let turnos: turno[] = [];
+    let labels: any = [];
+    let turnosChart: any = [];
+    this.firestore.getTurnos().subscribe(retorno => {
+      turnos = retorno as turno[];
+      turnos.forEach(item => {
+        let fecha = item.fecha.split('/')
+        item.fecha = fecha[2] + '/' + fecha[1] + '/' + fecha[0];
+      })
+      turnos.forEach(item => {
+        if (Date.parse(item.fecha) >= desde && Date.parse(item.fecha) <= hasta) {
+          if (this.turnosPorMedicoEnLapstoDeTiempo.length > 0) {
+            let indice = this.turnosPorMedicoEnLapstoDeTiempo.findIndex(ref => ref.especialista == item.especialista.nombre + " " + item.especialista.apellido);
+            if (this.turnosPorMedicoEnLapstoDeTiempo[indice])
+              this.turnosPorMedicoEnLapstoDeTiempo[indice].cantidadTurnos++;
+            else
+              this.turnosPorMedicoEnLapstoDeTiempo.push({ especialista: item.especialista.nombre + ' ' + item.especialista.apellido, cantidadTurnos: 1 });
+          } else {
+            this.turnosPorMedicoEnLapstoDeTiempo.push({ especialista: item.especialista.nombre + ' ' + item.especialista.apellido, cantidadTurnos: 1 });
+          }
+        }
+      });
+      this.turnosPorMedicoEnLapstoDeTiempo.forEach(item => {
+        labels.push(item.especialista);
+        turnosChart.push(item.cantidadTurnos);
+      })
+      this.BuildBarGrafic(turnosChart, labels)
+    })
+  }
+  BuildBarGrafic(turnos: any, labels: any) {
+    turnos.push(10);
+    this.chart = new Chart(
+      document.getElementById('myChart') as ChartItem,
+      {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Turnos Por especialista',
+            data: turnos,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1,
+          }]
+        },
+        options: {}
+      }
+    );
+  }
   BuildCantidadTurnosPorDia(turnosFuncion: turno[]) {
     this.turnosPorDia = {
       labels: ['lunes', 'martes', 'martes', 'miercoles', 'jueves', 'viernes'],
@@ -90,56 +232,5 @@ export class HomeComponent implements OnInit {
       ]
     };
   }
-
-  PrintJSTurnosPorEspecialidad() {
-    this.BuildPrintableJson('especialidad');
-    printJS({
-      documentTitle: 'Historia Clinica',
-      header: '<h1><img class="img" src="../../../assets/clinica-logo2.jpg"></h1>',
-      printable: this.PrintableJSONEspecialidad,
-      type: 'json', properties: ['Especialidad', 'Turnos'],
-      style: '.img {width: 100px; height:100px; border-radius:30px;}',
-      gridHeaderStyle: 'font-size:25px; border: 1px solid lightgray; margin-bottom: -1px;',
-      gridStyle: 'font-size:25px; border: 1px solid lightgray; margin-bottom: -1px;'
-    })
-  }
-  PrintJSTurnosPorDia() {
-    this.BuildPrintableJson('dias');
-    printJS({
-      documentTitle: 'Historia Clinica',
-      header: '<h1><img class="img" src="../../../assets/clinica-logo2.jpg"></h1>',
-      printable: this.PrintableJSONPorDia,
-      type: 'json', properties: ['Dia', 'Cantidad-Turnos'],
-      style: '.img {width: 100px; height:100px; border-radius:30px;}',
-      gridHeaderStyle: 'font-size:25px; border: 1px solid lightgray; margin-bottom: -1px;',
-      gridStyle: 'font-size:25px; border: 1px solid lightgray; margin-bottom: -1px;'
-    })
-  }
-  BuildPrintableJson(tipo: string) {
-    if (tipo == 'especialidad') {
-      if (this.diasPorEspecialidad) {
-        this.PrintableJSONEspecialidad = [];
-        this.diasPorEspecialidad.forEach(item => {
-          if (item.especialidad != '') {
-            this.PrintableJSONEspecialidad.push({
-              'Especialidad': item.especialidad,
-              'Turnos': item.dias,
-            })
-          }
-        })
-      }
-    } else if (tipo == 'dias') {
-
-      this.PrintableJSONPorDia = [
-        { 'Dia': 'Lunes', 'Cantidad-Turnos': 1 },
-        { 'Dia': 'Martes', 'Cantidad-Turnos': 2 },
-        { 'Dia': 'Miercoles', 'Cantidad-Turnos': 3 },
-        { 'Dia': 'Jueves', 'Cantidad-Turnos': 1 },
-        { 'Dia': 'Viernes', 'Cantidad-Turnos': 1 },
-      ]
-    }
-  }
-
-
-
+  //----------------------------------------------------------
 }

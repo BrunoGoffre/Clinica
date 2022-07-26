@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WSAEDESTADDRREQ } from 'constants';
 import { Usuario } from 'src/app/models/usuario';
+import { log } from 'src/app/models/log';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -32,12 +34,16 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-
+    let dateNow = new Date();
     this.auth.Login(this.f['email'].value, this.f['pass'].value).then((retorno) => {
       if (retorno != null) {
         this.cargando = true;
         let result = this.fireStore.getPaciente(this.f['email'].value).subscribe((retorno) => {
+
+          let log: log = { fecha: dateNow.getDate() + "/" + (dateNow.getMonth()) + "/" + dateNow.getFullYear(), usuario: retorno[0] as Usuario, hora: dateNow.getHours() + ':' + dateNow.getMinutes() }
+
           if (retorno != null && retorno.length != 0) {
+            this.fireStore.UpdateObj('logs', log);
             this.fireStore.usuario.next(retorno[0] as Usuario);
             window.localStorage.setItem('usuario', JSON.stringify(retorno[0] as Usuario));
             result.unsubscribe();

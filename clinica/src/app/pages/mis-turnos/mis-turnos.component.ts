@@ -3,14 +3,14 @@ import { response } from 'express';
 import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MessageService } from 'primeng/api';
+import { RecaptchaLoaderService } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-mis-turnos',
   templateUrl: './mis-turnos.component.html',
   styleUrls: ['./mis-turnos.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, RecaptchaLoaderService]
 
 })
 export class MisTurnosComponent implements OnInit {
@@ -29,6 +29,7 @@ export class MisTurnosComponent implements OnInit {
   estadoUpdate!: string;
   error: string = '';
   displayDialog: boolean = false;
+  displayEncuesta: boolean = false;
 
   constructor(private firestore: FirestoreService, private messageService: MessageService) { }
 
@@ -119,6 +120,9 @@ export class MisTurnosComponent implements OnInit {
   }
   Closeform() {
     this.agregandoTurno = false;
+  }
+  CloseEncuesta() {
+    this.displayEncuesta = false;
   }
   viewReview(resenia: string) {
     if (resenia != null && resenia != '') {

@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/angularapp
 /tmp
 /out-tsc
 /bazel-out

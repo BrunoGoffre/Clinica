@@ -31,6 +31,9 @@ export class FinaliazarTurnoComponent implements OnInit {
   Dynamic1: Dynamic = { name: '', value: '', mostrar: false };
   Dynamic2: Dynamic = { name: '', value: '', mostrar: false };
   Dynamic3: Dynamic = { name: '', value: '', mostrar: false };
+  Dynamic4: Dynamic = { name: '', value: '', mostrar: false };
+  Dynamic5: Dynamic = { name: '', value: '', mostrar: false };
+  Dynamic6: Dynamic = { name: '', value: '', mostrar: false };
 
   constructor(private firestore: FirestoreService) { }
 
@@ -40,13 +43,39 @@ export class FinaliazarTurnoComponent implements OnInit {
   AddDynamicButton() {
     if (this.Dynamic1.mostrar == false)
       this.Dynamic1.mostrar = true;
+
     else if (this.Dynamic2.mostrar == false)
       this.Dynamic2.mostrar = true;
+
+    else if (this.Dynamic3.mostrar == false)
+      this.Dynamic3.mostrar = true;
+
+    else if (this.Dynamic4.mostrar == false)
+      this.Dynamic4.mostrar = true;
+
+    else if (this.Dynamic5.mostrar == false)
+      this.Dynamic5.mostrar = true;
+
     else
-      this.Dynamic3.mostrar = true
+      this.Dynamic6.mostrar = true;
   }
   LessDynamicButton() {
-    if (this.Dynamic3.mostrar == true) {
+    if (this.Dynamic6.mostrar == true) {
+      this.Dynamic6.mostrar = false;
+      this.Dynamic6.name = '';
+      this.Dynamic6.value = '';
+    }
+    else if (this.Dynamic5.mostrar == true) {
+      this.Dynamic5.mostrar = false;
+      this.Dynamic5.name = '';
+      this.Dynamic5.value = '';
+    }
+    else if (this.Dynamic4.mostrar == true) {
+      this.Dynamic4.mostrar = false;
+      this.Dynamic4.name = '';
+      this.Dynamic4.value = '';
+    }
+    else if (this.Dynamic3.mostrar == true) {
       this.Dynamic3.mostrar = false;
       this.Dynamic3.name = '';
       this.Dynamic3.value = '';
@@ -93,14 +122,23 @@ export class FinaliazarTurnoComponent implements OnInit {
   }
   ObtenerCamposDynamicos(): any[] {
     let dynamics = [];
-    if (this.Dynamic1.value != '') {
+    if (this.Dynamic1.value != '' && this.Dynamic1.name != '') {
       dynamics.push(this.Dynamic1);
     }
-    if (this.Dynamic2.value != '') {
+    if (this.Dynamic2.value != '' && this.Dynamic2.name != '') {
       dynamics.push(this.Dynamic2);
     }
-    if (this.Dynamic3.value != '') {
+    if (this.Dynamic3.value != '' && this.Dynamic3.name != '') {
       dynamics.push(this.Dynamic3);
+    }
+    if (this.Dynamic4.value != '' && this.Dynamic4.name != '') {
+      dynamics.push(this.Dynamic4);
+    }
+    if (this.Dynamic5.value != '' && this.Dynamic5.name != '') {
+      dynamics.push(this.Dynamic5);
+    }
+    if (this.Dynamic6.value != '' && this.Dynamic6.name != '') {
+      dynamics.push(this.Dynamic6);
     }
     return dynamics;
   }

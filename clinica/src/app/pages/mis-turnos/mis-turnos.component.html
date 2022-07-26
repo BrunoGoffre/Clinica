@@ -3,6 +3,7 @@
     <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()" (error)="onClickError($event)"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
+    <app-encuesta *ngIf="displayEncuesta" (close)="CloseEncuesta()"></app-encuesta>
     <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)" [estadoUpdate]="estadoUpdate"></app-question>
     <app-finaliazar-turno *ngIf="displayDialog" [turnoAFinalizar]="UpdateTurnoSelected" (error)="onClickError($event)"
         (close)="CloseFinalizarForm()">
@@ -50,8 +51,11 @@
                         [class.pendiente]="turno.estado == 'pendiente'">
                         {{turno.estado}}</div>
                     <div *ngIf="user.rol == 'paciente'" class="col col-2">
-                        <button class="button-delete-turno" (click)="ChangeStateTurno('cancelar',turno)"><i
-                                class="fa fa-ban"></i></button>
+                        <button class="button-delete-turno" *ngIf="turno.estado != 'completado'"
+                            (click)="ChangeStateTurno('cancelar',turno)"><i class="fa fa-ban"></i></button>
+                        <button *ngIf="turno.estado == 'completado'" pTooltip="Completar encuesta" tooltipPosition="top"
+                            class="button-delete-turno" (click)="displayEncuesta=true"><i
+                                class="fa fa-book"></i></button>
                     </div>
                     <div *ngIf="user.rol == 'especialista'" class="col col-2">
                         <button *ngIf="turno.estado != 'cancelado' && turno.estado != 'completado'"

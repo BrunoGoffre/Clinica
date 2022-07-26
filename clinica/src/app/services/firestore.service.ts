@@ -64,4 +64,7 @@ export class FirestoreService {
   UpdateObj(collection: string, obj: any, id: string = obj.id) {
     return this.aFStore.collection(collection).doc(id).set(obj, { merge: true });
   }
+  GetLogs() {
+    return this.aFStore.collection('logs', ref => ref.orderBy('hora', 'asc')).valueChanges()
+  }
 } 

@@ -58,6 +58,32 @@
                 <input type="text" class="col-5 inputsTexts" id="Dynamic3" pInputText placeholder="Valor"
                     [(ngModel)]="Dynamic3.value">
             </div>
+            <div *ngIf="Dynamic4.mostrar" class="row mt-3">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic4" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic4.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <div class="col-5 mt-1">
+                    <div class="row d-flex justify-content-between">
+                        <label class="col-2" style="font-size: large;">{{Dynamic4.value}}</label>
+                        <input type="range" min="0" max="100" class="col-10 inputsTexts" id="Dynamic4" value="0"
+                            pInputText placeholder="Valor" [(ngModel)]="Dynamic4.value">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="Dynamic5.mostrar" class="row mt-3">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic5" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic5.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <input type="number" class="col-5 inputsTexts" id="Dynamic5" pInputText placeholder="Numero"
+                    [(ngModel)]="Dynamic5.value">
+            </div>
+            <div *ngIf="Dynamic6.mostrar" class="row mt-3">
+                <input type="text" class="col-5 inputsTexts" id="Dynamic6" pInputText placeholder="Nombre"
+                    [(ngModel)]="Dynamic6.name">
+                <label class="mr-1 ml-1 col-2 d-flex justify-content-center" style="font-size: x-large;">=</label>
+                <p-toggleButton class="col-5 d-flex justify-content-center inputsTexts" [(ngModel)]="Dynamic6.value"
+                    onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">

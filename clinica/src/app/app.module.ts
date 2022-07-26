@@ -18,6 +18,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { StatsComponent } from './pages/stats/stats.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { StatsComponent } from './pages/stats/stats.component';
     GeneralComponentsModule,
     DropdownModule,
     ChartModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

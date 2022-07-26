@@ -4,6 +4,7 @@ import { turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Guid } from "guid-typescript";
+import { environment } from 'src/environments/environment';
 
 export enum EDays {
   "Lunes" = 1,
@@ -17,7 +18,7 @@ export enum EDays {
 @Component({
   selector: 'app-add-turno',
   templateUrl: './add-turno.component.html',
-  styleUrls: ['./add-turno.component.scss']
+  styleUrls: ['./add-turno.component.scss'],
 })
 export class AddTurnoComponent implements OnInit {
 

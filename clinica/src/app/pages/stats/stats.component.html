@@ -1,5 +1,140 @@
 <div class="container">
+    <h1 class="d-flex justify-content-center mt-3">Estadisticas</h1>
+    <hr class="mb-4">
+    <!-- Ingresos al sistema -->
     <div class="row">
-        <h1>Estadisticas</h1>
+        <div class="row">
+            <h3 class="col-6">Ingresos al sistema</h3>
+            <p-button class="col-6 d-flex flex-row-reverse" label="ImprimirPDF" (click)="PrintJSLogs()">
+            </p-button>
+        </div>
+        <div class="row">
+            <p-table [value]="listaDeLogs" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{item.usuario.DNI}}</td>
+                        <td>{{item.usuario.nombre}}</td>
+                        <td>{{item.usuario.apellido}}</td>
+                        <td>{{item.fecha}}</td>
+                        <td>{{item.hora}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!-- Cantidad turnos por especialidad -->
+    <div class="row mt-5">
+        <div class="row">
+            <h3 class="col-6">Cantidad Turnos Por Especialidad</h3>
+            <p-button class="col-6 d-flex flex-row-reverse" label="ImprimirPDF"
+                (click)="PrintJSTurnosPorEspecialidad()">
+            </p-button>
+        </div>
+        <div class="row">
+            <p-table [value]="diasPorEspecialidad" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Especialidad</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{item.especialidad}}</td>
+                        <td>{{item.dias}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!-- Turnos por dia-->
+    <div class="row mt-5">
+        <div class="row">
+            <h3 class="col-6">Turnos por dia</h3>
+            <p-button class="col-6 d-flex flex-row-reverse" label="ImprimirPDF" (click)="PrintJSTurnosPorDia()">
+            </p-button>
+        </div>
+        <div class="row">
+            <p-table [value]="CantidadTurnosPorDia" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miercoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{item.lunes}}</td>
+                        <td>{{item.martes}}</td>
+                        <td>{{item.miercoles}}</td>
+                        <td>{{item.jueves}}</td>
+                        <td>{{item.viernes}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!-- Turnos por lapso de tiempo -->
+    <div class="row mt-5">
+        <div class="row">
+            <h3 class="col-8">Turnos desde 10/06/2022 hasta 10/07/2022</h3>
+            <p-button class="col-4 d-flex flex-row-reverse" label="ImprimirPDF"
+                (click)="PrintJSTurnosPorEspecialista()">
+            </p-button>
+        </div>
+        <div class="row">
+            <p-table [value]="turnosPorMedicoEnLapstoDeTiempo" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Especialista</th>
+                        <th>Cantidad de turnos</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{item.especialista}}</td>
+                        <td>{{item.cantidadTurnos}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!-- Turnos completados por lapso de tiempo -->
+    <div class="row mt-5">
+        <div class="row">
+            <h3 class="col-8">Turnos Completados desde 10/06/2022 hasta 10/07/2022</h3>
+            <p-button class="col-4 d-flex flex-row-reverse" label="ImprimirPDF"
+                (click)="PrintJSTurnosCompletadosPorEspecialista()">
+            </p-button>
+        </div>
+        <div class="row">
+            <p-table [value]="turnosCompletadoPorMedicoEnLapstoDeTiempo" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Especialista</th>
+                        <th>Cantidad de turnos</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{item.especialista}}</td>
+                        <td>{{item.cantidadTurnos}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
 </div>
