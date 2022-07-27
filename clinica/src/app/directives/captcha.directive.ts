@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, ViewContainerRef } from '@angular/core';
+import { Directive, ViewContainerRef } from '@angular/core';
 import { RecaptchaComponent, RecaptchaLoaderService } from 'ng-recaptcha';
 
 

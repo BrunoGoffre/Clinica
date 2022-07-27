@@ -36,7 +36,7 @@
         </div>
         <div class="contenedorFechas" *ngIf="especialidadSeleccionada != ''">
             <div class="row justify-content-center text-aling center">
-                <div class="col-6  alig-items-center">
+                <div class="col-6 aling-items-center">
                     <h3 class="d-flex flex-row justify-content-center alig-items-center mb-3">Seleccione dia</h3>
                     <p-dropdown [options]="dias" [(ngModel)]="diaSelected" optionValue="value" optionLabel="name"
                         placeholder="Dias" [style]="{width: '100%'}"></p-dropdown>
@@ -48,9 +48,7 @@
                 </div>
             </div>
             <div class="row justify-content-center text-aling center">
-                <p class="col-12" CustomCaptcha>
-
-                </p>
+                <p class="col-12 mt-3" CustomCaptcha></p>
             </div>
         </div>
     </ng-template>
