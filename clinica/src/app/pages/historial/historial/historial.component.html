@@ -1,18 +1,18 @@
 <app-loading *ngIf="cargando"></app-loading>
 <div *ngIf="!cargando" class="container mt-3">
     <div *ngIf="turnosCompletadosGeneral.length != 0">
-        <h1 class="d-flex justify-content-center">Historial clinico</h1>
+        <h1 class="d-flex justify-content-center">{{'historialClinico.titulo' | translate}}</h1>
         <hr>
         <p-table [value]="turnosCompletadosGeneral" styleClass="p-datatable-striped" responsiveLayout="scroll">
             <ng-template pTemplate="header">
                 <tr *ngIf="usuario.value?.rol != 'especialista'">
-                    <th>Foto Especialista</th>
-                    <th>Fecha</th>
-                    <th>Especialista</th>
-                    <th>Altura</th>
-                    <th>Peso</th>
-                    <th>Temperatura</th>
-                    <th>Presion</th>
+                    <th>{{'tablaComponente.fotoEspecialista' | translate}}</th>
+                    <th>{{'tablaComponente.fecha' | translate}}</th>
+                    <th>{{'tablaComponente.especialista' | translate}}</th>
+                    <th>{{'tablaComponente.altura' | translate}}</th>
+                    <th>{{'tablaComponente.peso' | translate}}</th>
+                    <th>{{'tablaComponente.temperatura' | translate}}</th>
+                    <th>{{'tablaComponente.presion' | translate}}</th>
                 </tr>
                 <!-- <tr *ngIf="usuario.value?.rol == 'especialista'">
                     <th>Imagen paciente</th>
@@ -47,6 +47,6 @@
         </p-table>
     </div>
     <div class="alert alert-danger" role="alert" *ngIf="turnosCompletadosGeneral.length == 0">
-        <h1 class="d-flex justify-content-center">No existe historial clinico para este paciente</h1>
+        <h1 class="d-flex justify-content-center">{{'tablaComponente.hisotirialInexistente' | translate}}</h1>
     </div>
 </div>

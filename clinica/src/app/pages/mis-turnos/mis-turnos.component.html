@@ -9,16 +9,17 @@
         (close)="CloseFinalizarForm()">
     </app-finaliazar-turno>
     <div class="container">
-        <h2>Mis turnos</h2>
+        <h2>{{ 'misTurnos.titulo' | translate}}</h2>
         <hr>
         <div class="row">
             <div *ngIf="user.rol == 'paciente'" class="col-6 mb-3">
                 <button class="button-add-turno" (click)="OpenForm()">
-                    <i class="fa fa-plus"> Agregar turno</i></button>
+                    <i class="fa fa-plus"> {{'misTurnos.botonAgregarTurno' | translate}}</i></button>
             </div>
             <span class="p-input-icon-left d-flex justify-content-end col-6">
                 <i class="pi pi-search" style="margin-left: 65%;"></i>
-                <input type="text" pInputText (change)="onFilter($event)" placeholder="Search" />
+                <input type="text" pInputText (change)="onFilter($event)"
+                    placeholder="{{'misTurnos.buscador' | translate}}" />
             </span>
         </div>
         <div *ngIf="error != ''" class="alert alert-danger mt-2" role="alert">
@@ -27,13 +28,15 @@
         <div class="row mt-5">
             <ul class="responsive-table">
                 <li class="table-header">
-                    <div class="col col-2">Fecha</div>
-                    <div class="col col-2">Hora</div>
-                    <div *ngIf="user.rol == 'paciente'" class="col col-2">Especialista </div>
-                    <div *ngIf="user.rol == 'especialista'" class="col col-2">Paciente </div>
+                    <div class="col col-2">{{'misTurnos.tabla.fecha' | translate}}</div>
+                    <div class="col col-2">{{'misTurnos.tabla.hora' | translate}}</div>
+                    <div *ngIf="user.rol == 'paciente'" class="col col-2">{{'misTurnos.tabla.especialista' | translate}}
+                    </div>
+                    <div *ngIf="user.rol == 'especialista'" class="col col-2">{{'misTurnos.tabla.paciente' |
+                        translate}}</div>
                     <div class="col col-2"><i class="fa fa-pencil"></i></div>
-                    <div class="col col-2">Estado</div>
-                    <div class="col col-2">Accion</div>
+                    <div class="col col-2">{{'misTurnos.tabla.estado' | translate}}</div>
+                    <div class="col col-2">{{'misTurnos.tabla.accion' | translate}}</div>
                 </li>
                 <li class="table-row" *ngFor="let turno of turnos">
                     <div class="col col-2">{{turno.fecha}}</div>
@@ -42,7 +45,8 @@
                         {{turno.especialista.apellido}}</div>
                     <div *ngIf="user.rol == 'especialista'" class="col col-2">{{turno.usuario.nombre}}
                         {{turno.usuario.apellido}}</div>
-                    <div class="col col-2"><button (click)="viewReview(turno.resenia)" class="btn-review"> Reseña <i
+                    <div class="col col-2"><button (click)="viewReview(turno.resenia)"
+                            class="btn-review">{{'misTurnos.tabla.resenia' | translate}} <i
                                 class="fa fa-pencil"></i></button>
                     </div>
                     <div class="col col-2"

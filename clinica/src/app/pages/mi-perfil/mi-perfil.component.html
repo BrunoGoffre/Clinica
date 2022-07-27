@@ -27,54 +27,54 @@
         <div class="contendor-info mt-5 col-8 ">
             <div class="row">
                 <div class="col-6">
-                    <h3>Nombre:</h3>
+                    <h3>{{'misDatos.nombre' | translate }}:</h3>
                     <h4>{{usuario.value?.nombre}} {{usuario.value?.apellido}}</h4>
                 </div>
                 <div class="col-6">
-                    <h3>Edad:</h3>
+                    <h3>{{'misDatos.edad' | translate }}:</h3>
                     <h4>{{usuario.value?.edad}} Años</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h3>DNI:</h3>
+                    <h3>{{'misDatos.DNI' | translate }}:</h3>
                     <h5>{{usuario.value?.DNI}}</h5>
                 </div>
                 <div class="col-6">
-                    <h3>Email:</h3>
+                    <h3>{{'misDatos.email' | translate }}:</h3>
                     <h4>{{usuario.value?.email}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div *ngIf="usuario.value?.rol=='paciente'" class="col-12">
-                    <h3>ObraSocial:</h3>
+                    <h3>{{'misDatos.paciente.obraSocial' | translate }}:</h3>
                     <h4>{{usuario.value?.obraSocial}} </h4>
                 </div>
                 <div *ngIf="usuario.value?.rol=='especialista'" class="col-12">
-                    <h3>Especialidad:</h3>
+                    <h3>{{'misDatos.especialista.especialidad' | translate }}:</h3>
                     <h4>{{usuario.value?.especialidad}} </h4>
                 </div>
             </div>
             <div class="row">
                 <div *ngIf="usuario.value?.rol=='especialista'" class="col-6">
-                    <h3>Dias:</h3>
+                    <h3>{{'misDatos.especialista.dias' | translate }}:</h3>
                     <h4 *ngFor="let dia of usuario.value?.dias">{{dia}}</h4>
                 </div>
                 <div *ngIf="usuario.value?.rol=='especialista'" class="col-6">
-                    <h3>Horarios:</h3>
-                    <h4>Desde: {{usuario.value?.desde | formatHorario}}</h4>
-                    <h4>Hasta: {{usuario.value?.hasta | formatHorario}}</h4>
+                    <h3>{{'misDatos.especialista.horarios' | translate }}:</h3>
+                    <h4>{{'misDatos.especialista.desde' | translate }}: {{usuario.value?.desde | formatHorario}}</h4>
+                    <h4>{{'misDatos.especialista.hasta' | translate }}: {{usuario.value?.hasta | formatHorario}}</h4>
                 </div>
             </div>
         </div>
         <button *ngIf="usuario.value?.rol == 'especialista'" class="button-15" type="button" (click)="display=true"><i
-                class="fa fa-clock-o"></i> Cargar mis horarios</button>
+                class="fa fa-clock-o"></i> {{'misDatos.cargaMisHorarios' | translate }}</button>
         <button *ngIf="usuario.value?.rol == 'especialista'" style="margin-bottom: 2%;" routerLink="/mis-turnos"
             class="button-15" role="button"><i class="fa fa-pencil">
-                Mis turnos</i></button>
+                {{'misTurnos.titulo' | translate }}</i></button>
         <button *ngIf="usuario.value?.rol != 'especialista'" (click)="PrintJS()" style="margin-bottom: 2%;"
             class="button-15" role="button"><i class="fa fa-file"></i>
-            Imprimir historia clinica (PDF)</button>
+            {{'misDatos.PDFHistoriaClinica' | translate}}</button>
     </div>
 </div>
 <div class="mt-4" *ngIf="usuario.value?.rol == 'paciente'">

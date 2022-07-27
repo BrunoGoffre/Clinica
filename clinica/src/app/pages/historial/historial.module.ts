@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { GeneralComponentsModule } from 'src/app/components/general-components.module';
+import { GeneralComponentsModule, HttpLoaderFactory } from 'src/app/components/general-components.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,10 +22,19 @@ import { GeneralComponentsModule } from 'src/app/components/general-components.m
     ReactiveFormsModule,
     TableModule,
     SelectButtonModule,
-    GeneralComponentsModule
+    GeneralComponentsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     HistorialComponent
   ]
 })
 export class HistorialModule { }
+

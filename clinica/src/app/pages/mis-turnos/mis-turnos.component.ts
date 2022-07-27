@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { MessageService } from 'primeng/api';
 import { RecaptchaLoaderService } from 'ng-recaptcha';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -31,7 +32,8 @@ export class MisTurnosComponent implements OnInit {
   displayDialog: boolean = false;
   displayEncuesta: boolean = false;
 
-  constructor(private firestore: FirestoreService, private messageService: MessageService) { }
+  constructor(private firestore: FirestoreService, private messageService: MessageService) {
+  }
 
   ngOnInit(): void {
     this.getCurrentUser();

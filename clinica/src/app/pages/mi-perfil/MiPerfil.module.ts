@@ -10,6 +10,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { HistorialModule } from "../historial/historial.module";
 import { PipesModule } from "src/app/pipes/pipes.module";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { HttpLoaderFactory } from "../mis-turnos/turnos.module";
 
 @NgModule({
     declarations: [
@@ -26,7 +29,15 @@ import { PipesModule } from "src/app/pipes/pipes.module";
         DropdownModule,
         ToastModule,
         HistorialModule,
-        PipesModule
+        PipesModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     exports: [
         MiPerfilComponent

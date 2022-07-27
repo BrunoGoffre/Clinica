@@ -35,6 +35,20 @@
                             Logout</button></li>
                 </ul>
             </div>
+            <div class="btn-group">
+                <button class="buttonDropDown btn btn-secondary btn-lg dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'navbar.idiomas' | translate}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><button class="dropdown-item" (click)="ChooseLanguage('es')">{{'idiomas.espaniol' |
+                            translate}}</button></li>
+                    <li><button class="dropdown-item" (click)="ChooseLanguage('en')">{{'idiomas.ingles' |
+                            translate}}</button></li>
+                    <li><button class="dropdown-item" (click)="ChooseLanguage('por')">{{'idiomas.portugues' |
+                            translate}}</button></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

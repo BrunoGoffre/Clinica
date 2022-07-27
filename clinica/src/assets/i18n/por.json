@@ -1,0 +1,57 @@
+{
+    "idiomas": {
+        "espaniol": "Espanhol",
+        "ingles": "Inglês",
+        "portugues": "Português"
+    },
+    "navbar": {
+        "idiomas": "Idiomas"
+    },
+    "misTurnos": {
+        "titulo": "Minhas consultas",
+        "botonAgregarTurno": "Adicionar consultas",
+        "buscador": "Procurar",
+        "tabla": {
+            "fecha": "Encontro",
+            "hora": "Hora",
+            "especialista": "Especialista",
+            "estado": "Doença",
+            "accion": "Ação",
+            "resenia": "Análise",
+            "paciente": "Paciente"
+        }
+    },
+    "historialClinico": {
+        "titulo": "Histórico médico"
+    },
+    "tablaComponente": {
+        "fotoEspecialista": "Foto do especialista",
+        "fotoPaciente": "Foto do paciente",
+        "fecha": "Encontro",
+        "especialista": "Especialista",
+        "paciente": "Paciente",
+        "altura": "Altura",
+        "peso": "Peso",
+        "temperatura": "Temperatura",
+        "presion": "Pressão",
+        "hisotirialInexistente": "Não há história clínica para este paciente"
+    },
+    "misDatos": {
+        "nombre": "Nome",
+        "edad": "Era",
+        "DNI": "EU IRIA",
+        "email": "E-mail",
+        "cargaMisHorarios": "Carregar meus horários",
+        "PDFHistoriaClinica": "Imprimir meu histórico médico (PDF)",
+        "paciente": {
+            "obraSocial": "Trabalho social"
+        },
+        "especialista": {
+            "especialidad": "Especialidade",
+            "dias": "Dias",
+            "horarios": "Horários",
+            "desde": "Desde",
+            "hasta": "Até"
+        }
+    }
+}

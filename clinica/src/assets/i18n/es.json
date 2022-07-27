@@ -1,0 +1,57 @@
+{
+    "idiomas": {
+        "espaniol": "español",
+        "ingles": "Ingles",
+        "portugues": "Portugues"
+    },
+    "navbar": {
+        "idiomas": "Idiomas"
+    },
+    "misTurnos": {
+        "titulo": "Mis turnos",
+        "botonAgregarTurno": "Agregar turno",
+        "buscador": "Buscar",
+        "tabla": {
+            "fecha": "Fecha",
+            "hora": "Hora",
+            "especialista": "Especialista",
+            "estado": "Estado",
+            "accion": "Accion",
+            "resenia": "Reseña",
+            "paciente": "Paciente"
+        }
+    },
+    "historialClinico": {
+        "titulo": "Historial Clinico"
+    },
+    "tablaComponente": {
+        "fotoEspecialista": "Foto de especialista",
+        "fotoPaciente": "Foto de Paciente",
+        "fecha": "Fecha",
+        "especialista": "Especialista",
+        "paciente": "Paciente",
+        "altura": "Altura",
+        "peso": "Peso",
+        "temperatura": "Temperatura",
+        "presion": "Presion",
+        "hisotirialInexistente": "No existe historial clinico para este paciente"
+    },
+    "misDatos": {
+        "nombre": "Nombre",
+        "edad": "Edad",
+        "DNI": "DNI",
+        "email": "Email",
+        "cargaMisHorarios": "Cargar mis horarios",
+        "PDFHistoriaClinica": "Imprimir historia clinica (PDF)",
+        "paciente": {
+            "obraSocial": "Obra Social"
+        },
+        "especialista": {
+            "especialidad": "Especialidad",
+            "dias": "Dias",
+            "horarios": "Horarios",
+            "desde": "Desde",
+            "hasta": "Hasta"
+        }
+    }
+}

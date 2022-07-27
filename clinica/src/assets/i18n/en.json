@@ -1,0 +1,57 @@
+{
+    "idiomas": {
+        "espaniol": "Spanish",
+        "ingles": "English",
+        "portugues": "Portuguese"
+    },
+    "navbar": {
+        "idiomas": "Languages"
+    },
+    "misTurnos": {
+        "titulo": "My turns",
+        "botonAgregarTurno": "Add Turn",
+        "buscador": "Search",
+        "tabla": {
+            "fecha": "Date",
+            "hora": "Time",
+            "especialista": "Specialist",
+            "estado": "State",
+            "accion": "Action",
+            "resenia": "Review",
+            "paciente": "patient"
+        }
+    },
+    "historialClinico": {
+        "titulo": "Medical history"
+    },
+    "tablaComponente": {
+        "fotoEspecialista": "Specialista Photo",
+        "fotoPaciente": "Foto Especialista",
+        "fecha": "Date",
+        "especialista": "Specialist",
+        "paciente": "Patient",
+        "altura": "Height",
+        "peso": "Weight",
+        "temperatura": "Temperature",
+        "presion": "Pressure",
+        "hisotirialInexistente": "Does not exist this patient medical history"
+    },
+    "misDatos": {
+        "nombre": "Name",
+        "edad": "Age",
+        "DNI": "ID",
+        "email": "E-mail",
+        "cargaMisHorarios": "Load my turns",
+        "PDFHistoriaClinica": "Print my medical history (PDF)",
+        "paciente": {
+            "obraSocial": "Medical assistant"
+        },
+        "especialista": {
+            "especialidad": "Specialty",
+            "dias": "Days",
+            "horarios": "Schedules",
+            "desde": "From",
+            "hasta": "Until"
+        }
+    }
+}

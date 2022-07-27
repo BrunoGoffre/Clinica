@@ -18,6 +18,9 @@ import { RecaptchaLoaderService, RecaptchaModule } from 'ng-recaptcha';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,15 @@ import { TableModule } from 'primeng/table';
     DirectivesModule,
     RecaptchaModule,
     TooltipModule,
-    TableModule
+    TableModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     MisTurnosComponent,
@@ -52,3 +63,8 @@ import { TableModule } from 'primeng/table';
   ]
 })
 export class TurnosModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
