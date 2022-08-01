@@ -1,0 +1,33 @@
+<app-loading *ngIf="cargando"></app-loading>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3>Comentarios sobre las atenciones</h3>
+            <hr>
+            <div class="row message-container">
+                <div *ngFor="let encuesta of encuestas" class="mt-3 message">
+                    <h5>{{encuesta.usuario.nombre + ' ' + encuesta.usuario.apellido}}</h5>
+                    <hr>
+                    <p>{{encuesta.opinion}}</p>
+                    <div class="rating-box" id="rating-Box">
+                        <div class="rating-container">
+                            <label [class.label-selected]="encuesta.stars >= 5">&#9733;</label>
+                            <label [class.label-selected]="encuesta.stars >= 4">&#9733;</label>
+                            <label [class.label-selected]="encuesta.stars >= 3">&#9733;</label>
+                            <label [class.label-selected]="encuesta.stars >= 2">&#9733;</label>
+                            <label [class.label-selected]="encuesta.stars >= 1">&#9733;</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <p-card [style]="{'width': '15rem', 'margin-bottom': '1em'}">
+                <ng-template pTemplate="header">
+                    <h1 style="margin-left: 30%; margin-top:10%">{{porcentajeRepetirAtencion}}%</h1>
+                </ng-template>
+                <p>Este porcetaje de personas volverian a atenderce en nuestra clinica</p>
+            </p-card>
+        </div>
+    </div>
+</div>

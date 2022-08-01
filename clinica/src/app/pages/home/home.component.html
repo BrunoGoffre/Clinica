@@ -23,4 +23,31 @@
             <canvas id="myChart2" width="20" height="20"></canvas>
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col-6">
+            <h3 class="">Cantidad de visitas en la clinica</h3>
+            <div class="card">
+                <p-chart type="line" [data]="cantidadVisitasClinica" [options]="basicOptions"></p-chart>
+            </div>
+        </div>
+        <div class="col-6">
+            <h3 class="">Cantidad de pacientes por especialidad</h3>
+            <div class="card">
+                <canvas id="myChart3" width="20" height="20"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6">
+            <h3 class="">Cantidad de especialistas por especialidad</h3>
+            <p-chart type="pie" [data]="cantidadEspecialistasPorEspecialidad"
+                [style]="{'width': '20%', 'height':'20%'}">
+            </p-chart>
+        </div>
+        <div class="col-6">
+            <h3 class="">Cantidad de pacientes por especialidad</h3>
+            <p-chart type="pie" [data]="cantidadPacientesPorEspecialidad" [style]="{'width': '20%', 'height':'20%'}">
+            </p-chart>
+        </div>
+    </div>
 </div>

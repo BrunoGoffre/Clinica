@@ -64,6 +64,9 @@
             <input #file type="file" accept="image/*" (change)="onChangeFile()" placeholder="Seleccione una imagen" />
 
             <div *ngIf="error != ''" Class="form" style="color: red;">{{error}}</div>
+            <div class="mb-3">
+                <p CustomCaptcha></p>
+            </div>
 
             <button (click)="submit()" [disabled]="registerForm.invalid">Register</button>
             <a class="register" routerLink="/login">Already have an account?</a>

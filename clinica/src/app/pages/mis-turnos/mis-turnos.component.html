@@ -3,7 +3,8 @@
     <app-loading *ngIf="cargando"></app-loading>
     <app-add-turno *ngIf="agregandoTurno" (close)="Closeform()" (error)="onClickError($event)"></app-add-turno>
     <app-review *ngIf="mostrarReview" [review]="turnoSelected" (close)="CloseReiew()"></app-review>
-    <app-encuesta *ngIf="displayEncuesta" (close)="CloseEncuesta()"></app-encuesta>
+    <app-encuesta *ngIf="displayEncuesta" (close)="CloseEncuesta()"
+        (success)="emitirEventExitoso('Encuesta completada con exito')" [turno]="turnoParaEncuesta"></app-encuesta>
     <app-question *ngIf="mostrarQuestion" (close)="UpdateTurno($event)" [estadoUpdate]="estadoUpdate"></app-question>
     <app-finaliazar-turno *ngIf="displayDialog" [turnoAFinalizar]="UpdateTurnoSelected" (error)="onClickError($event)"
         (close)="CloseFinalizarForm()">
@@ -45,9 +46,10 @@
                         {{turno.especialista.apellido}}</div>
                     <div *ngIf="user.rol == 'especialista'" class="col col-2">{{turno.usuario.nombre}}
                         {{turno.usuario.apellido}}</div>
-                    <div class="col col-2"><button (click)="viewReview(turno.resenia)"
-                            class="btn-review">{{'misTurnos.tabla.resenia' | translate}} <i
-                                class="fa fa-pencil"></i></button>
+                    <div class="col col-2">
+                        <button (click)="viewReview(turno.resenia)" class="btn-review">
+                            {{'misTurnos.tabla.resenia' | translate}} <i class="fa fa-pencil"></i>
+                        </button>
                     </div>
                     <div class="col col-2"
                         [class.cancelado]="turno.estado == 'cancelado' || turno.estado == 'rechazado'"
@@ -58,8 +60,11 @@
                         <button class="button-delete-turno" *ngIf="turno.estado != 'completado'"
                             (click)="ChangeStateTurno('cancelar',turno)"><i class="fa fa-ban"></i></button>
                         <button *ngIf="turno.estado == 'completado'" pTooltip="Completar encuesta" tooltipPosition="top"
-                            class="button-delete-turno" (click)="displayEncuesta=true"><i
-                                class="fa fa-book"></i></button>
+                            class="button-delete-turno" (click)="OpenEncuesta(turno)"
+                            [disabled]="turno.EncuestaCompletada == true"
+                            [class.desabilitado]="turno.EncuestaCompletada == true">
+                            <i class="fa fa-book"></i>
+                        </button>
                     </div>
                     <div *ngIf="user.rol == 'especialista'" class="col col-2">
                         <button *ngIf="turno.estado != 'cancelado' && turno.estado != 'completado'"

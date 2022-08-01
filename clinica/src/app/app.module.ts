@@ -22,6 +22,7 @@ import { TableModule } from 'primeng/table';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    DirectivesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

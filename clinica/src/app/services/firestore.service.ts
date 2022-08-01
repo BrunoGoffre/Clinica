@@ -67,4 +67,7 @@ export class FirestoreService {
   GetLogs() {
     return this.aFStore.collection('logs', ref => ref.orderBy('hora', 'asc')).valueChanges()
   }
+  GetEncuestas() {
+    return this.aFStore.collection('encuestas').valueChanges()
+  }
 } 

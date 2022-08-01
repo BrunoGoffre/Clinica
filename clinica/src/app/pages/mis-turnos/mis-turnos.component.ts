@@ -31,6 +31,8 @@ export class MisTurnosComponent implements OnInit {
   error: string = '';
   displayDialog: boolean = false;
   displayEncuesta: boolean = false;
+  encuestaCompletada: boolean = false;
+  turnoParaEncuesta!: turno;
 
   constructor(private firestore: FirestoreService, private messageService: MessageService) {
   }
@@ -79,6 +81,9 @@ export class MisTurnosComponent implements OnInit {
     })
   }
 
+  emitirEventExitoso(mensaje: string) {
+    this.messageService.add({ key: 'c', severity: 'success', summary: 'Success', detail: mensaje });
+  }
 
   getTurnos() {
     this.cargando = true;
@@ -122,6 +127,10 @@ export class MisTurnosComponent implements OnInit {
   }
   Closeform() {
     this.agregandoTurno = false;
+  }
+  OpenEncuesta(turno: turno) {
+    this.turnoParaEncuesta = turno;
+    this.displayEncuesta = true;
   }
   CloseEncuesta() {
     this.displayEncuesta = false;

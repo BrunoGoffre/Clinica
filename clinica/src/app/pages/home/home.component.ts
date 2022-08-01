@@ -5,6 +5,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { turnosFiltrado } from '../stats/stats.component';
 import { Chart, ChartItem } from 'chart.js';
 import { log } from 'src/app/models/log';
+import { Usuario } from 'src/app/models/usuario';
 
 
 @Component({
@@ -26,7 +27,12 @@ export class HomeComponent implements OnInit {
   turnosPorMedicoEnLapstoDeTiempo: turnosFiltrado[] = [];
   chart: any;
   chart2: any;
+  chart3: any;
   listaDeLogs!: log[];
+  cantidadVisitasClinica: any;
+  cantidadEspecialistasPorEspecialidad: any;
+  basicOptions: any;
+  cantidadPacientesPorEspecialidad: any;
 
   constructor(private firestore: FirestoreService) { }
 
@@ -40,6 +46,10 @@ export class HomeComponent implements OnInit {
     })
     this.BuildTurnosPorMedicoEnLapstoDeTiempo();
     this.BuildTurnosCompletadosEnLapstoDeTiempo();
+    this.BuildCantidadVisitasClinica();
+    this.BuildCantidadPacientesPorEspecialidad();
+    this.BuildCantidadDeEspecialistaPorEspecialidad();
+    this.BuildCantidadDePacientesPorEspecialidad();
   }
 
   GetTurnos() {
@@ -51,6 +61,213 @@ export class HomeComponent implements OnInit {
     })
   }
   //--------------- Buildings Charts -------------------------
+  BuildCantidadDePacientesPorEspecialidad() {
+    let labels: any[] = [];
+    let pacientes: Usuario[] = [];
+    let cantidadTurnos: any[] = [];
+    let existeEspecialidad = false;
+    let existeUsuario = false;
+    this.firestore.getTurnos().subscribe(retorno => {
+      let turnos = retorno as turno[];
+      turnos.forEach(item => {
+        pacientes.forEach(paciente => {
+          if (paciente.email == item.usuario.email) {
+            existeUsuario = true;
+          }
+        })
+        labels.forEach(label => {
+          if (item.especialista.especialidad == label) {
+            existeEspecialidad = true;
+          }
+        })
+        if (existeEspecialidad == false) {
+          labels.push(item.especialista.especialidad);
+        }
+        if (existeUsuario == false) {
+          pacientes.push(item.usuario);
+        }
+        existeEspecialidad = false;
+        existeUsuario = false;
+      })
+
+      let cantidad = 0;
+      pacientes.forEach(paciente => {
+        turnos.forEach(turno => {
+          labels.forEach(label => {
+            if (turno.especialista.especialidad == label && turno.usuario.email == paciente.email) {
+              cantidad++;
+            }
+          })
+
+        })
+        cantidadTurnos.push(cantidad);
+        cantidad = 0;
+      })
+      this.cantidadPacientesPorEspecialidad = {
+        labels: labels,
+        datasets: [
+          {
+            data: cantidadTurnos,
+            backgroundColor: ["yellow", "pink", "lightblue"],
+            hoverBackgroundColor: ["#64B5F6", "#81C784", "#FFB74D"]
+          }
+        ]
+      };
+
+    })
+  }
+  BuildCantidadDeEspecialistaPorEspecialidad() {
+    let labels: any[] = [];
+    let cantidadEspecialistas: any[] = [];
+    let existeEspecialidad = false;
+    let cantidad = 0;
+    this.firestore.getEspecilistas().subscribe(retorno => {
+      let especialistas = retorno as Usuario[];
+      especialistas.forEach(item => {
+        labels.forEach(label => {
+          if (item.especialidad == label) {
+            existeEspecialidad = true;
+          }
+        })
+        if (existeEspecialidad == false) {
+          labels.push(item.especialidad);
+        }
+        existeEspecialidad = false;
+      })
+
+      labels.forEach(label => {
+        especialistas.forEach(especialista => {
+          if (label == especialista.especialidad) {
+            cantidad++;
+          }
+        })
+        cantidadEspecialistas.push(cantidad);
+        cantidad = 0;
+      })
+
+      this.cantidadEspecialistasPorEspecialidad = {
+        labels: labels,
+        datasets: [
+          {
+            data: cantidadEspecialistas,
+            backgroundColor: ["blue", "red", "green"],
+            hoverBackgroundColor: ["#64B5F6", "#81C784", "#FFB74D"]
+          }
+        ]
+      };
+    })
+
+
+  }
+  BuildCantidadPacientesPorEspecialidad() {
+    let labels: any[] = [];
+    let pacientes: any[] = [];
+    let existeEspecialidad = false;
+    this.firestore.getTurnos().subscribe(retorno => {
+      let turnos = retorno as turno[];
+      turnos.forEach(item => {
+        labels.forEach(label => {
+          if (item.especialista.especialidad == label) {
+            existeEspecialidad = true;
+          }
+        })
+        if (existeEspecialidad == false) {
+          labels.push(item.especialista.especialidad);
+        }
+        existeEspecialidad = false;
+      })
+      let cantidad = 0;
+      labels.forEach(label => {
+        turnos.forEach(turno => {
+          if (label == turno.especialista.especialidad) {
+            cantidad++;
+          }
+        })
+        pacientes.push(cantidad);
+        cantidad = 0;
+      })
+
+      this.chart3 = new Chart(
+        document.getElementById('myChart3') as ChartItem,
+        {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Turnos completados Por especialista',
+              data: pacientes,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+              ],
+              borderWidth: 1,
+            }]
+          },
+          options: {}
+        })
+    })
+  }
+  BuildCantidadVisitasClinica() {
+    this.firestore.getTurnos().subscribe(retorno => {
+      let turnos = retorno as turno[];
+      let turnosFiltrados = turnos.filter(turno => turno.estado == 'completado');
+      let cantidad = turnosFiltrados.length;
+      this.cantidadVisitasClinica = {
+        labels: ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'],
+        datasets: [
+          {
+            label: 'Cantidad de turnos',
+            data: [cantidad - 1, cantidad - 3, cantidad - 2],
+            fill: false,
+            borderColor: '#42A5F5',
+            tension: .4
+          },
+        ]
+      }
+    })
+
+    this.basicOptions = {
+      plugins: {
+        legend: {
+          labels: {
+            color: 'black'
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#black'
+          },
+          grid: {
+            color: 'rgba(255,255,255,0.2)'
+          }
+        },
+        y: {
+          ticks: {
+            color: 'black'
+          },
+          grid: {
+            color: 'grey'
+          }
+        }
+      }
+    };
+  }
   BuildTurnosCompletadosEnLapstoDeTiempo() {
     let desde = Date.parse('2022/06/10');
     let hasta = Date.parse('2022/07/10');

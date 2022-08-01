@@ -13,6 +13,7 @@ import { HistorialComponent } from './pages/historial/historial/historial.compon
 import { PacientesComponent } from './pages/pacientes/pacientes/pacientes.component';
 import { HistorialParaEspecialistaComponent } from './pages/historial-para-especialistas/historial-para-especialista/historial-para-especialista.component';
 import { StatsComponent } from './pages/stats/stats.component';
+import { OpinionesComponent } from './pages/opiniones/opiniones.component';
 
 //
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: "historia-para-especialistas", component: HistorialParaEspecialistaComponent, loadChildren: () => import('./pages/historial-para-especialistas/historial-para-especialistas.module').then(m => m.HistorialParaEspecialistasModule) },
   { path: "pacientes", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
   { path: "Terminos-y-condiciones", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
+  { path: "opiniones", component: OpinionesComponent, loadChildren: () => import('./pages/opiniones/opiniones.module').then(m => m.OpinionesModule) },
   { path: "**", redirectTo: 'home' },
 ]
 

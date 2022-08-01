@@ -1,16 +1,31 @@
+<p-toast key="tc"></p-toast>
 <p-dialog [visible]="true" header="Complete la encuesta" [closable]="false" [style]="{width: '50vw'}">
     <div class="container">
         <div class="row">
-            <h5>Deje su opinion sobre la atencion:</h5>
-            <textarea cols="110" rows="5"></textarea>
+            <h5>Deje su opinion sobre la atencion (mayor a 10 caracteres):</h5>
+            <textarea cols="110" id="opinion" rows="5" style="resize: none;" [(ngModel)]="opinion"></textarea>
         </div>
 
-        <div class="fichas-listado-v2 row mt-4">
+        <div class="fichas-listado-v2 row mt-2">
             <h5>Califique nuestra atencion</h5>
-            <div class="voto col-12">
-                <div class="voto-estrellas">
-                    <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
-                        class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+            <div>
+                <div class="rating-box">
+                    <div class="rating-container">
+                        <input type="radio" name="rating" [(ngModel)]="stars" value="5" id="star-5"> <label
+                            for="star-5">&#9733;</label>
+
+                        <input type="radio" name="rating" [(ngModel)]="stars" value="4" id="star-4"> <label
+                            for="star-4">&#9733;</label>
+
+                        <input type="radio" name="rating" [(ngModel)]="stars" value="3" id="star-3"> <label
+                            for="star-3">&#9733;</label>
+
+                        <input type="radio" name="rating" [(ngModel)]="stars" value="2" id="star-2"> <label
+                            for="star-2">&#9733;</label>
+
+                        <input type="radio" name="rating" [(ngModel)]="stars" value="1" id="star-1"> <label
+                            for="star-1">&#9733;</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,33 +34,38 @@
             <p-toggleButton [(ngModel)]="toggleResponse" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
         </div>
         <div class="row mt-4">
-            <h5>Que tan profesionales son nuestros medicos</h5>
+            <h5>Que tan profesionales son nuestros medicos?</h5>
             <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="RadioButtons" id="nada">
+                <input class="form-check-input" [(ngModel)]="radioButtons" value="nada" type="radio" name="RadioButtons"
+                    id="nada">
                 <label class="form-check-label" for="nada">
                     Nada
                 </label>
             </div>
             <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="RadioButtons" id="poco">
+                <input class="form-check-input" type="radio" [(ngModel)]="radioButtons" value="poco" name="RadioButtons"
+                    id="poco">
                 <label class="form-check-label" for="poco">
                     Poco
                 </label>
             </div>
             <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="RadioButtons" id="regular">
+                <input class="form-check-input" type="radio" [(ngModel)]="radioButtons" value="regular"
+                    name="RadioButtons" id="regular">
                 <label class="form-check-label" for="regular">
                     Regular
                 </label>
             </div>
             <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="RadioButtons" id="bueno">
+                <input class="form-check-input" type="radio" [(ngModel)]="radioButtons" value="bueno"
+                    name="RadioButtons" id="bueno">
                 <label class="form-check-label" for="bueno">
                     Bueno
                 </label>
             </div>
             <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="RadioButtons" id="excelente">
+                <input class="form-check-input" type="radio" [(ngModel)]="radioButtons" value="excelente"
+                    name="RadioButtons" id="excelente">
                 <label class="form-check-label" for="excelente">
                     Excelente
                 </label>
@@ -53,7 +73,7 @@
         </div>
         <div class="row mt-4">
             <div class="row d-flex justify-content-between">
-                <h5>Que tan recomendable es nuestra clinica</h5>
+                <h5>Que tan recomendable es nuestra clinica?</h5>
                 <label class="col-2" style="font-size: large;">{{valueRange}}%</label>
                 <input type="range" min="0" max="100" class="col-10 inputsTexts" id="Dynamic4" value="0" pInputText
                     placeholder="Valor" [(ngModel)]="valueRange">
@@ -61,7 +81,7 @@
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="Close()" label="Finalizar" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="Finalizar()" label="Finalizar" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-cross" (click)="Close()" label="Cancelar" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
