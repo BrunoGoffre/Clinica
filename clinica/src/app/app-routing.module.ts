@@ -19,19 +19,19 @@ import { OpinionesComponent } from './pages/opiniones/opiniones.component';
 
 const routes: Routes = [
   { path: "", component: BienvenidoComponent },
-  { path: "usuarios", component: ListadoComponent, canActivate: [AdminGuard], data: { animation: 'usuariosPage' }, loadChildren: () => import('./pages/listadoUsuarios/listado.module').then(m => m.ListadoModule) },
-  { path: "mis-turnos", component: MisTurnosComponent, loadChildren: () => import('../app/pages/mis-turnos/turnos.module').then(m => m.TurnosModule) },
-  { path: "turnos", component: TurnosComponent, canActivate: [AdminGuard] },
-  { path: "home", component: HomeComponent, data: { animation: 'homePage' } },
+  { path: "usuarios", component: ListadoComponent, canActivate: [AdminGuard], data: { animation: 'fadePageLeft' }, loadChildren: () => import('./pages/listadoUsuarios/listado.module').then(m => m.ListadoModule) },
+  { path: "mis-turnos", component: MisTurnosComponent, data: { animation: 'FadeIn' }, loadChildren: () => import('../app/pages/mis-turnos/turnos.module').then(m => m.TurnosModule) },
+  { path: "turnos", component: TurnosComponent, canActivate: [AdminGuard], data: { animation: 'FadeIn' } },
+  { path: "home", component: HomeComponent, data: { animation: 'fadePageLeft' } },
   { path: "login", component: LoginComponent, data: { animation: 'fadePage' } },
   { path: "register", component: RegisterComponent },
-  { path: "estadisticas", component: StatsComponent },
-  { path: "mi-perfil", component: MiPerfilComponent, loadChildren: () => import('./pages/mi-perfil/MiPerfil.module').then(m => m.MiPerfilModule) },
-  { path: "historial", component: HistorialComponent, loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialModule) },
-  { path: "historia-para-especialistas", component: HistorialParaEspecialistaComponent, loadChildren: () => import('./pages/historial-para-especialistas/historial-para-especialistas.module').then(m => m.HistorialParaEspecialistasModule) },
+  { path: "estadisticas", component: StatsComponent, data: { animation: 'fadePage' } },
+  { path: "mi-perfil", component: MiPerfilComponent, data: { animation: 'fadePageLeft' }, loadChildren: () => import('./pages/mi-perfil/MiPerfil.module').then(m => m.MiPerfilModule) },
+  { path: "historial", component: HistorialComponent, data: { animation: 'fadePage' }, loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialModule) },
+  { path: "historia-para-especialistas", data: { animation: 'FadeIn' }, component: HistorialParaEspecialistaComponent, loadChildren: () => import('./pages/historial-para-especialistas/historial-para-especialistas.module').then(m => m.HistorialParaEspecialistasModule) },
   { path: "pacientes", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
   { path: "Terminos-y-condiciones", component: PacientesComponent, loadChildren: () => import('./pages/pacientes/pacientes.module').then(m => m.PacientesModule) },
-  { path: "opiniones", component: OpinionesComponent, loadChildren: () => import('./pages/opiniones/opiniones.module').then(m => m.OpinionesModule) },
+  { path: "opiniones", component: OpinionesComponent, data: { animation: 'FadeIn' }, loadChildren: () => import('./pages/opiniones/opiniones.module').then(m => m.OpinionesModule) },
   { path: "**", redirectTo: 'home' },
 ]
 

@@ -11,42 +11,50 @@ import { animate, animateChild, group, query, style, transition, trigger } from 
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnimations', [
-      transition('homePage => misTurnosPage', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
+      transition('* => FadeIn', [
+        query(':enter', [
           style({
             position: 'absolute',
-            bottom: 0,
+            //bottom: 0,
             left: 0,
-            width: '100%'
+            width: '100%',
+            opacity: 0
           })
         ]),
         query(':enter', [
-          style({ bottom: '-100%' })
-        ]),
-        query(':leave', animateChild()),
-        group([
-          query(':leave', [
-            animate('300ms ease-out', style({ bottom: '100%' }))
-          ]),
-          query(':enter', [
-            animate('300ms ease-out', style({ bottom: '0%' }))
-          ]),
+          animate('500ms ease-out'),
+          style({ opacity: 1 })
         ]),
       ]),
       transition('* => fadePage', [
-        query(':enter, :leave', [
+        query(':enter', [
           style({
             position: 'absolute',
-            top: 0,
             width: '100%',
             opacity: 0,
             transform: 'scale(0) translateX(100%)'
           }),
         ]),
         query(':enter', [
-          animate('600ms ease',
+          animate('600ms ease-out',
             style({ opacity: 1, transform: 'scale(1) translateY(0)' }))
+        ]),
+      ]),
+      transition('* => fadePageLeft', [
+        query(':enter', [
+          style({
+            position: 'absolute',
+            width: '100%',
+            transform: 'translateX(-100%)',
+            opacity: 0
+          }),
+        ]),
+        query(':enter', [
+          animate('600ms ease-out',
+            style({
+              opacity: 1,
+              transform: 'translateX(0%)'
+            }))
         ])
       ])
     ])
